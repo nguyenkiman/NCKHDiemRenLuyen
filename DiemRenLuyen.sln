@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiemRenLuyen", "DiemRenLuyen\DiemRenLuyen.csproj", "{BC6B5724-EA8F-4539-8CE4-9FEF9BEC28A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{5782A947-5905-4351-89F2-9FFB1E983DA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC6B5724-EA8F-4539-8CE4-9FEF9BEC28A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC6B5724-EA8F-4539-8CE4-9FEF9BEC28A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC6B5724-EA8F-4539-8CE4-9FEF9BEC28A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC6B5724-EA8F-4539-8CE4-9FEF9BEC28A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5782A947-5905-4351-89F2-9FFB1E983DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5782A947-5905-4351-89F2-9FFB1E983DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5782A947-5905-4351-89F2-9FFB1E983DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5782A947-5905-4351-89F2-9FFB1E983DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59ACDD08-8D3A-403F-BE29-259CCE7A9D37}
+	EndGlobalSection
+EndGlobal
