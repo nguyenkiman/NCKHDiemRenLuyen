@@ -81,14 +81,13 @@
     <Compile Include="EF\phieuChamDiem.cs" />
     <Compile Include="EF\sinhVien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\sinhVienServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
   </ItemGroup>
