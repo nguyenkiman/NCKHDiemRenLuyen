@@ -13,15 +13,23 @@ namespace Models.DAO
         
         public sinhVien findByMaSinhVien(String maSinhVien)
         {
-            return db.sinhViens.Find(maSinhVien);
+            sinhVien sinhVien =  db.sinhViens.Find(maSinhVien);
+            if(sinhVien.trangThai == Constraints.Common.ACTIVATE)
+            {
+                return sinhVien;
+            }
+            else
+            {
+                return null;
+            }
         }
         public ICollection<sinhVien> findByMaLop(String maLop)
         {
-            return db.lops.Where(x => x.maLop.Equals(maLop)).SingleOrDefault().sinhViens;
+            return db.lops.Where(x => x.maLop.Equals(maLop)).Where(x => x.trangThai == Constraints.Common.ACTIVATE).SingleOrDefault().sinhViens;
         }
         public ICollection<sinhVien> findByMaNganh(String maNganh)
         {
-            ICollection<lop> lops = db.nganhs.Where(x => x.maNganh.Equals(maNganh)).SingleOrDefault().lops;
+            ICollection<lop> lops = db.nganhs.Where(x => x.maNganh.Equals(maNganh)).Where(x => x.trangThai == Constraints.Common.ACTIVATE).SingleOrDefault().lops;
             List<sinhVien> result = new List<sinhVien>();
             foreach (lop templop in lops){
                 result.Concat(templop.sinhViens);
