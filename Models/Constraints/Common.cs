@@ -14,6 +14,9 @@ namespace Models.Constraints
         public const int ACCOUNT_NOT_EXISTS = 0;
         public const int INVALID_PASSWORDS = 1;
         public const int LOGIN_SUCCESS = 2;
+        public const int BLOCK = 3;
+
+        public const string USER_SESSION = "USER_SESSION";
 
         public const int PAGE_SIZE = 10;
        

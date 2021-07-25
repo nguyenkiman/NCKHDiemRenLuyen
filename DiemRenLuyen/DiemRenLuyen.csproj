@@ -125,9 +125,11 @@
     <Compile Include="Areas\Admin\Controllers\diemHocTapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\giangViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\hocPhisController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginsController.cs" />
     <Compile Include="Areas\Admin\Controllers\lopsController.cs" />
     <Compile Include="Areas\Admin\Controllers\phieuChamDiemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\sinhViensController.cs" />
+    <Compile Include="Areas\Admin\Model\LoginModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfficersController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
@@ -2149,6 +2151,7 @@
     <Content Include="Assets\admin\plugins\summernote\summernote.js.map" />
     <Content Include="Assets\admin\plugins\summernote\summernote.min.js.map" />
     <Content Include="Assets\admin\plugins\toastr\toastr.js.map" />
+    <Content Include="Areas\Admin\Views\Logins\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

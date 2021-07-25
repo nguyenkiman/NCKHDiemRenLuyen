@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Constraints\Common.cs" />
     <Compile Include="Constraints\sinhVienContraints.cs" />
+    <Compile Include="DAO\adminDAO.cs" />
     <Compile Include="DAO\giangVienDAO.cs" />
     <Compile Include="DAO\sinhVienDAO.cs" />
     <Compile Include="EF\admin.cs" />
