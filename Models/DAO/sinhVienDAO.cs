@@ -9,7 +9,7 @@ namespace Models.DAO
 {
     public class sinhVienDAO
     {
-         DbContext db =  new DbContext();
+         Db db =  new Db();
         
         public sinhVien findByMaSinhVien(String maSinhVien)
         {

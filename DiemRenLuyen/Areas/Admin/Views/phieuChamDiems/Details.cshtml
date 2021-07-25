@@ -1,0 +1,58 @@
+﻿@model Models.EF.phieuChamDiem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>phieuChamDiem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.hocKi.nguoiTao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hocKi.nguoiTao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sinhVien.matKhau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sinhVien.matKhau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngayCham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngayCham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tongDiem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tongDiem)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.maPhieuChamDiem }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

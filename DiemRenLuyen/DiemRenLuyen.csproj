@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -120,6 +126,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\baoHiemYTesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\diemHocTapsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\giangViensController.cs" />
+    <Compile Include="Areas\Admin\Controllers\hocPhisController.cs" />
+    <Compile Include="Areas\Admin\Controllers\lopsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\phieuChamDiemsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\sinhViensController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfficersController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
@@ -177,6 +191,40 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\sinhViens\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\sinhViens\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\sinhViens\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\sinhViens\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\sinhViens\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\diemHocTaps\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\diemHocTaps\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\diemHocTaps\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\diemHocTaps\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\baoHiemYTes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\baoHiemYTes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\baoHiemYTes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\baoHiemYTes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\hocPhis\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\hocPhis\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\hocPhis\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\hocPhis\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\lops\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\lops\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\lops\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\lops\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\phieuChamDiems\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\phieuChamDiems\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\phieuChamDiems\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\phieuChamDiems\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\phieuChamDiems\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\giangViens\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\giangViens\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\giangViens\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\giangViens\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\giangViens\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -205,8 +253,6 @@
     <Content Include="Views\Students\MarkPoint.cshtml" />
     <Content Include="Views\Students\ListClass.cshtml" />
     <Content Include="Views\Students\ViewScores.cshtml" />
-    <Content Include="Views\Students\ChangePassword.cshtml" />
-    <Content Include="Views\Students\UpdatePersonalInfo.cshtml" />
     <Content Include="Views\Students\PersonalScores.cshtml" />
     <Content Include="Views\Students\Notification.cshtml" />
     <Content Include="Views\Students\DetailNotification.cshtml" />
@@ -222,9 +268,12 @@
     <Content Include="Views\Officers\MarkPoint.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\UpdatePersonalInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Assets\admin\" />
     <Folder Include="Models\" />
   </ItemGroup>
@@ -240,6 +289,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{5782a947-5905-4351-89f2-9ffb1e983da3}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

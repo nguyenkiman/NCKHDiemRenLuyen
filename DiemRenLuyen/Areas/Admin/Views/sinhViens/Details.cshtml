@@ -1,0 +1,82 @@
+﻿@model Models.EF.sinhVien
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>sinhVien</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lop.maNganh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lop.maNganh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.matKhau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.matKhau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tenSinhVien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenSinhVien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.soDienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.soDienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangThai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.maSinhVien }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

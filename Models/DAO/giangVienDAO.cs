@@ -9,7 +9,7 @@ namespace Models.DAO
 {
     public class giangVienDAO
     {
-        DbContext db = new DbContext();
+        Db db = new Db();
 
         
     }

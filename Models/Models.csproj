@@ -68,7 +68,7 @@
     <Compile Include="EF\canBoLop.cs" />
     <Compile Include="EF\chiTietPhieuCham.cs" />
     <Compile Include="EF\danhMucDanhGia.cs" />
-    <Compile Include="EF\DbContext.cs" />
+    <Compile Include="EF\Db.cs" />
     <Compile Include="EF\diemHocTap.cs" />
     <Compile Include="EF\giangVien.cs" />
     <Compile Include="EF\giaoVienChuNhiem.cs" />

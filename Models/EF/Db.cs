@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace Models.EF
 {
-    public partial class DbContext : DbContext
+    public partial class Db : DbContext
     {
-        public DbContext()
-            : base("name=DbContext")
+        public Db()
+            : base("name=Db")
         {
         }
 

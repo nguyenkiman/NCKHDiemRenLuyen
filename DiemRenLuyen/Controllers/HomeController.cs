@@ -21,5 +21,13 @@ namespace DiemRenLuyen.Controllers
         {
             return View();
         }
+        public ActionResult UpdatePersonalInfo()
+        {
+            return View();
+        }
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
     }
 }
