@@ -1,22 +1,32 @@
 ﻿
 @{
-    ViewBag.Title = "Trang chủ";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Giáo Viên";
+    Layout = "~/Views/Teacher/_Layout.cshtml";
 }
-    
+
 <main>
+
+    <div id="crumbs" class="wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
+        <ul>
+            <li><a href="@Url.Action("Index","Teacher")" class="breadcrumb">Trang chủ</a></li>
+            <li><a href="#" class="breadcrumb">Giáo viên</a></li>
+
+        </ul>
+    </div>
+
     <div class="form-group">
         <div class="news mt-2 ">
             <ul>
                 <li>
                     <a href="#">
                         <b>
-                            <span style="color:red">
-                               Quên mật khẩu
+                            <span style="color:blue">
+                                Cập nhật lại thông tin cá nhân
                             </span>
                         </b>
                     </a>
-                </li>             
+                </li>
+
                 <li>
                     <a href="#">
                         <b>
@@ -35,13 +45,19 @@
                         </b>
                     </a>
                 </li>
-
+                <li>
+                    <a href="#">
+                        <b>
+                            <span style="color:#fcb1ae">
+                                Danh sách lớp chủ nhiệm
+                            </span>
+                        </b>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
+
     <hr>
 </main>
 
-
-
-   
