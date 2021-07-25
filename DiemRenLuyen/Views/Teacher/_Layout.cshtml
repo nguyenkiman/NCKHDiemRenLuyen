@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     Layout = null;
 }
 
@@ -9,7 +10,7 @@
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <link href="../../assets/client/image/favicon.png" rel="icon">
+    <link href="~/Assets/client/image/favicon.png" rel="icon">
     <link rel="stylesheet" type="text/css" href="~/Assets/client/css/slick.css">
     </li>
     <link rel="stylesheet" type="text/css" href="~/Assets/client/css/animate.min.css">
@@ -52,7 +53,7 @@
                                     <div class="logo-image logo-control">
                                         <a href="#" title="Trường ĐH Sư phạm Kỹ thuật">
 
-                                            <img class="logo-img-sm" rel="nofollow" src="../../assets/client/image/header-ute.png"
+                                            <img class="logo-img-sm" rel="nofollow" src="~/Assets/client/image/header-ute.png"
                                                  alt="Trường Đại học Sư phạm Kỹ thuật">
 
                                         </a>
@@ -64,23 +65,33 @@
                             <div class="module-inner">
                                 <div class="module-ct">
                                     <ul id="hambuger_menu" class="nav  nav-pills nav-stacked ">
-                                        <li class="current active"><a class="nav-icon nav-magazine" href="/">UTE</a></li>
+                                        <li class="current active">
+                                            <a class="nav-icon nav-magazine" href="/">UTE</a>
+                                        </li>
                                         <li>
-                                            <a id="" class="" href="index.php">
-                                                <i class="fas fa-home mr-2"></i>Trang
-                                                chủ
+                                            <a class="@Url.Action("Index","Teacher")" href="index.php">
+                                                <i class="fas fa-home mr-2"></i>Trang chủ
                                             </a>
                                         </li>
+                                        <li><a href="#" class=""><i class="fas fa-exclamation-triangle mr-2"></i>Quy định</a></li>
+                                        <li><a href="#" class=""><i class="fas fa-file-word mr-2"></i>Hướng dẫn </a></li>
                                         <li>
-                                            <a href="" class=""><i class="fas fa-exclamation-triangle mr-2"></i>Quy định</a>
+                                            <a href="#" class=""><i class="fas fa-address-card mr-2"></i>Danh sách lớp</a>
+                                            <ul class="sub-menu--hambuger">
+                                                <li><a href="@Url.Action("ListClass","Teacher")" target="_blank"><i class="fas fa-graduation-cap mr-2"></i>18T1</a></li>
+                                                <li><a href="@Url.Action("ListClass","Teacher")"><i class="fas fa-graduation-cap mr-2"></i>18T2</a></li>
+
+                                            </ul>
                                         </li>
-                                        <li><a href="" class=""><i class="fas fa-file-word mr-2"></i>Hướng dẫn </a></li>
+                                        <li>
+                                            <a href="@Url.Action("ChangePassword","Students")">
+                                                <i class="fas fa-key mr-2"></i>Thay đổi mật
+                                                khẩu
+                                            </a>
+                                        </li>
                                         <li><a href="#"><i class="fas fa-question-circle mr-2"></i>Thông tin chấm điểm rèn luyện</a></li>
-                                        <li>
-                                            <a href="@Url.Action("Login","Home")" class="nav-icon">
-                                                <i class="fas fa-sign-in-alt mr-2"></i>Đăng nhập
-                                            </a>
-                                        </li>
+                                        <li><a href="@Url.Action("UpdatePersonalInfo","Students")"><i class="fas fa-user mr-2"></i>Thông tin cá nhân</a></li>
+                                        <li><a href="@Url.Action("Index","Home")"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -120,19 +131,46 @@
                             <div class="navbar-collapse" id="navbarNavDropdown">
                                 <div class="menu">
                                     <ul class="parent">
-                                        <li><a href="index.php">Trang Chủ</a></li>
+                                        <li><a href="@Url.Action("Index","Teacher")">Trang Chủ</a></li>
                                         <li>
-                                            <a href="#" target="_blank"> Quy định</a>
+                                            <a href="" target="_blank">Danh sách lớp</a>
+                                            <ul class="sub-menu">
+                                                <li>
+                                                    <a href="@Url.Action("ListClass","Teacher")" target="_blank">
+                                                        <i class="fas fa-graduation-cap mr-2"></i>18T1
+                                                    </a>
+                                                </li>
+                                                <li><a href="@Url.Action("ListClass","Teacher")"><i class="fas fa-graduation-cap mr-2"></i>18T2</a></li>
+
+                                            </ul>
                                         </li>
                                         <li>
-                                            <a href="#" target="_blank"> Hướng dẫn</a>
+                                            <a href="" target="_blank"> Quy định</a>
                                         </li>
                                         <li>
-                                            <a href="notification.php" target="_blank"> Thông báo</a>
+                                            <a href="" target="_blank"> Hướng dẫn</a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Notification","Students")" target="_blank"> Thông báo</a>
 
                                         </li>
                                         <li>
-                                            <a href="@Url.Action("Login","Home")" target="_blank"> Đăng nhập</a>
+                                            <a href="#" target="_blank">Nguyễn Thị Hà Quyên <i class="fa fa-chevron-circle-down fa-fw"></i></a>
+                                            <ul class="sub-menu">
+                                                <li>
+                                                    <a href="@Url.Action("ChangePassword","Students")" target="_blank">
+                                                        <i class="fas fa-key mr-2"></i>Thay đổi mật khẩu
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("UpdatePersonalInfo","Students")">
+                                                        <i class="fas fa-user mr-2"></i>Thông tin cá nhân
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="@Url.Action("Index","Home")"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a>
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
                                 </div>
@@ -285,12 +323,10 @@
                     </footer>
                 </div>
             </div>
-
         </div>
     </div>
+
     <!-- page-content" -->
-    <script src="~/Assets/client/js/jquery.slimscroll.js"></script>
-    <script src="~/Assets/client/js/jquery.nicescroll.js"></script>
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
 
     <script type="text/javascript" src="~/Assets/client/js/jquery-3.5.1.min.js"></script>
@@ -299,6 +335,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script type="text/javascript" src="~/Assets/client/js/slick.min.js"></script>
     <script type="text/javascript" src="~/Assets/client/js/custom.js"></script>
+    <script type="text/javascript" src="~/Assets/client/js/detailPoint.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,191 @@
+@media only screen and (max-width: 2000px){
+	.sticky{
+		width: 91.5%;
+	}
+}
+
+@media only screen and (min-width: 992px) and  (max-width: 1200px){
+	
+}
+@media only screen and (max-width: 1024px){
+	.menu__hide{
+  		display: block;
+	}
+	.header__banner{
+		display: none;
+	}
+	.module-ct .nav-pills{
+		display: block;
+	}
+	.navbar-light.bg-light{
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 900px){
+	
+	.tabbed ul li{
+		margin-right: 3px;
+	}
+	.tabbed ul{
+		padding-left: 0px;
+	}
+	.nav > li > a{
+		padding:5px 22px;
+	}
+	ul.sub-menu--hambuger{
+		top: 41.2%;
+	}
+	ul.sub-menu--hambuger li{
+        padding: 5px 0px;
+      }
+	.tabbed .arrow{
+		display: none;
+	}
+}
+@media only screen and (max-width: 850px){
+	#crumbs{
+		display: none;
+	}
+}
+@media only screen and (min-width: 768px) and  (max-width: 991px){
+	.bg-module-middle input{
+			width: 50%;
+	}
+	#login-sv .bg-module-top{
+		width: 100%;
+    	height: 82px;
+    	background-size: 625px 80px;
+	}
+	
+}
+
+@media only screen and (max-width: 767px){
+
+	.sticky{
+		width: 100%;
+	}
+	/*login*/
+	#login-sv .bg-module-top{
+		background: none;
+		height: 0px;
+	}
+	#login-sv .login__info{
+		padding-top: 5px;
+	}
+	/*listClass*/
+	.list__class_appraise{
+		padding:0px 10px;
+	}
+	.list_class--info{
+		padding: 0px 10px;
+	}
+	/*forgotPassword*/
+		.btn-primary.send{
+			max-width: 40%;
+		}
+		.bg-module-middle input{
+			width: 100%;
+		}
+		.moudle__info--title{
+			width: 100%;
+    		text-align: left;
+		}
+		.reset__password--info{
+			margin-top: 20px;
+		}
+		.reset__password--send{
+			margin-top: 0px!important;
+		}
+	/*forgotPassword*/
+	/*page detailPoint*/
+	#crumbs{
+		display: none;
+	}
+	.page-wrapper{
+		border: none;
+	}
+	.list__class{
+		padding: 0px!important;
+	}
+	
+	.evaluate__student-info {
+		display: block!important;
+	}
+	.evaluate__student-info p{
+		margin-left: 0px;
+    	color: darkblue;
+    	border-bottom: 1px solid #e8e4f1;
+    	padding: 7px 0px;
+	}
+	.evaluate__student-info p:nth-child(4)
+	{
+		border-bottom: none;
+	}
+	/*page detailPoint*/
+
+	.evaluate__student-point-sum table td{
+		padding: 5px 28px;
+	}
+}
+@media only screen and (max-width: 580px){
+	.evaluate__student-point-sum table td {
+    padding: 3px 14px;
+	}
+	.nav > li > a{
+		padding: 2px 15px;
+    	font-size: 12px;
+	}
+	ul.sub-menu--hambuger{
+		top: 44.3%;
+	}
+	
+	ul.sub-menu--hambuger li{
+		padding: 0px;
+	}
+	ul.sub-menu--hambuger li a{
+		font-size: 12px;
+		padding: 3px;
+	}
+	.list_class--info table{
+		display: block!important;
+	}
+
+}
+@media only screen and (max-width: 480px){
+	.footer-links .online-content .user:nth-child(2n){
+  		margin-left: 40px;
+	}
+	.bg-module-middle input{
+			width: 100%;
+		}
+	.btn-primary.send {
+    	max-width: 60%;
+	}
+	.nav > li > a{
+		padding: 2px 7px;
+	}
+	#v-pilss-mucI table{
+		display: block!important;
+	}
+	#v-pilss-mucII table{
+		display: block!important;
+	}
+}
+@media only screen and (max-width: 414px){
+	.footer-links .online-content{
+		display: grid;
+	}
+	.footer-links .online-content .user{
+  		max-width: 100%;
+	}
+	.footer-links .online-content .user:nth-child(2n){
+  		margin-left:-14px;
+	}
+	.tabbed ul li{
+		padding: 9px 2px 0px;
+	}
+	.reset__password--code input{
+		width: 100%!important;
+	}
+}

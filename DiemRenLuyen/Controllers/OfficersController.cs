@@ -6,18 +6,26 @@ using System.Web.Mvc;
 
 namespace DiemRenLuyen.Controllers
 {
-    public class HomeController : Controller
+    public class OfficersController : Controller
     {
+        // GET: Officers
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult Login()
+        public ActionResult ListClass()
         {
             return View();
         }
-        public ActionResult ForgotPassword()
+        public ActionResult OfficersMark()
+        {
+            return View();
+        }
+        public ActionResult ViewScores()
+        {
+            return View();
+        }
+        public ActionResult MarkPoint()
         {
             return View();
         }
