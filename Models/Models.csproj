@@ -82,6 +82,7 @@
     <Compile Include="EF\phieuChamDiem.cs" />
     <Compile Include="EF\sinhVien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\giangVienServices.cs" />
     <Compile Include="Services\sinhVienServices.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -47,7 +47,14 @@ namespace Models.DAO
             {
                 if (sinhVien.matKhau.Equals(matKhau))
                 {
-                    return Constraints.Common.LOGIN_SUCCESS;
+                    if (sinhVien.trangThai == Constraints.Common.INACTIVATE)
+                    {
+                        return Constraints.Common.BLOCK;
+                    }
+                    else
+                    {
+                        return Constraints.Common.LOGIN_SUCCESS;
+                    }
                 }
                 else
                 {
@@ -60,11 +67,11 @@ namespace Models.DAO
             canBoLop canBoLop = db.canBoLops.Where(x => x.maSinhVien.Equals(maSinhVien)).Where(x => x.trangThai == Constraints.Common.ACTIVATE).SingleOrDefault();
             if(canBoLop is null)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
     }
