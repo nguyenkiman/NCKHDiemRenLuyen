@@ -74,5 +74,22 @@ namespace Models.DAO
                 return true;
             }
         }
+        public List<sinhVien> ListWhereAll(string maSinhVien)
+        {
+            return db.sinhVien.Where(x => x.maSinhVien == maSinhVien).ToList();
+        }
+
+        public string UpdatePersonalInfo(sinhVien sv)
+        {
+            var sinhVien = db.sinhVien.Find(sv.maSinhVien);
+            if(sinhVien !=null)
+            {
+                sinhVien.soDienThoai = sv.soDienThoai;
+                sinhVien.gmail = sv.gmail;
+            }
+            db.SaveChanges();
+            return sv.tenSinhVien;
+        }
+        
     }
 }

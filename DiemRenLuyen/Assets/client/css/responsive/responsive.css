@@ -20,8 +20,18 @@
 	.navbar-light.bg-light{
 		display: none;
 	}
+	.moudle__info--title {
+		width: 21vw;
+	}
+	button.btn-show-password {
+		right: 16.5vw !important;
+	}
 }
-
+@media only screen and (max-width: 990px) {
+	button.btn-show-password {
+		right: 12.5vw !important;
+	}
+}
 @media only screen and (max-width: 900px){
 	
 	.tabbed ul li{
@@ -47,6 +57,12 @@
 	#crumbs{
 		display: none;
 	}
+	.moudle__info--title {
+		width: 24vw;
+	}
+	button.btn-show-password {
+		right: 10.5vw !important;
+	}
 }
 @media only screen and (min-width: 768px) and  (max-width: 991px){
 	.bg-module-middle input{
@@ -61,7 +77,13 @@
 }
 
 @media only screen and (max-width: 767px){
-
+	button.btn-show-password-login {
+		top: 35px !important;
+		right: 2.1vw !important;
+	}
+	button.btn-show-password {
+		right: 1.5vw !important;
+	}
 	.sticky{
 		width: 100%;
 	}

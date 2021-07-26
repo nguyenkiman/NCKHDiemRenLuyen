@@ -17,6 +17,7 @@ namespace Models.Constraints
         public const int BLOCK = 3;
 
         public const string USER_SESSION = "USER_SESSION";
+        public const string NAME_USER_SESSION = "MA_USER_SESSION";
 
         public const int PAGE_SIZE = 10;
        
