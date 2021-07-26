@@ -28,5 +28,9 @@ namespace Models.Services
         {
             return sinhVienDAO.checkLogin(maSinhVien, matKhau);
         }
+        public bool isCanBoLop(String maSinhVien)
+        {
+            return sinhVienDAO.isCanBoLop(maSinhVien);
+        }
     }
 }
