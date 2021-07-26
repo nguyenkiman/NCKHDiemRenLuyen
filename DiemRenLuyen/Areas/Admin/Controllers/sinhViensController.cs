@@ -40,6 +40,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.maLop = new SelectList(db.lop, "maLop", "maNganh");
+            nch
             return View();
         }
 
@@ -97,6 +98,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/sinhViens/Delete/5
         public ActionResult Delete(string id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -114,8 +116,10 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
+            
             sinhVien sinhVien = db.sinhVien.Find(id);
-            db.sinhVien.Remove(sinhVien);
+            sinhVien.trangThai = 0;
+            db.Entry(sinhVien).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -127,6 +131,12 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult CreateExel()
+        {
+          
+            return View();
         }
     }
 }

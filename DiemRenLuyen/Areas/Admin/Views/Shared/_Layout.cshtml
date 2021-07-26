@@ -99,15 +99,21 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="listStudent.html" class="nav-link ">
+                                    <a href="@Url.Action("Index","sinhViens")" class="nav-link ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách sinh viên</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="addStudent.html" class="nav-link">
+                                    <a href="@Url.Action("Create","sinhViens")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm sinh viên</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("CreateExel","sinhViens")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Nhập từ file Exel</p>
                                     </a>
                                 </li>
                             </ul>
