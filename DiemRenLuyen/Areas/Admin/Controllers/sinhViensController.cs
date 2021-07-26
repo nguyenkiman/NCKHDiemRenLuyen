@@ -39,7 +39,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/sinhViens/Create
         public ActionResult Create()
         {
-            ViewBag.maLop = new SelectList(db.lops, "maLop", "maNganh");
+            ViewBag.maLop = new SelectList(db.lops, "maLop", "maLop");
             return View();
         }
 
@@ -97,25 +97,9 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/sinhViens/Delete/5
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             sinhVien sinhVien = db.sinhViens.Find(id);
-            if (sinhVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(sinhVien);
-        }
-
-        // POST: Admin/sinhViens/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            sinhVien sinhVien = db.sinhViens.Find(id);
-            db.sinhViens.Remove(sinhVien);
+            sinhVien.trangThai = 0;
+            db.Entry(sinhVien).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -127,6 +111,12 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult CreateExel()
+        {
+          
+            return View();
         }
     }
 }
