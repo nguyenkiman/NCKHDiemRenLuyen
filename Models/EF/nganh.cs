@@ -12,7 +12,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public nganh()
         {
-            lops = new HashSet<lop>();
+            lop = new HashSet<lop>();
         }
 
         [Key]
@@ -30,6 +30,6 @@ namespace Models.EF
         public virtual khoa khoa { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<lop> lops { get; set; }
+        public virtual ICollection<lop> lop { get; set; }
     }
 }

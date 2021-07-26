@@ -17,7 +17,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/lops
         public ActionResult Index()
         {
-            var lops = db.lops.Include(l => l.nganh);
+            var lops = db.lop.Include(l => l.nganh);
             return View(lops.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            lop lop = db.lops.Find(id);
+            lop lop = db.lop.Find(id);
             if (lop == null)
             {
                 return HttpNotFound();
@@ -39,7 +39,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/lops/Create
         public ActionResult Create()
         {
-            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh");
+            ViewBag.maNganh = new SelectList(db.nganh, "maNganh", "tenNganh");
             return View();
         }
 
@@ -52,12 +52,12 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.lops.Add(lop);
+                db.lop.Add(lop);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh", lop.maNganh);
+            ViewBag.maNganh = new SelectList(db.nganh, "maNganh", "tenNganh", lop.maNganh);
             return View(lop);
         }
 
@@ -68,12 +68,12 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            lop lop = db.lops.Find(id);
+            lop lop = db.lop.Find(id);
             if (lop == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh", lop.maNganh);
+            ViewBag.maNganh = new SelectList(db.nganh, "maNganh", "tenNganh", lop.maNganh);
             return View(lop);
         }
 
@@ -90,7 +90,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh", lop.maNganh);
+            ViewBag.maNganh = new SelectList(db.nganh, "maNganh", "tenNganh", lop.maNganh);
             return View(lop);
         }
 
@@ -101,7 +101,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            lop lop = db.lops.Find(id);
+            lop lop = db.lop.Find(id);
             if (lop == null)
             {
                 return HttpNotFound();
@@ -114,8 +114,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            lop lop = db.lops.Find(id);
-            db.lops.Remove(lop);
+            lop lop = db.lop.Find(id);
+            db.lop.Remove(lop);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
