@@ -40,7 +40,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.maLop = new SelectList(db.lop, "maLop", "maNganh");
-            nch
+            
             return View();
         }
 
