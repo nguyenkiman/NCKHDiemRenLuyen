@@ -15,6 +15,7 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult MarkPoint()
         {
+
             return View();
         }
         public ActionResult ListClass()
