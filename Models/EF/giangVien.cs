@@ -12,7 +12,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public giangVien()
         {
-            giaoVienChuNhiem = new HashSet<giaoVienChuNhiem>();
+            giaoVienChuNhiems = new HashSet<giaoVienChuNhiem>();
         }
 
         [Key]
@@ -20,10 +20,10 @@ namespace Models.EF
         public string maGiangVien { get; set; }
 
         [Required]
-        public string tenGiangVien { get; set; }
+        public string matKhau { get; set; }
 
         [Required]
-        public string matKhau { get; set; }
+        public string tenGiangVien { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime ngaySinh { get; set; }
@@ -39,6 +39,6 @@ namespace Models.EF
         public int trangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<giaoVienChuNhiem> giaoVienChuNhiem { get; set; }
+        public virtual ICollection<giaoVienChuNhiem> giaoVienChuNhiems { get; set; }
     }
 }

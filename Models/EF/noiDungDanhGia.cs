@@ -12,7 +12,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public noiDungDanhGia()
         {
-            chiTietPhieuCham = new HashSet<chiTietPhieuCham>();
+            chiTietPhieuChams = new HashSet<chiTietPhieuCham>();
         }
 
         [Key]
@@ -30,7 +30,7 @@ namespace Models.EF
         public int trangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chiTietPhieuCham> chiTietPhieuCham { get; set; }
+        public virtual ICollection<chiTietPhieuCham> chiTietPhieuChams { get; set; }
 
         public virtual danhMucDanhGia danhMucDanhGia { get; set; }
     }

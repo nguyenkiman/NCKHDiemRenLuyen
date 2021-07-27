@@ -12,11 +12,11 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public sinhVien()
         {
-            baoHiemYTe = new HashSet<baoHiemYTe>();
-            canBoLop = new HashSet<canBoLop>();
-            diemHocTap = new HashSet<diemHocTap>();
-            hocPhi = new HashSet<hocPhi>();
-            phieuChamDiem = new HashSet<phieuChamDiem>();
+            baoHiemYTes = new HashSet<baoHiemYTe>();
+            canBoLops = new HashSet<canBoLop>();
+            diemHocTaps = new HashSet<diemHocTap>();
+            hocPhis = new HashSet<hocPhi>();
+            phieuChamDiems = new HashSet<phieuChamDiem>();
         }
 
         [Key]
@@ -46,20 +46,20 @@ namespace Models.EF
         public string maLop { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<baoHiemYTe> baoHiemYTe { get; set; }
+        public virtual ICollection<baoHiemYTe> baoHiemYTes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<canBoLop> canBoLop { get; set; }
+        public virtual ICollection<canBoLop> canBoLops { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<diemHocTap> diemHocTap { get; set; }
+        public virtual ICollection<diemHocTap> diemHocTaps { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<hocPhi> hocPhi { get; set; }
+        public virtual ICollection<hocPhi> hocPhis { get; set; }
 
         public virtual lop lop { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<phieuChamDiem> phieuChamDiem { get; set; }
+        public virtual ICollection<phieuChamDiem> phieuChamDiems { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public admin()
         {
-            hocKi = new HashSet<hocKi>();
+            hocKis = new HashSet<hocKi>();
         }
 
         [Key]
@@ -28,6 +28,6 @@ namespace Models.EF
         public int? trangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<hocKi> hocKi { get; set; }
+        public virtual ICollection<hocKi> hocKis { get; set; }
     }
 }

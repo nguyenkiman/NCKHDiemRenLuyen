@@ -12,10 +12,10 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public hocKi()
         {
-            baoHiemYTe = new HashSet<baoHiemYTe>();
-            diemHocTap = new HashSet<diemHocTap>();
-            hocPhi = new HashSet<hocPhi>();
-            phieuChamDiem = new HashSet<phieuChamDiem>();
+            baoHiemYTes = new HashSet<baoHiemYTe>();
+            diemHocTaps = new HashSet<diemHocTap>();
+            hocPhis = new HashSet<hocPhi>();
+            phieuChamDiems = new HashSet<phieuChamDiem>();
         }
 
         [Key]
@@ -37,15 +37,15 @@ namespace Models.EF
         public virtual admin admin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<baoHiemYTe> baoHiemYTe { get; set; }
+        public virtual ICollection<baoHiemYTe> baoHiemYTes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<diemHocTap> diemHocTap { get; set; }
+        public virtual ICollection<diemHocTap> diemHocTaps { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<hocPhi> hocPhi { get; set; }
+        public virtual ICollection<hocPhi> hocPhis { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<phieuChamDiem> phieuChamDiem { get; set; }
+        public virtual ICollection<phieuChamDiem> phieuChamDiems { get; set; }
     }
 }

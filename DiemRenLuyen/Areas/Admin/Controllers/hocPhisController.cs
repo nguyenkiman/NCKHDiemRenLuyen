@@ -17,7 +17,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/hocPhis
         public ActionResult Index()
         {
-            var hocPhis = db.hocPhi.Include(h => h.hocKi).Include(h => h.sinhVien);
+            var hocPhis = db.hocPhis.Include(h => h.hocKi).Include(h => h.sinhVien);
             return View(hocPhis.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            hocPhi hocPhi = db.hocPhi.Find(id);
+            hocPhi hocPhi = db.hocPhis.Find(id);
             if (hocPhi == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/hocPhis/Create
         public ActionResult Create()
         {
-            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao");
-            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau");
+            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao");
+            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau");
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.hocPhi.Add(hocPhi);
+                db.hocPhis.Add(hocPhi);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", hocPhi.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", hocPhi.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", hocPhi.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", hocPhi.maSinhVien);
             return View(hocPhi);
         }
 
@@ -70,13 +70,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            hocPhi hocPhi = db.hocPhi.Find(id);
+            hocPhi hocPhi = db.hocPhis.Find(id);
             if (hocPhi == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", hocPhi.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", hocPhi.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", hocPhi.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", hocPhi.maSinhVien);
             return View(hocPhi);
         }
 
@@ -93,8 +93,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", hocPhi.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", hocPhi.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", hocPhi.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", hocPhi.maSinhVien);
             return View(hocPhi);
         }
 
@@ -105,7 +105,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            hocPhi hocPhi = db.hocPhi.Find(id);
+            hocPhi hocPhi = db.hocPhis.Find(id);
             if (hocPhi == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            hocPhi hocPhi = db.hocPhi.Find(id);
-            db.hocPhi.Remove(hocPhi);
+            hocPhi hocPhi = db.hocPhis.Find(id);
+            db.hocPhis.Remove(hocPhi);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

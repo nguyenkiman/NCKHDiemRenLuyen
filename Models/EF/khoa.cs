@@ -12,7 +12,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public khoa()
         {
-            nganh = new HashSet<nganh>();
+            nganhs = new HashSet<nganh>();
         }
 
         [Key]
@@ -25,6 +25,6 @@ namespace Models.EF
         public int? trangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<nganh> nganh { get; set; }
+        public virtual ICollection<nganh> nganhs { get; set; }
     }
 }

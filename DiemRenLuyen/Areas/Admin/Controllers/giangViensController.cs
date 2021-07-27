@@ -17,7 +17,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/giangViens
         public ActionResult Index()
         {
-            return View(db.giangVien.ToList());
+            return View(db.giangViens.ToList());
         }
 
         // GET: Admin/giangViens/Details/5
@@ -27,7 +27,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            giangVien giangVien = db.giangVien.Find(id);
+            giangVien giangVien = db.giangViens.Find(id);
             if (giangVien == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.giangVien.Add(giangVien);
+                db.giangViens.Add(giangVien);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            giangVien giangVien = db.giangVien.Find(id);
+            giangVien giangVien = db.giangViens.Find(id);
             if (giangVien == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            giangVien giangVien = db.giangVien.Find(id);
+            giangVien giangVien = db.giangViens.Find(id);
             if (giangVien == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            giangVien giangVien = db.giangVien.Find(id);
-            db.giangVien.Remove(giangVien);
+            giangVien giangVien = db.giangViens.Find(id);
+            db.giangViens.Remove(giangVien);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

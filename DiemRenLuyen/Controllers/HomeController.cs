@@ -10,7 +10,7 @@ using Microsoft.Build.Tasks;
 
 namespace DiemRenLuyen.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         sinhVienServices sinhVienServices = new sinhVienServices();
         giangVienServices giangVienServices = new giangVienServices();
@@ -31,22 +31,25 @@ namespace DiemRenLuyen.Controllers
         {
             var checkGiangVien = giangVienServices.checkLoginGiangVien(user.UserName, user.PassWord);
             var checkHocSinh = sinhVienServices.checkLogin(user.UserName, user.PassWord);
-
+            
 
             if (checkGiangVien == Models.Constraints.Common.ACCOUNT_NOT_EXISTS)
             {
                 if (checkHocSinh == Models.Constraints.Common.ACCOUNT_NOT_EXISTS)
                 {
+<<<<<<< HEAD
                     SetAlert("Tài khoản không tồn tại", "error");
                     //Response.Write("<script>alert('Tài khoản không tồn tại');</script>");
+=======
+                    ModelState.AddModelError("", "Tài khoản không tồn tại");
+                    Response.Write("<script>alert('Tài khoản không tồn tại');</script>");
+>>>>>>> parent of 362962d (Merge branch 'master' into develops)
                 }
                 else
                 {
                     if (checkHocSinh == Models.Constraints.Common.LOGIN_SUCCESS)
                     {
-                        var sinhVien = sinhVienServices.findByMaSinhVien(user.UserName);
                         Session.Add(Models.Constraints.Common.USER_SESSION, user);
-                        Session.Add(Models.Constraints.Common.NAME_USER_SESSION, sinhVien.tenSinhVien);
                         if (sinhVienServices.isCanBoLop(user.UserName))
                         {
                             return RedirectToAction("Index", "Officers");
@@ -54,18 +57,23 @@ namespace DiemRenLuyen.Controllers
                         else
                         {
                             return RedirectToAction("Index", "Students");
+
                         }
                     }
                     else if (checkHocSinh == Models.Constraints.Common.INVALID_PASSWORDS)
                     {
+<<<<<<< HEAD
                         //ModelState.AddModelError("", "Mật khẩu không đúng");
                         //Response.Write("<script>alert('Mật khẩu không đúng');</script>");
                         SetAlert("Mật khẩu không đúng", "error");
+=======
+                        ModelState.AddModelError("", "Mật khẩu không đúng");
+                        Response.Write("<script>alert('Mật khẩu không đúng');</script>");
+>>>>>>> parent of 362962d (Merge branch 'master' into develops)
                     }
                     else
                     {
-                        SetAlert("Tài khoản bị khóa", "error");
-                        // ModelState.AddModelError("", "Tài khoản bị khóa");
+                        ModelState.AddModelError("", "Tài khoản bị khóa");
                     }
                 }
 
@@ -74,32 +82,29 @@ namespace DiemRenLuyen.Controllers
             {
                 if (checkGiangVien == Models.Constraints.Common.LOGIN_SUCCESS)
                 {
-                    var giangVien = giangVienServices.findByMaGiangVien(user.UserName);
-                    Session.Add(Models.Constraints.Common.NAME_USER_SESSION, giangVien.tenGiangVien);
                     Session.Add(Models.Constraints.Common.USER_SESSION, user);
                     return RedirectToAction("Index", "Teacher");
                 }
                 else if (checkGiangVien == Models.Constraints.Common.INVALID_PASSWORDS)
                 {
-                    SetAlert("Mật khẩu không đúng", "error");
-                    //ModelState.AddModelError("", "Mật khẩu không đúng");
+                    ModelState.AddModelError("", "Mật khẩu không đúng");
                 }
                 else
                 {
-                    SetAlert("Tài khoản bị khóa", "error");
-                    //ModelState.AddModelError("", "Tài khoản bị khóa");
+                    ModelState.AddModelError("", "Tài khoản bị khóa");
                 }
             }
             return RedirectToAction("Login", "Home");
         }
-
-        public ActionResult Logout()
-        {
-            Session[Models.Constraints.Common.USER_SESSION] = null;
-            Session[Models.Constraints.Common.NAME_USER_SESSION] = null;
-            return RedirectToAction("Index", "Home");
-        }
         public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+        public ActionResult UpdatePersonalInfo()
+        {
+            return View();
+        }
+        public ActionResult ChangePassword()
         {
             return View();
         }
