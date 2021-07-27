@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="~/Assets/admin/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="~/Assets/admin/plugins/summernote/summernote-bs4.min.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -99,15 +100,21 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="listStudent.html" class="nav-link ">
+                                    <a href="@Url.Action("Index","sinhViens")" class="nav-link ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách sinh viên</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="addStudent.html" class="nav-link">
+                                    <a href="@Url.Action("Create","sinhViens")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm sinh viên</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("CreateExel","sinhViens")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Nhập từ file Exel</p>
                                     </a>
                                 </li>
                             </ul>
@@ -122,13 +129,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="listClass.html" class="nav-link ">
+                                    <a href="@Url.Action("Index","lops")" class="nav-link ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách lớp</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="addClass.html" class="nav-link">
+                                    <a href="@Url.Action("Create","lops")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Thêm lớp</p>
                                     </a>
@@ -243,6 +250,8 @@
     <script src="~/Assets/admin/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/Assets/admin/dist/js/pages/dashboard.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </body>
 
 </html>

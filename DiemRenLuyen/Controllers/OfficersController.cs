@@ -11,6 +11,11 @@ namespace DiemRenLuyen.Controllers
         // GET: Officers
         public ActionResult Index()
         {
+            var session = Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
         public ActionResult ListClass()

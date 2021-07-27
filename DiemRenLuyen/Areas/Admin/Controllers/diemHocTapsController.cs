@@ -17,7 +17,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/diemHocTaps
         public ActionResult Index()
         {
-            var diemHocTaps = db.diemHocTaps.Include(d => d.hocKi).Include(d => d.sinhVien);
+            var diemHocTaps = db.diemHocTap.Include(d => d.hocKi).Include(d => d.sinhVien);
             return View(diemHocTaps.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            diemHocTap diemHocTap = db.diemHocTaps.Find(id);
+            diemHocTap diemHocTap = db.diemHocTap.Find(id);
             if (diemHocTap == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/diemHocTaps/Create
         public ActionResult Create()
         {
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao");
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau");
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao");
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau");
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.diemHocTaps.Add(diemHocTap);
+                db.diemHocTap.Add(diemHocTap);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", diemHocTap.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", diemHocTap.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", diemHocTap.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", diemHocTap.maSinhVien);
             return View(diemHocTap);
         }
 
@@ -70,13 +70,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            diemHocTap diemHocTap = db.diemHocTaps.Find(id);
+            diemHocTap diemHocTap = db.diemHocTap.Find(id);
             if (diemHocTap == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", diemHocTap.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", diemHocTap.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", diemHocTap.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", diemHocTap.maSinhVien);
             return View(diemHocTap);
         }
 
@@ -93,8 +93,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", diemHocTap.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", diemHocTap.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", diemHocTap.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", diemHocTap.maSinhVien);
             return View(diemHocTap);
         }
 
@@ -105,7 +105,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            diemHocTap diemHocTap = db.diemHocTaps.Find(id);
+            diemHocTap diemHocTap = db.diemHocTap.Find(id);
             if (diemHocTap == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            diemHocTap diemHocTap = db.diemHocTaps.Find(id);
-            db.diemHocTaps.Remove(diemHocTap);
+            diemHocTap diemHocTap = db.diemHocTap.Find(id);
+            db.diemHocTap.Remove(diemHocTap);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

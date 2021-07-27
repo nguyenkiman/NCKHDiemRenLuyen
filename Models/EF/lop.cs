@@ -12,9 +12,9 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public lop()
         {
-            canBoLops = new HashSet<canBoLop>();
-            giaoVienChuNhiems = new HashSet<giaoVienChuNhiem>();
-            sinhViens = new HashSet<sinhVien>();
+            canBoLop = new HashSet<canBoLop>();
+            giaoVienChuNhiem = new HashSet<giaoVienChuNhiem>();
+            sinhVien = new HashSet<sinhVien>();
         }
 
         [Key]
@@ -27,14 +27,14 @@ namespace Models.EF
         public int trangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<canBoLop> canBoLops { get; set; }
+        public virtual ICollection<canBoLop> canBoLop { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<giaoVienChuNhiem> giaoVienChuNhiems { get; set; }
+        public virtual ICollection<giaoVienChuNhiem> giaoVienChuNhiem { get; set; }
 
         public virtual nganh nganh { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<sinhVien> sinhViens { get; set; }
+        public virtual ICollection<sinhVien> sinhVien { get; set; }
     }
 }
