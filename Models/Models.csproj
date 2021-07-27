@@ -84,6 +84,8 @@
     <Compile Include="EF\sinhVien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\giangVienServices.cs" />
+    <Compile Include="Services\hocKiServices.cs" />
+    <Compile Include="Services\phieuChamDiemServices.cs" />
     <Compile Include="Services\sinhVienServices.cs" />
   </ItemGroup>
   <ItemGroup>
