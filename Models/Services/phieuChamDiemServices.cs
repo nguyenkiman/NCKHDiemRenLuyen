@@ -2,6 +2,7 @@
 using Models.EF;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -127,6 +128,35 @@ namespace Models.Services
             }
             newPhieuChamDiem.chiTietPhieuChams = chiTietPhieuChams;
             return newPhieuChamDiem;
+        }
+        public phieuChamDiem findByMaSinhVienAndMaHocKy(string maSinhVien,string maHocKi)
+        {
+            var query = (from dht in db.phieuChamDiems
+                         where dht.maSinhVien.Equals(maSinhVien) && dht.maHocKi.Equals(maHocKi)
+                         select dht).FirstOrDefault();
+            return query;
+        }
+        public void saveChiTietPhieuCham(int maPhieuCham,int maNoiDung,int diemTuCham,int dienCBLCham,int diemGVCNCham,string minhChung)
+        {
+            chiTietPhieuCham noidung1 = new chiTietPhieuCham();
+            noidung1.maNoiDung = maNoiDung;
+            noidung1.diemTuCham = diemTuCham;
+            noidung1.diemCBLCham = dienCBLCham;
+            noidung1.diemGVCNCham = diemGVCNCham;
+            noidung1.minhChung = minhChung;
+            noidung1.maPhieuChamDiem = maPhieuCham;
+            try
+            {
+                
+                db.chiTietPhieuChams.Add(noidung1);
+                db.SaveChanges();
+            }
+            catch
+            {
+                db.Entry(noidung1).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
         }
     }
 }
