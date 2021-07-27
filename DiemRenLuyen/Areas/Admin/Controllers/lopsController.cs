@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Models.DAO;
 using Models.EF;
+using PagedList;
 
 namespace DiemRenLuyen.Areas.Admin.Controllers
 {
@@ -15,10 +17,17 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         private Db db = new Db();
 
         // GET: Admin/lops
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
-            var lops = db.lops.Include(l => l.nganh);
-            return View(lops.ToList());
+            var session = (DiemRenLuyen.Areas.Admin.Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
+            var lops = new lopsDAO();
+            var model = lops.ListWhereAll(searchString, page, pageSize);
+            ViewBag.SearchString = searchString;
+            return View(model);
         }
 
         // GET: Admin/lops/Details/5
@@ -56,7 +65,6 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh", lop.maNganh);
             return View(lop);
         }
@@ -94,28 +102,11 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             return View(lop);
         }
 
-        // GET: Admin/lops/Delete/5
+        [HttpDelete]
         public ActionResult Delete(string id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             lop lop = db.lops.Find(id);
-            if (lop == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lop);
-        }
-
-        // POST: Admin/lops/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            lop lop = db.lops.Find(id);
-            db.lops.Remove(lop);
+            lop.trangThai = 0 ;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
