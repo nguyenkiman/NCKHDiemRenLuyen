@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Models.EF.hocKi>
 @{
     ViewBag.Title = "Danh sách lớp";
     Layout = "~/Views/Teacher/_Layout.cshtml";
@@ -18,10 +18,10 @@
             <div class="list__class_appraise wow animate__fadeInUp" data-wow-duration="1s" style="visibility: visible;">
                 <label class="list__class_appraise--title">Đợt đánh giá: </label>
                 <select class="list__class_appraise--time">
-                    <option>Đợt đánh giá HK 220</option>
-                    <option>Đợt đánh giá HK 120</option>
-                    <option>Đợt đánh giá HK 119</option>
-                    <option>Đợt đánh giá HK 219</option>
+                    @foreach (var item in Model)
+                    {
+                    <option value="@item.maHocKi">Đợt đánh giá HK @item.maHocKi</option>
+                    }
                 </select>
             </div>
             <div class="list_class--info ">
@@ -55,30 +55,7 @@
                             <td>Tốt</td>
                             <td><a href="#" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a></td>
                         </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>1811505310131</td>
-                            <td>Ngô Kim Hoàng Minh</td>
-                            <td>85</td>
-                            <td>Tốt</td>
-                            <td><a href="#" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>1811505310131</td>
-                            <td>Ngô Kim Hoàng Minh</td>
-                            <td>85</td>
-                            <td>Tốt</td>
-                            <td><a href="#" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>1811505310131</td>
-                            <td>Ngô Kim Hoàng Minh</td>
-                            <td>85</td>
-                            <td>Tốt</td>
-                            <td><a href="#" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a></td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
