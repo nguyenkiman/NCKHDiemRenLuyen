@@ -172,7 +172,9 @@
 	.list_class--info table{
 		display: block!important;
 	}
-
+	.notify_info--image {
+		display: none !important;
+	}
 }
 @media only screen and (max-width: 480px){
 	.footer-links .online-content .user:nth-child(2n){

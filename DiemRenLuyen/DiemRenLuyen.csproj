@@ -2025,6 +2025,7 @@
     <Content Include="Assets\client\image\blood.jpg" />
     <Content Include="Assets\client\image\capcha.PNG" />
     <Content Include="Assets\client\image\chatbox.PNG" />
+    <Content Include="Assets\client\image\error_drl.jpg" />
     <Content Include="Assets\client\image\eye.png" />
     <Content Include="Assets\client\image\favicon.png" />
     <Content Include="Assets\client\image\header-ute.png" />
@@ -2039,6 +2040,7 @@
     <Content Include="Assets\client\image\no_avatar.jpg" />
     <Content Include="Assets\client\image\required.png" />
     <Content Include="Assets\client\image\slide_2.png" />
+    <Content Include="Assets\client\image\succes_drl.PNG" />
     <Content Include="Assets\client\js\bootstrap.min.js" />
     <Content Include="Assets\client\js\custom.js" />
     <Content Include="Assets\client\js\detailPoint.js" />
@@ -2223,6 +2225,8 @@
     <Content Include="Views\Students\UpdatePersonalInfo.cshtml" />
     <Content Include="Views\Teacher\UpdatePersonalInfo.cshtml" />
     <Content Include="Views\Teacher\ChangePassword.cshtml" />
+    <Content Include="Views\Students\NotifySuccess.cshtml" />
+    <Content Include="Views\Students\NotifyError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
