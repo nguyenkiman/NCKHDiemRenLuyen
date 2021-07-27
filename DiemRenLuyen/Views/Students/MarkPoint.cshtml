@@ -19,7 +19,6 @@
             <div class="evaluate__student-info d-flex">
                 <p class="ml-0 wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-male mr-2"></i>@Html.DisplayFor(model => model.sinhVien.tenSinhVien)</p>
                 <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-address-card mr-2"></i>@Html.DisplayFor(model => model.maSinhVien)</p>
-                <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-barcode mr-2"></i>@Html.DisplayFor(model => model.sinhVien.maLop)</p>
                 <p class=" wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-certificate mr-2"></i>@Html.DisplayFor(model => model.hocKi.maHocKi)</p>
             </div>
             <div class="evalue__student--drl mt-1 d-flex align-items-center wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
@@ -28,40 +27,41 @@
             </div>
             <!--evaluate-->
             <div class="evaluate__student-point p-2">
-                <div class="evaluate__student-point-sum wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;" id="point_sum">
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-success d-flex align-items-center"><img src="../../../assets/client/image/icons-check.png" alt="" class="mr-1"> Chấm điểm</button>
-                    </div>
-                    <table class=" table-bordered mt-2">
-                        <tr class="font-weight-bold" style="background: floralwhite">
-                            <td rowspan="2" class="text-danger" style="padding-top: 22px;">Tổng điểm</td>
-                            <td class="align-middle">Điểm tối đa</td>
-                            <td class="align-middle">Sinh viên đánh giá</td>
-                        </tr>
-                        <tr class="text-danger fw-bold">
-
-                            <td class="text-center">100</td>
-                            <td class="text-center">
-                                <p id="txt_total"></p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="tabbed round mt-3 d-flex justify-content-center wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
-                    <ul class="nav nav-tabs">
-                        <li class="tabitem active" onclick="openCity(event,'v-pilss-mucI')"><a data-toggle="tab">Mục I <p id="total_mucI" class="text-center"></p></a></li>
-                        <div class="arrow"></div>
-                        <li class="tabitem " onclick="openCity(event,'v-pilss-mucII')"><a data-toggle="tab">Mục II <p id="total_mucII" class="text-center"></p></a></li>
-                        <div class="arrow"></div>
-                        <li class="tabitem " onclick="openCity(event,'v-pilss-mucIII')"><a data-toggle="tab">Mục III<p id="total_mucIII" class="text-center"></p></a></li>
-                        <div class="arrow"></div>
-                        <li class="tabitem " onclick="openCity(event,'v-pilss-mucIV')"><a data-toggle="tab">Mục IV<p id="total_mucIV" class="text-center"></p></a></li>
-                        <div class="arrow"></div>
-                        <li class="tabitem mr-0 " onclick="openCity(event,'v-pilss-mucV')"><a data-toggle="tab">Mục V<p id="total_mucV" class="text-center"></p></a></li>
-                    </ul>
-                </div>
-                @using (Html.BeginForm())
+                @using (Html.BeginForm("MarkPoint", "Students", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
+                    <div class="evaluate__student-point-sum wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;" id="point_sum">
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="btn btn-success d-flex align-items-center" value="Chấm điểm"><img src="../../../assets/client/image/icons-check.png" alt="" class="mr-1" />
+                        </div>
+                        <table class=" table-bordered mt-2">
+                            <tr class="font-weight-bold" style="background: floralwhite">
+                                <td rowspan="2" class="text-danger" style="padding-top: 22px;">Tổng điểm</td>
+                                <td class="align-middle">Điểm tối đa</td>
+                                <td class="align-middle">Sinh viên đánh giá</td>
+                            </tr>
+                            <tr class="text-danger fw-bold">
+
+                                <td class="text-center">100</td>
+                                <td class="text-center">
+                                    <p id="txt_total"></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tabbed round mt-3 d-flex justify-content-center wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
+                        <ul class="nav nav-tabs">
+                            <li class="tabitem active" onclick="openCity(event,'v-pilss-mucI')"><a data-toggle="tab">Mục I <p id="total_mucI" class="text-center"></p></a></li>
+                            <div class="arrow"></div>
+                            <li class="tabitem " onclick="openCity(event,'v-pilss-mucII')"><a data-toggle="tab">Mục II <p id="total_mucII" class="text-center"></p></a></li>
+                            <div class="arrow"></div>
+                            <li class="tabitem " onclick="openCity(event,'v-pilss-mucIII')"><a data-toggle="tab">Mục III<p id="total_mucIII" class="text-center"></p></a></li>
+                            <div class="arrow"></div>
+                            <li class="tabitem " onclick="openCity(event,'v-pilss-mucIV')"><a data-toggle="tab">Mục IV<p id="total_mucIV" class="text-center"></p></a></li>
+                            <div class="arrow"></div>
+                            <li class="tabitem mr-0 " onclick="openCity(event,'v-pilss-mucV')"><a data-toggle="tab">Mục V<p id="total_mucV" class="text-center"></p></a></li>
+                        </ul>
+                    </div>
+
                     @Html.AntiForgeryToken()
 
                     <div class="tab-content">
@@ -101,11 +101,18 @@
                                                         @if (item.noiDungDanhGia.cachCham == 3)
                                                         {
                                                             //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" disabled="disabled">
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
                                                         }
                                                         else
                                                         {
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="0" onclick="YThucThamGiaHocTap()">
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucThamGiaHocTap()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHocTap()">
+                                                            }
                                                         }
                                                     </td>
                                                     <td>
@@ -160,11 +167,18 @@
                                                         @if (item.noiDungDanhGia.cachCham == 3)
                                                         {
                                                             //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" disabled="disabled">
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
                                                         }
                                                         else
                                                         {
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="0" onclick="QuyCheNhaTruong()">
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="QuyCheNhaTruong()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="QuyCheNhaTruong()">
+                                                            }
                                                         }
                                                     </td>
                                                     <td>
@@ -221,11 +235,19 @@
                                                         @if (item.noiDungDanhGia.cachCham == 3)
                                                         {
                                                             //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" disabled="disabled">
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
                                                         }
                                                         else
                                                         {
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="0" onclick="YThucThamGiaHoatDongChinhTri()">
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucThamGiaHoatDongChinhTri()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHoatDongChinhTri()">
+                                                            }
+
                                                         }
                                                     </td>
                                                     <td>
@@ -283,11 +305,19 @@
                                                         @if (item.noiDungDanhGia.cachCham == 3)
                                                         {
                                                             //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" disabled="disabled">
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
                                                         }
                                                         else
                                                         {
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="0" onclick="YThucCongDan()">
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucCongDan()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucCongDan()">
+                                                            }
+
                                                         }
                                                     </td>
                                                     <td>
@@ -346,11 +376,19 @@
                                                         @if (item.noiDungDanhGia.cachCham == 3)
                                                         {
                                                             //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" disabled="disabled">
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
                                                         }
                                                         else
                                                         {
-                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="0" onclick="ThamGiaCongTacLop()">
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="ThamGiaCongTacLop()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="ThamGiaCongTacLop()">
+                                                            }
+
                                                         }
                                                     </td>
                                                     <td>

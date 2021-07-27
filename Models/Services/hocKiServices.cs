@@ -17,6 +17,11 @@ namespace Models.Services
             //{
             //    return null;
             //}
+            int res = DateTime.Compare(result.ngayKetThucCham, DateTime.Today);
+            if(res < 0)
+            {
+                return null;
+            }
             return result;
         }
     }

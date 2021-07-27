@@ -38,9 +38,5 @@ namespace DiemRenLuyen.Controllers
         {
             return View();
         }
-        public ActionResult MarkPoint()
-        {
-            return View();
-        }
     }
 }

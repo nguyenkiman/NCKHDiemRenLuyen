@@ -1,6 +1,6 @@
 ﻿@using Models.Constraints
 @using DiemRenLuyen.Model
-@model IEnumerable<Models.EF.sinhVien>
+
 @{
     Layout = null;
 }
@@ -81,12 +81,7 @@
                                         <li>
                                             <a href="@Url.Action("MarkPoint","Students")" class="nav-icon "><i class="fas fa-edit mr-2"></i>Tự đánh giá điểm rèn luyện</a>
                                         </li>
-                                            @foreach (var item in Model)
-                                            {
-                                            <li>
-                                                <a href="@Url.Action("ListClass", "Students", new { maLop = @item.maLop })" class="nav-icon "><i class="fas fa-file-excel mr-2"></i>Xem điểm cả lớp</a>
-                                            </li>
-                                            }
+                                           
                                             <li>
                                                 <a href="" class=""><i class="fas fa-exclamation-triangle mr-2"></i>Quy định</a>
                                             </li>
@@ -138,10 +133,6 @@
                                     <ul class="parent">
                                         <li><a href="index.php">Trang Chủ</a></li>
                                         <li><a href="@Url.Action("MarkPoint","Students")">Tự đánh giá rèn luyện</a></li>
-                                        @foreach (var item in Model)
-                                        {
-                                            <li><a href="@Url.Action("ListClass", "Students", new { maLop = @item.maLop })">Xem điểm cả lớp</a></li>
-                                        }
                                             <li>
                                                 <a href="#" target="_blank"> Quy định</a>
                                             </li>
