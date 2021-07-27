@@ -1,4 +1,4 @@
-﻿
+﻿@model DiemRenLuyen.Model.LoginModel
 @{
     ViewBag.Title = "Đăng nhập";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,40 +25,50 @@
                 <div class="bg-module bg-module-top">
 
                 </div>
+                @if (TempData["AlertMessage"] != null)
+                {
+                    <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                        @TempData["AlertMessage"]
+                    </div>
+                }
             </div>
-            <div class="login__info">
-                <div align="center" class="login__info login__info--username bg-module-middle wow animate__fadeInUp" data-wow-duration="2s">
-                    <label class="moudle__info--title">Mã sinh viên</label>
-                    <input type="text" id="txt_Login_ten_dang_nhap"
-                           class="username-login form-control required display-inline-block"
-                           name="txt_Login_ten_dang_nhap" value="" placeholder="Mã số đăng nhập">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                <div class="login__info">
+                    <div align="center" class="login__info login__info--username bg-module-middle wow animate__fadeinup" data-wow-duration="2s">
+                        <label class="moudle__info--title">Mã đăng nhập</label>
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "username-login form-control required display-inline-block", @placeholder = "Mời nhập tên đăng nhập", @autofocus = "autofocus" })
+
+                    </div>
+                    <div align="center" class="login__info login__info--password bg-module-middle wow animate__fadeinup" data-wow-duration="2s" style="position: relative;">
+
+                        <label class="moudle__info--title">Mật khẩu</label>
+                        @Html.TextBoxFor(model => model.PassWord, new { @class = "form-password-login form-control required display-inline-block",@id="pwd",  @placeholder = "Mời nhập mật khẩu", @type = "password" })
+                        <button type="button" class="btn-show-password btn-show-password-login" onclick="showHide()" id="eye" style="position: absolute;outline: none; background: none; top: 17px; right:18.5vw;">
+                            <img src="../../assets/client/image/eye.png" alt="eye" />
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group row form-group--center wow animate__fadeInUp" data-wow-duration="2s" style="margin: 0">
+                    <div class="col-lg-4 col-md-4 form-group">
+                        <button type="submit" class="btn btn-danger" style="width: 100%" >
+                            <i class="fa fa-users"></i>&nbsp;Đăng nhập tài khoản
+                        </button>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <a class="btn btn-info" style="width: 100%" href="@Url.Action("ForgotPassword","Home")"
+                           target="_blank">
+                            <i class="fa fa-key">
+                            </i>&nbsp;Quên mật khẩu?
+                        </a>
+                    </div>
 
                 </div>
-                <div align="center" class="login__info login__info--password bg-module-middle wow animate__fadeInUp" data-wow-duration="2s">
-
-                    <label class="moudle__info--title">Mật khẩu</label>
-                    <input type="password" id="pw_Login_mat_khau"
-                           class="password-login form-control required display-inline-block"
-                           name="pw_Login_mat_khau" value="" placeholder="Mật khẩu">
-                </div>
-            </div>
-            <div class="form-group row form-group--center wow animate__fadeInUp" data-wow-duration="2s" style="margin: 0">
+            }
 
 
-                <div class="col-lg-4 col-md-4 form-group">
-                    <a class="btn btn-danger" style="width: 100%" href="@Url.Action("Index","Students")">
-                        <i class="fa fa-users"></i>&nbsp;Đăng nhập tài khoản
-                    </a>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <a class="btn btn-info" style="width: 100%" href="@Url.Action("ForgotPassword","Home")"
-                       target="_blank">
-                        <i class="fa fa-key">
-                        </i>&nbsp;Quên mật khẩu?
-                    </a>
-                </div>
-
-            </div>
             <div>
                 <div class="bg-module bg-module-bottom wow animate__fadeInUp" data-wow-duration="2s" colspan="2">
                     &nbsp;
@@ -88,4 +98,19 @@
     </div>
     <hr>
 </main>
+<script>
+    var x = true;
+    function showHide() {
+        if (x) {
+            document.getElementById("pwd").type = "text";
+            x = false;
+        } else {
+            document.getElementById("pwd").type = "password";
+            x = true;
+        }
+    } 
+</script>
+<script>
+    $('#AlertBox').removeClass("hide");
+</script>
 

@@ -17,7 +17,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/phieuChamDiems
         public ActionResult Index()
         {
-            var phieuChamDiems = db.phieuChamDiems.Include(p => p.hocKi).Include(p => p.sinhVien);
+            var phieuChamDiems = db.phieuChamDiem.Include(p => p.hocKi).Include(p => p.sinhVien);
             return View(phieuChamDiems.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            phieuChamDiem phieuChamDiem = db.phieuChamDiems.Find(id);
+            phieuChamDiem phieuChamDiem = db.phieuChamDiem.Find(id);
             if (phieuChamDiem == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/phieuChamDiems/Create
         public ActionResult Create()
         {
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao");
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau");
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao");
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau");
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.phieuChamDiems.Add(phieuChamDiem);
+                db.phieuChamDiem.Add(phieuChamDiem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", phieuChamDiem.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", phieuChamDiem.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", phieuChamDiem.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", phieuChamDiem.maSinhVien);
             return View(phieuChamDiem);
         }
 
@@ -70,13 +70,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            phieuChamDiem phieuChamDiem = db.phieuChamDiems.Find(id);
+            phieuChamDiem phieuChamDiem = db.phieuChamDiem.Find(id);
             if (phieuChamDiem == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", phieuChamDiem.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", phieuChamDiem.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", phieuChamDiem.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", phieuChamDiem.maSinhVien);
             return View(phieuChamDiem);
         }
 
@@ -93,8 +93,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", phieuChamDiem.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", phieuChamDiem.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", phieuChamDiem.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", phieuChamDiem.maSinhVien);
             return View(phieuChamDiem);
         }
 
@@ -105,7 +105,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            phieuChamDiem phieuChamDiem = db.phieuChamDiems.Find(id);
+            phieuChamDiem phieuChamDiem = db.phieuChamDiem.Find(id);
             if (phieuChamDiem == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            phieuChamDiem phieuChamDiem = db.phieuChamDiems.Find(id);
-            db.phieuChamDiems.Remove(phieuChamDiem);
+            phieuChamDiem phieuChamDiem = db.phieuChamDiem.Find(id);
+            db.phieuChamDiem.Remove(phieuChamDiem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

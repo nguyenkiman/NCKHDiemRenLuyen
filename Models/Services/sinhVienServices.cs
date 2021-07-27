@@ -28,5 +28,17 @@ namespace Models.Services
         {
             return sinhVienDAO.checkLogin(maSinhVien, matKhau);
         }
+        public bool isCanBoLop(String maSinhVien)
+        {
+            return sinhVienDAO.isCanBoLop(maSinhVien);
+        }
+        public List<sinhVien> ListWhereAll(string maSinhVien)
+        {
+            return sinhVienDAO.ListWhereAll(maSinhVien);
+        }
+        public string UpdatePersonalInfo(sinhVien sv)
+        {
+            return sinhVienDAO.UpdatePersonalInfo(sv);
+        }
     }
 }

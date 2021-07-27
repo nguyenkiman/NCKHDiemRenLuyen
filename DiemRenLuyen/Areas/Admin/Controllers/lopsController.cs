@@ -19,6 +19,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/lops
         public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
+
             var session = (DiemRenLuyen.Areas.Admin.Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
             if (session == null)
             {
@@ -28,6 +29,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             var model = lops.ListWhereAll(searchString, page, pageSize);
             ViewBag.SearchString = searchString;
             return View(model);
+
         }
 
         // GET: Admin/lops/Details/5
@@ -37,7 +39,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            lop lop = db.lops.Find(id);
+            lop lop = db.lop.Find(id);
             if (lop == null)
             {
                 return HttpNotFound();
@@ -48,7 +50,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/lops/Create
         public ActionResult Create()
         {
-            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh");
+            ViewBag.maNganh = new SelectList(db.nganh, "maNganh", "tenNganh");
             return View();
         }
 
@@ -61,11 +63,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.lops.Add(lop);
+                db.lop.Add(lop);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh", lop.maNganh);
+
             return View(lop);
         }
 
@@ -76,12 +80,12 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            lop lop = db.lops.Find(id);
+            lop lop = db.lop.Find(id);
             if (lop == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh", lop.maNganh);
+            ViewBag.maNganh = new SelectList(db.nganh, "maNganh", "tenNganh", lop.maNganh);
             return View(lop);
         }
 
@@ -98,13 +102,14 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh", lop.maNganh);
+            ViewBag.maNganh = new SelectList(db.nganh, "maNganh", "tenNganh", lop.maNganh);
             return View(lop);
         }
 
         [HttpDelete]
         public ActionResult Delete(string id)
         {
+
             lop lop = db.lops.Find(id);
             lop.trangThai = 0 ;
             db.SaveChanges();
