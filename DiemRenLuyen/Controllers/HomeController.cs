@@ -37,8 +37,9 @@ namespace DiemRenLuyen.Controllers
             {
                 if (checkHocSinh == Models.Constraints.Common.ACCOUNT_NOT_EXISTS)
                 {
+
                     SetAlert("Tài khoản không tồn tại", "error");
-                    //Response.Write("<script>alert('Tài khoản không tồn tại');</script>");
+
                 }
                 else
                 {
@@ -58,9 +59,11 @@ namespace DiemRenLuyen.Controllers
                     }
                     else if (checkHocSinh == Models.Constraints.Common.INVALID_PASSWORDS)
                     {
-                        //ModelState.AddModelError("", "Mật khẩu không đúng");
-                        //Response.Write("<script>alert('Mật khẩu không đúng');</script>");
+
+
+                       
                         SetAlert("Mật khẩu không đúng", "error");
+
                     }
                     else
                     {

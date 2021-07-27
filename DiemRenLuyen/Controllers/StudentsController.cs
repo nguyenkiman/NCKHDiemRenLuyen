@@ -1,5 +1,6 @@
+
+﻿using Models.Services;
 ﻿using Models.EF;
-using Models.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,18 @@ namespace DiemRenLuyen.Controllers
             }
             return View();
         }
+        [HttpGet]
         public ActionResult MarkPoint()
         {
-
-            return View();
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            
+            phieuChamDiemServices services = new phieuChamDiemServices();
+            phieuChamDiem phieuChamDiem = services.generateNewPhieuChamDiem(session.UserName);
+            return View(phieuChamDiem);
         }
         public ActionResult ListClass()
         {
