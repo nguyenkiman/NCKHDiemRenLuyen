@@ -81,6 +81,14 @@ namespace DiemRenLuyen.Controllers
         {
             return View();
         }
+        public ActionResult NotifySuccess()
+        {
+            return View();
+        }
+        public ActionResult NotifyError()
+        {
+            return View();
+        }
     }
     
 }
