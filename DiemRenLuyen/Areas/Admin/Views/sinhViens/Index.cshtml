@@ -71,111 +71,46 @@
                     <th></th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>SV0001</td>
-                    <td>Nguyễn Kim An</td>
-                    <td>18T3</td>
-                    <td>08/10/1197</td>
-                    <td>0385763449</td>
-                    <td>skdarealest@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>SV0001</td>
-                    <td>Nguyễn Kim An</td>
-                    <td>18T3</td>
-                    <td>08/10/1197</td>
-                    <td>0385763449</td>
-                    <td>skdarealest@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>SV0001</td>
-                    <td>Nguyễn Kim An</td>
-                    <td>18T3</td>
-                    <td>08/10/1197</td>
-                    <td>0385763449</td>
-                    <td>skdarealest@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>SV0001</td>
-                    <td>Nguyễn Kim An</td>
-                    <td>18T3</td>
-                    <td>08/10/1197</td>
-                    <td>0385763449</td>
-                    <td>skdarealest@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>SV0001</td>
-                    <td>Nguyễn Kim An</td>
-                    <td>18T3</td>
-                    <td>08/10/1197</td>
-                    <td>0385763449</td>
-                    <td>skdarealest@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.maSinhVien)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tenSinhVien)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.maLop)
+                        </td>
+                        <td>
+                            @{String a = String.Format("{0:dd/MM/yyyy}", item.ngaySinh); }
+                            @a
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.soDienThoai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gmail)
+                        </td>
+                        @{ if (item.trangThai == 1)
+                            {
+                                <td class="text-success">Hiện</td>
+                            }
+                            else
+                            {
+                                <td class="text-success">Ẩn</td>
+                            }
+                        }
+                        <td>
+                            <a href="@Url.Action("Edit","sinhViens", new { id = item.maSinhVien })"><i class="fa fa-edit"></i></a>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Delete","sinhViens", new { id = item.maSinhVien })"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                }
 
             </table>
         </div>
