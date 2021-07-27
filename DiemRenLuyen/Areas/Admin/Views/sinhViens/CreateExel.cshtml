@@ -4,9 +4,9 @@
     ViewBag.Title = "CreateExel";
 }
 
-<h4>Add Users via Excel</h4>
+<h4>Thêm sinh viên từ file Exel</h4>
 <hr />
-@using (Html.BeginForm("UploadExcel", "User", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+@using (Html.BeginForm("CreateExel", "sinhViens", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
 {
     <div class="form-horizontal">
         <div class="form-group">
