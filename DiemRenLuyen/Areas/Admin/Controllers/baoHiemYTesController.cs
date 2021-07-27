@@ -17,7 +17,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/baoHiemYTes
         public ActionResult Index()
         {
-            var baoHiemYTes = db.baoHiemYTes.Include(b => b.hocKi).Include(b => b.sinhVien);
+            var baoHiemYTes = db.baoHiemYTe.Include(b => b.hocKi).Include(b => b.sinhVien);
             return View(baoHiemYTes.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            baoHiemYTe baoHiemYTe = db.baoHiemYTes.Find(id);
+            baoHiemYTe baoHiemYTe = db.baoHiemYTe.Find(id);
             if (baoHiemYTe == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/baoHiemYTes/Create
         public ActionResult Create()
         {
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao");
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau");
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao");
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau");
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.baoHiemYTes.Add(baoHiemYTe);
+                db.baoHiemYTe.Add(baoHiemYTe);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", baoHiemYTe.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", baoHiemYTe.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", baoHiemYTe.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", baoHiemYTe.maSinhVien);
             return View(baoHiemYTe);
         }
 
@@ -70,13 +70,13 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            baoHiemYTe baoHiemYTe = db.baoHiemYTes.Find(id);
+            baoHiemYTe baoHiemYTe = db.baoHiemYTe.Find(id);
             if (baoHiemYTe == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", baoHiemYTe.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", baoHiemYTe.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", baoHiemYTe.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", baoHiemYTe.maSinhVien);
             return View(baoHiemYTe);
         }
 
@@ -93,8 +93,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.maHocKi = new SelectList(db.hocKis, "maHocKi", "nguoiTao", baoHiemYTe.maHocKi);
-            ViewBag.maSinhVien = new SelectList(db.sinhViens, "maSinhVien", "matKhau", baoHiemYTe.maSinhVien);
+            ViewBag.maHocKi = new SelectList(db.hocKi, "maHocKi", "nguoiTao", baoHiemYTe.maHocKi);
+            ViewBag.maSinhVien = new SelectList(db.sinhVien, "maSinhVien", "matKhau", baoHiemYTe.maSinhVien);
             return View(baoHiemYTe);
         }
 
@@ -105,7 +105,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            baoHiemYTe baoHiemYTe = db.baoHiemYTes.Find(id);
+            baoHiemYTe baoHiemYTe = db.baoHiemYTe.Find(id);
             if (baoHiemYTe == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            baoHiemYTe baoHiemYTe = db.baoHiemYTes.Find(id);
-            db.baoHiemYTes.Remove(baoHiemYTe);
+            baoHiemYTe baoHiemYTe = db.baoHiemYTe.Find(id);
+            db.baoHiemYTe.Remove(baoHiemYTe);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

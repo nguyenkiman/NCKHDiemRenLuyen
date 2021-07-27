@@ -25,6 +25,12 @@
                 <div class="bg-module bg-module-top">
 
                 </div>
+                @if (TempData["AlertMessage"] != null)
+                {
+                    <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                        @TempData["AlertMessage"]
+                    </div>
+                }
             </div>
             @using (Html.BeginForm())
             {
@@ -32,14 +38,17 @@
                 @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
                 <div class="login__info">
                     <div align="center" class="login__info login__info--username bg-module-middle wow animate__fadeinup" data-wow-duration="2s">
-                        <label class="moudle__info--title">mã sinh viên</label>
+                        <label class="moudle__info--title">Mã đăng nhập</label>
                         @Html.TextBoxFor(model => model.UserName, new { @class = "username-login form-control required display-inline-block", @placeholder = "Mời nhập tên đăng nhập", @autofocus = "autofocus" })
 
                     </div>
-                    <div align="center" class="login__info login__info--password bg-module-middle wow animate__fadeinup" data-wow-duration="2s">
+                    <div align="center" class="login__info login__info--password bg-module-middle wow animate__fadeinup" data-wow-duration="2s" style="position: relative;">
 
-                        <label class="moudle__info--title">mật khẩu</label>
-                        @Html.TextBoxFor(model => model.PassWord, new { @class = "form-password-login form-control required display-inline-block", @placeholder = "Mời nhập mật khẩu", @type = "password" })
+                        <label class="moudle__info--title">Mật khẩu</label>
+                        @Html.TextBoxFor(model => model.PassWord, new { @class = "form-password-login form-control required display-inline-block",@id="pwd",  @placeholder = "Mời nhập mật khẩu", @type = "password" })
+                        <button type="button" class="btn-show-password btn-show-password-login" onclick="showHide()" id="eye" style="position: absolute;outline: none; background: none; top: 17px; right:18.5vw;">
+                            <img src="../../assets/client/image/eye.png" alt="eye" />
+                        </button>
                     </div>
                 </div>
                 <div class="form-group row form-group--center wow animate__fadeInUp" data-wow-duration="2s" style="margin: 0">
@@ -89,4 +98,19 @@
     </div>
     <hr>
 </main>
+<script>
+    var x = true;
+    function showHide() {
+        if (x) {
+            document.getElementById("pwd").type = "text";
+            x = false;
+        } else {
+            document.getElementById("pwd").type = "password";
+            x = true;
+        }
+    } 
+</script>
+<script>
+    $('#AlertBox').removeClass("hide");
+</script>
 

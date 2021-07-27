@@ -394,6 +394,13 @@ ul.sub-menu li:hover{
       color: #fff;
       
     }
+.alert {
+    position: relative;
+    padding: 0px !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0px !important;
+    color: #CC0000;
+}
     .alert-danger{
       color: #b94a48
     }
@@ -438,7 +445,7 @@ ul.sub-menu li:hover{
       padding: 10px 0px;
     }
     .moudle__info--title{
-        width: 13vw;
+        width: 18vw;
         text-align: left;
     }
     .bg-module-middle input{
@@ -460,13 +467,7 @@ ul.sub-menu li:hover{
         .forget__password--form{
           padding: 20px;
         }
-        input[type=text].required, 
-        input[type=password].required, 
-        input[type=email].required{
-          background: url(../image/required.png);
-          background-repeat: no-repeat;
-          background-position: right center;
-        }
+        
         .display-inline-block {
              display: inline-block;
         }
