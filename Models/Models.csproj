@@ -88,6 +88,7 @@
     <Compile Include="Services\hocKiServices.cs" />
     <Compile Include="Services\phieuChamDiemServices.cs" />
     <Compile Include="Services\sinhVienServices.cs" />
+    <Compile Include="ViewModel\PhieuChamDiemModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

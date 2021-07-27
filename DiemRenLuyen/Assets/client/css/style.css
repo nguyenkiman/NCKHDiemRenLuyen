@@ -318,7 +318,6 @@ header .menu ul.parent > li {
 header ul.sub-menu {
     padding: 2px 0px;
     width: 265px;
-    min-height: 120px;
     background: #fff;
     position: absolute;
     border: 1px solid #d2c9c9;
