@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-﻿using Models.EF;
-using Models.Services;
-=======
+
 ﻿using Models.Services;
->>>>>>> parent of 362962d (Merge branch 'master' into develops)
 using System;
 using System.Collections.Generic;
 using System.Linq;

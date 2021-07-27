@@ -74,24 +74,24 @@ namespace Models.DAO
                 return true;
             }
         }
-<<<<<<< HEAD
+
         public List<sinhVien> ListWhereAll(string maSinhVien)
         {
-            return db.sinhVien.Where(x => x.maSinhVien == maSinhVien).ToList();
+            return db.sinhViens.Where(x => x.maSinhVien == maSinhVien).ToList();
         }
 
         public string UpdatePersonalInfo(sinhVien sv)
         {
-            var sinhVien = db.sinhVien.Find(sv.maSinhVien);
-            if(sinhVien !=null)
+            var sinhVien = db.sinhViens.Find(sv.maSinhVien);
+            if (sinhVien != null)
             {
                 sinhVien.soDienThoai = sv.soDienThoai;
                 sinhVien.gmail = sv.gmail;
             }
             db.SaveChanges();
             return sv.tenSinhVien;
-=======
-        public bool checkBHYTBySinhVienAndMaHocKy(sinhVien sinhVien,String maHocKy)
+        }
+        public bool checkBHYTBySinhVienAndMaHocKy(sinhVien sinhVien, String maHocKy)
         {
             int trangThai = db.baoHiemYTes.Where(x => x.maHocKi.Equals(maHocKy)).Where(x => x.maSinhVien.Equals(sinhVien.maSinhVien)).SingleOrDefault().trangThai;
             if (trangThai == Constraints.Common.ACTIVATE)
@@ -102,8 +102,6 @@ namespace Models.DAO
             {
                 return false;
             }
->>>>>>> parent of 362962d (Merge branch 'master' into develops)
         }
-        
     }
 }

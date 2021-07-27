@@ -20,10 +20,10 @@ namespace Models.EF
         public string maGiangVien { get; set; }
 
         [Required]
-        public string matKhau { get; set; }
+        public string tenGiangVien { get; set; }
 
         [Required]
-        public string tenGiangVien { get; set; }
+        public string matKhau { get; set; }
 
         [Column(TypeName = "date")]
         public DateTime ngaySinh { get; set; }

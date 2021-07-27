@@ -37,13 +37,8 @@ namespace DiemRenLuyen.Controllers
             {
                 if (checkHocSinh == Models.Constraints.Common.ACCOUNT_NOT_EXISTS)
                 {
-<<<<<<< HEAD
-                    SetAlert("Tài khoản không tồn tại", "error");
+                    // SetAlert("Tài khoản không tồn tại", "error");
                     //Response.Write("<script>alert('Tài khoản không tồn tại');</script>");
-=======
-                    ModelState.AddModelError("", "Tài khoản không tồn tại");
-                    Response.Write("<script>alert('Tài khoản không tồn tại');</script>");
->>>>>>> parent of 362962d (Merge branch 'master' into develops)
                 }
                 else
                 {
@@ -56,20 +51,20 @@ namespace DiemRenLuyen.Controllers
                         }
                         else
                         {
+                            var sinhVien = sinhVienServices.findByMaSinhVien(user.UserName);
+                            Session.Add(Models.Constraints.Common.USER_SESSION, user);
+                            
                             return RedirectToAction("Index", "Students");
 
                         }
                     }
                     else if (checkHocSinh == Models.Constraints.Common.INVALID_PASSWORDS)
                     {
-<<<<<<< HEAD
+
                         //ModelState.AddModelError("", "Mật khẩu không đúng");
                         //Response.Write("<script>alert('Mật khẩu không đúng');</script>");
-                        SetAlert("Mật khẩu không đúng", "error");
-=======
-                        ModelState.AddModelError("", "Mật khẩu không đúng");
-                        Response.Write("<script>alert('Mật khẩu không đúng');</script>");
->>>>>>> parent of 362962d (Merge branch 'master' into develops)
+                       // SetAlert("Mật khẩu không đúng", "error");
+
                     }
                     else
                     {
