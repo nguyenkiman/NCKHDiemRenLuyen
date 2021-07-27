@@ -104,5 +104,10 @@ namespace Models.DAO
                 return false;
             }
         }
+        
+        public List<hocKi> ListHocKy()
+        {
+            return db.hocKis.OrderByDescending(x => x.maHocKi).ToList();
+        }
     }
 }

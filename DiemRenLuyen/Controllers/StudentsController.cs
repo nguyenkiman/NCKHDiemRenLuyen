@@ -7,6 +7,8 @@ using Models.EF;
 using DiemRenLuyen.Model;
 using Models.Services;
 using System.IO;
+using Models.ViewModel;
+using System.Data.Entity;
 
 namespace DiemRenLuyen.Controllers
 {
@@ -25,7 +27,8 @@ namespace DiemRenLuyen.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            return View();
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            return View(model);
         }
 
         public ActionResult NotifyError()
@@ -41,7 +44,6 @@ namespace DiemRenLuyen.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-
             hocKi hocKi = new hocKiServices().getCurrentHocKi();
             if(hocKi is null)
             {
@@ -59,9 +61,13 @@ namespace DiemRenLuyen.Controllers
                 {
                     return View(phieuChamDiem);
                 }
+
+
+                //phieuChamDiem phieuChamDiem = phieuChamDiemServices.generateNewPhieuChamDiem(session.UserName);
+                //return View(phieuChamDiem);
             }
-            
-           
+
+
         }
 
 
@@ -78,17 +84,28 @@ namespace DiemRenLuyen.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
+            hocKi hocKi = new hocKiServices().getCurrentHocKi();
+            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName, hocKi.maHocKi);
             phieuChamDiem newphieuChamDiem = new phieuChamDiem();
             newphieuChamDiem.maHocKi = new hocKiServices().getCurrentHocKi().maHocKi;
             newphieuChamDiem.maSinhVien = session.UserName;
             newphieuChamDiem.ngayCham = DateTime.Today;
             newphieuChamDiem.trangThai = 1;
-            newphieuChamDiem.tongDiem = diemTuCham_1 + diemTuCham_2 + diemTuCham_3+diemTuCham_4+diemTuCham_5+diemTuCham_6+diemTuCham_7+diemTuCham_8+diemTuCham_9+diemTuCham_10+diemTuCham_11
-                +diemTuCham_12+diemTuCham_13+diemTuCham_14+diemTuCham_15+diemTuCham_16+diemTuCham_17+diemTuCham_18+diemTuCham_19+diemTuCham_20+diemTuCham_21+diemTuCham_22+diemTuCham_23;
-            db.phieuChamDiems.Add(newphieuChamDiem);
-            db.SaveChanges();
+            newphieuChamDiem.tongDiem = diemTuCham_1 + diemTuCham_2 + diemTuCham_3 + diemTuCham_4 + diemTuCham_5 + diemTuCham_6 + diemTuCham_7 + diemTuCham_8 + diemTuCham_9 + diemTuCham_10 + diemTuCham_11
+                + diemTuCham_12 + diemTuCham_13 + diemTuCham_14 + diemTuCham_15 + diemTuCham_16 + diemTuCham_17 + diemTuCham_18 + diemTuCham_19 + diemTuCham_20 + diemTuCham_21 + diemTuCham_22 + diemTuCham_23;
 
-            var maphieuchamdiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName, newphieuChamDiem.maHocKi).maPhieuChamDiem;
+            if (phieuChamDiem is null)
+            {
+                
+                db.phieuChamDiems.Add(newphieuChamDiem);
+                db.SaveChanges();
+            }
+            else
+            {
+                newphieuChamDiem.maPhieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName, hocKi.maHocKi).maPhieuChamDiem;
+                db.Entry(newphieuChamDiem).State = EntityState.Modified;
+                db.SaveChanges();
+            }
 
             string minhchungpath13 = null;
             if (minhchung13 != null && minhchung13.ContentLength > 0)
@@ -139,6 +156,8 @@ namespace DiemRenLuyen.Controllers
 
             }
 
+            var maphieuchamdiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName, hocKi.maHocKi).maPhieuChamDiem;
+
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 1, diemTuCham_1, 0, 0, null);
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 2, diemTuCham_2, 0, 0, null);
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 3, diemTuCham_3, 0, 0, null);
@@ -165,9 +184,57 @@ namespace DiemRenLuyen.Controllers
 
             return RedirectToAction("Index");
         }
-        public ActionResult ListClass()
+        public ActionResult ListClass(string maLop)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = db.sinhViens.Where(x => x.maLop.Equals(maLop)).Where(x => x.maSinhVien.Equals(session.UserName)).ToList();
+            var hocky = sinhVienServices.ListHocKy();
+            Session.Add(Models.Constraints.Common.LOP_USER_SESSION, maLop);
+            if (model != null)
+            {
+                ViewBag.Hocky = hocky;
+                return View(model);
+
+            }
             return View();
+        }
+        [HttpPost]
+        public JsonResult ListClass(string maLop, string maHocKy)
+        {
+            var sinhVien = db.sinhViens.Where(x => x.maLop.Equals(maLop)).Where(x => x.trangThai == Models.Constraints.Common.ACTIVATE).ToList();
+            List<string> maSinhVien = new List<string>();
+            List<PhieuChamDiemModel> sinhVienChamDiem = new List<PhieuChamDiemModel>();
+            foreach (var item in sinhVien)
+            {
+                maSinhVien.Add(item.maSinhVien);
+            }
+            foreach (var items in maSinhVien)
+            {
+                //var sinhVienChamDiems = db.phieuChamDiems.Where(x => x.maSinhVien.Equals(items)).Where(x => x.maHocKi == maHocKy).SingleOrDefault();
+                var sinhVienChamDiems = from s in db.sinhViens
+                                        join c in db.phieuChamDiems
+                                        on s.maSinhVien equals c.maSinhVien
+                                        where c.maSinhVien.Equals(items)
+                                        where c.maHocKi.Equals(maHocKy)
+                                        select new PhieuChamDiemModel //tra ve 1 custom class
+                                        {
+                                            maSinhVien = s.maSinhVien,
+                                            tenSinhVien = s.tenSinhVien,
+                                            tongDiem = c.tongDiem
+
+                                        };
+                var sinhVienInfo = sinhVienChamDiems.SingleOrDefault();
+                if (sinhVienInfo != null)
+                {
+                    var masinhvien = sinhVienInfo.maSinhVien;
+                    var tensinhvien = sinhVienInfo.tenSinhVien;
+                    var tongdiem = sinhVienInfo.tongDiem;
+                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien, tensinhvien, tongdiem));
+                }
+
+            }
+
+            return Json(sinhVienChamDiem, JsonRequestBehavior.AllowGet);
         }
         public ActionResult ViewScores()
         {

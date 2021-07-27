@@ -19,7 +19,6 @@
             <div class="evaluate__student-info d-flex">
                 <p class="ml-0 wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-male mr-2"></i>@Html.DisplayFor(model => model.sinhVien.tenSinhVien)</p>
                 <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-address-card mr-2"></i>@Html.DisplayFor(model => model.maSinhVien)</p>
-                <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-barcode mr-2"></i>@Html.DisplayFor(model => model.sinhVien.maLop)</p>
                 <p class=" wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-certificate mr-2"></i>@Html.DisplayFor(model => model.hocKi.maHocKi)</p>
             </div>
             <div class="evalue__student--drl mt-1 d-flex align-items-center wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
@@ -32,7 +31,7 @@
                 {
                     <div class="evaluate__student-point-sum wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;" id="point_sum">
                         <div class="d-flex justify-content-center">
-                            <input type="submit" class="btn btn-success d-flex align-items-center" value="Chấm điểm" ><img src="../../../assets/client/image/icons-check.png" alt="" class="mr-1"/>
+                            <input type="submit" class="btn btn-success d-flex align-items-center" value="Chấm điểm"><img src="../../../assets/client/image/icons-check.png" alt="" class="mr-1" />
                         </div>
                         <table class=" table-bordered mt-2">
                             <tr class="font-weight-bold" style="background: floralwhite">
@@ -248,7 +247,7 @@
                                                             {
                                                                 <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHoatDongChinhTri()">
                                                             }
-        
+
                                                         }
                                                     </td>
                                                     <td>
@@ -318,7 +317,7 @@
                                                             {
                                                                 <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucCongDan()">
                                                             }
-                                                            
+
                                                         }
                                                     </td>
                                                     <td>
@@ -389,7 +388,7 @@
                                                             {
                                                                 <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="ThamGiaCongTacLop()">
                                                             }
-                                                            
+
                                                         }
                                                     </td>
                                                     <td>

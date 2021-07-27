@@ -47,6 +47,7 @@ namespace DiemRenLuyen.Controllers
                         var sinhVien = sinhVienServices.findByMaSinhVien(user.UserName);
                         Session.Add(Models.Constraints.Common.USER_SESSION, user);
                         Session.Add(Models.Constraints.Common.NAME_USER_SESSION, sinhVien.tenSinhVien);
+                        Session.Add(Models.Constraints.Common.LOP_USER_SESSION, sinhVien.maLop);
                         if (sinhVienServices.isCanBoLop(user.UserName))
                         {
                             return RedirectToAction("Index", "Officers");
@@ -58,8 +59,6 @@ namespace DiemRenLuyen.Controllers
                     }
                     else if (checkHocSinh == Models.Constraints.Common.INVALID_PASSWORDS)
                     {
-                        //ModelState.AddModelError("", "Mật khẩu không đúng");
-                        //Response.Write("<script>alert('Mật khẩu không đúng');</script>");
                         SetAlert("Mật khẩu không đúng", "error");
                     }
                     else

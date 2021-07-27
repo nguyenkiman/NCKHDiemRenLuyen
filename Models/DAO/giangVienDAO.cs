@@ -70,9 +70,13 @@ namespace Models.DAO
             return gv.tenGiangVien;
 
         }
+        public List<giaoVienChuNhiem> ListGVCN(string maLop, string maGiangVien)
+        {
+            return db.giaoVienChuNhiems.Where(x => x.maLop.Equals(maLop)).Where(x => x.maGiangVien.Equals(maGiangVien)).ToList();
+        }
         public List<hocKi> ListHocKy()
         {
-            return db.hocKis.ToList();
+            return db.hocKis.OrderByDescending(x => x.maHocKi).ToList();
         }
     }
 }
