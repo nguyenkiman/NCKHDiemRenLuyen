@@ -2223,7 +2223,6 @@
     <Content Include="Views\Officers\ListClass.cshtml" />
     <Content Include="Views\Officers\OfficersMark.cshtml" />
     <Content Include="Views\Officers\ViewScores.cshtml" />
-    <Content Include="Views\Officers\MarkPoint.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Students\ChangePassword.cshtml" />
