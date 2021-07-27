@@ -40,5 +40,9 @@ namespace Models.Services
         {
             return sinhVienDAO.UpdatePersonalInfo(sv);
         }
+        public List<hocKi> ListHocKy()
+        {
+            return sinhVienDAO.ListHocKy();
+        }
     }
 }

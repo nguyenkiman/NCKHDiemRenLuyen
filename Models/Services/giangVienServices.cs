@@ -31,6 +31,10 @@ namespace Models.Services
         {
             return giangVienDAO.UpdatePersonalInfo(gv);
         }
+        public List<giaoVienChuNhiem> ListGVCN(string maLop, string maGiangVien)
+        {
+            return giangVienDAO.ListGVCN(maLop, maGiangVien);
+        }    
         public List<hocKi> ListHocKy()
         {
             return giangVienDAO.ListHocKy();

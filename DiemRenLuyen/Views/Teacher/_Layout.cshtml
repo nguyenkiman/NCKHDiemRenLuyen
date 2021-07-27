@@ -1,5 +1,6 @@
 ﻿@using Models.Constraints
 @using DiemRenLuyen.Model
+@model IEnumerable<Models.EF.giaoVienChuNhiem>
 @{
     Layout = null;
 }
@@ -13,9 +14,7 @@
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <link href="~/Assets/client/image/favicon.png" rel="icon">
     <link rel="stylesheet" type="text/css" href="~/Assets/client/css/slick.css">
-    </li>
     <link rel="stylesheet" type="text/css" href="~/Assets/client/css/animate.min.css">
-    </li>
     <link rel="stylesheet" type="text/css" href="~/Assets/client/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/Assets/client/css/font-awesome/css/font-awesome.css">
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
@@ -28,8 +27,7 @@
     <link rel="stylesheet" href="~/Assets/client/css/nice-toast-js.min.css">
     <link rel="stylesheet" href="~/Assets/client/css/style.css">
     <link rel="stylesheet" type="text/css" href="~/Assets/client/css/responsive/responsive.css">
-    </li>
-
+    <script type="text/javascript" src="~/Assets/client/js/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -84,9 +82,14 @@
                                         <li>
                                             <a href="#" class=""><i class="fas fa-address-card mr-2"></i>Danh sách lớp</a>
                                             <ul class="sub-menu--hambuger">
-                                                <li><a href="@Url.Action("ListClass","Teacher")" target="_blank"><i class="fas fa-graduation-cap mr-2"></i>18T1</a></li>
-                                                <li><a href="@Url.Action("ListClass","Teacher")"><i class="fas fa-graduation-cap mr-2"></i>18T2</a></li>
-
+                                                @foreach (var item in Model)
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("ListClass", "Teacher", new { maLop = @item.maLop })">
+                                                            <i class="fas fa-graduation-cap mr-2"></i>@item.maLop
+                                                        </a>
+                                                    </li>
+                                                }
                                             </ul>
                                         </li>
                                         <li>
@@ -141,11 +144,14 @@
                                         <li>
                                             <a href="" target="_blank">Danh sách lớp</a>
                                             <ul class="sub-menu">
-                                                <li>
-                                                    <a href="@Url.Action("ListClass","Teacher")">
-                                                        <i class="fas fa-graduation-cap mr-2"></i>18T3
-                                                    </a>
-                                                </li>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <li>
+                                                        <a href="@Url.Action("ListClass", "Teacher", new { maLop = @item.maLop })">
+                                                            <i class="fas fa-graduation-cap mr-2"></i>@item.maLop
+                                                        </a>
+                                                    </li>
+                                                }
                                             </ul>
                                         </li>
                                         <li>
@@ -336,8 +342,7 @@
 
     <!-- page-content" -->
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
-    <script type="text/javascript" src="~/Assets/client/jquery/jquery-1.12.4.min.js"></script>
-    <!--<script type="text/javascript" src="~/Assets/client/js/jquery-3.5.1.min.js"></script>-->
+
 
     <script type="text/javascript" src="~/Assets/client/js/wow.min.js"></script>
     <script type="text/javascript" src="~/Assets/client/js/bootstrap.min.js"></script>

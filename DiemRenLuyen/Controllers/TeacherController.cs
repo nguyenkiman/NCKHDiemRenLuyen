@@ -6,6 +6,7 @@ using System.Linq;
 using Models.DAO;
 using System.Collections.Generic;
 using Models.Constraints;
+using Models.ViewModel;
 
 namespace DiemRenLuyen.Controllers
 {
@@ -22,17 +23,60 @@ namespace DiemRenLuyen.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            return View();
+            var model = giangVienServices.ListClass(session.UserName);
+            return View(model);
         }
-        public ActionResult ListClass()
+        public ActionResult ListClass(string maLop)
         {
-            var model = giangVienServices.ListHocKy();
+            var session = (LoginModel)Session[Common.USER_SESSION];
+            var model = giangVienServices.ListGVCN(maLop, session.UserName);
+            var hocky = giangVienServices.ListHocKy();
+            Session.Add(Common.LOP_USER_SESSION, maLop);
             if (model != null)
             {
-                // ViewBag.Hocky = hocky;
+                ViewBag.Hocky = hocky;
                 return View(model);
+                
             }
             return View();
+        }
+        [HttpPost]
+        public JsonResult ListClass(string maLop, string maHocKy)
+        {
+            var sinhVien = db.sinhViens.Where(x => x.maLop.Equals(maLop)).Where(x => x.trangThai == Common.ACTIVATE).ToList();
+            List<string> maSinhVien = new List<string>();
+            List<PhieuChamDiemModel> sinhVienChamDiem = new List<PhieuChamDiemModel>();
+            foreach (var item in sinhVien)
+            {
+                maSinhVien.Add(item.maSinhVien);
+            }
+            foreach (var items in maSinhVien)
+            {
+                //var sinhVienChamDiems = db.phieuChamDiems.Where(x => x.maSinhVien.Equals(items)).Where(x => x.maHocKi == maHocKy).SingleOrDefault();
+                var sinhVienChamDiems = from s in db.sinhViens
+                                   join c in db.phieuChamDiems
+                                   on s.maSinhVien equals c.maSinhVien
+                                   where c.maSinhVien.Equals(items)
+                                   where c.maHocKi.Equals(maHocKy)
+                                   select new PhieuChamDiemModel //tra ve 1 custom class
+                                   {
+                                       maSinhVien = s.maSinhVien,
+                                       tenSinhVien = s.tenSinhVien,
+                                       tongDiem = c.tongDiem
+                                     
+                                   };
+                var sinhVienInfo = sinhVienChamDiems.SingleOrDefault();
+                if (sinhVienInfo != null)
+                {
+                    var masinhvien = sinhVienInfo.maSinhVien;
+                    var tensinhvien = sinhVienInfo.tenSinhVien;
+                    var tongdiem = sinhVienInfo.tongDiem;
+                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien,tensinhvien,tongdiem));
+                }    
+                 
+            }
+
+            return Json(sinhVienChamDiem, JsonRequestBehavior.AllowGet);
         }
         public ActionResult DetailPoint()
         {
