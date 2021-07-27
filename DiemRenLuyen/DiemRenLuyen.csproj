@@ -150,6 +150,7 @@
     <Compile Include="Areas\Admin\Controllers\phieuChamDiemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\sinhViensController.cs" />
     <Compile Include="Areas\Admin\Model\LoginModel.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfficersController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
@@ -2017,6 +2018,7 @@
     <Content Include="Assets\client\css\animate.min.css" />
     <Content Include="Assets\client\css\bootstrap.min.css" />
     <Content Include="Assets\client\css\font-awesome.css" />
+    <Content Include="Assets\client\css\nice-toast-js.min.css" />
     <Content Include="Assets\client\css\responsive\responsive.css" />
     <Content Include="Assets\client\css\slick.css" />
     <Content Include="Assets\client\css\style.css" />
@@ -2025,10 +2027,13 @@
     <Content Include="Assets\client\image\blood.jpg" />
     <Content Include="Assets\client\image\capcha.PNG" />
     <Content Include="Assets\client\image\chatbox.PNG" />
+    <Content Include="Assets\client\image\error_drl.jpg" />
+    <Content Include="Assets\client\image\eye.png" />
     <Content Include="Assets\client\image\favicon.png" />
     <Content Include="Assets\client\image\header-ute.png" />
     <Content Include="Assets\client\image\hethong.png" />
     <Content Include="Assets\client\image\icons-check.png" />
+    <Content Include="Assets\client\image\icons-gmail.png" />
     <Content Include="Assets\client\image\login.png" />
     <Content Include="Assets\client\image\login_2.png" />
     <Content Include="Assets\client\image\login_3.png" />
@@ -2037,6 +2042,7 @@
     <Content Include="Assets\client\image\no_avatar.jpg" />
     <Content Include="Assets\client\image\required.png" />
     <Content Include="Assets\client\image\slide_2.png" />
+    <Content Include="Assets\client\image\succes-drl.PNG" />
     <Content Include="Assets\client\js\bootstrap.min.js" />
     <Content Include="Assets\client\js\custom.js" />
     <Content Include="Assets\client\js\detailPoint.js" />
@@ -2046,6 +2052,7 @@
     <Content Include="Assets\client\js\jquery.scrollTo.js" />
     <Content Include="Assets\client\js\jquery.slimscroll.js" />
     <Content Include="Assets\client\js\markDrl.js" />
+    <Content Include="Assets\client\js\nice-toast-js.min.js" />
     <Content Include="Assets\client\js\officerMark.js" />
     <Content Include="Assets\client\js\slick.min.js" />
     <Content Include="Assets\client\js\viewScore.js" />
@@ -2218,14 +2225,19 @@
     <Content Include="Views\Officers\MarkPoint.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\ForgotPassword.cshtml" />
-    <Content Include="Views\Home\ChangePassword.cshtml" />
-    <Content Include="Views\Home\UpdatePersonalInfo.cshtml" />
+    <Content Include="Views\Students\ChangePassword.cshtml" />
+    <Content Include="Views\Students\UpdatePersonalInfo.cshtml" />
+    <Content Include="Views\Teacher\UpdatePersonalInfo.cshtml" />
+    <Content Include="Views\Teacher\ChangePassword.cshtml" />
+    <Content Include="Views\Students\NotifySuccess.cshtml" />
+    <Content Include="Views\Students\NotifyError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Content\Dao\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

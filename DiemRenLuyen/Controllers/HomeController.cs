@@ -10,7 +10,7 @@ using Microsoft.Build.Tasks;
 
 namespace DiemRenLuyen.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         sinhVienServices sinhVienServices = new sinhVienServices();
         giangVienServices giangVienServices = new giangVienServices();
@@ -31,44 +31,41 @@ namespace DiemRenLuyen.Controllers
         {
             var checkGiangVien = giangVienServices.checkLoginGiangVien(user.UserName, user.PassWord);
             var checkHocSinh = sinhVienServices.checkLogin(user.UserName, user.PassWord);
-            
+
 
             if (checkGiangVien == Models.Constraints.Common.ACCOUNT_NOT_EXISTS)
             {
                 if (checkHocSinh == Models.Constraints.Common.ACCOUNT_NOT_EXISTS)
                 {
-                    // SetAlert("Tài khoản không tồn tại", "error");
+                    SetAlert("Tài khoản không tồn tại", "error");
                     //Response.Write("<script>alert('Tài khoản không tồn tại');</script>");
                 }
                 else
                 {
                     if (checkHocSinh == Models.Constraints.Common.LOGIN_SUCCESS)
                     {
+                        var sinhVien = sinhVienServices.findByMaSinhVien(user.UserName);
                         Session.Add(Models.Constraints.Common.USER_SESSION, user);
+                        Session.Add(Models.Constraints.Common.NAME_USER_SESSION, sinhVien.tenSinhVien);
                         if (sinhVienServices.isCanBoLop(user.UserName))
                         {
                             return RedirectToAction("Index", "Officers");
                         }
                         else
                         {
-                            var sinhVien = sinhVienServices.findByMaSinhVien(user.UserName);
-                            Session.Add(Models.Constraints.Common.USER_SESSION, user);
-                            
                             return RedirectToAction("Index", "Students");
-
                         }
                     }
                     else if (checkHocSinh == Models.Constraints.Common.INVALID_PASSWORDS)
                     {
-
                         //ModelState.AddModelError("", "Mật khẩu không đúng");
                         //Response.Write("<script>alert('Mật khẩu không đúng');</script>");
-                       // SetAlert("Mật khẩu không đúng", "error");
-
+                        SetAlert("Mật khẩu không đúng", "error");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Tài khoản bị khóa");
+                        SetAlert("Tài khoản bị khóa", "error");
+                        // ModelState.AddModelError("", "Tài khoản bị khóa");
                     }
                 }
 
@@ -77,19 +74,30 @@ namespace DiemRenLuyen.Controllers
             {
                 if (checkGiangVien == Models.Constraints.Common.LOGIN_SUCCESS)
                 {
+                    var giangVien = giangVienServices.findByMaGiangVien(user.UserName);
+                    Session.Add(Models.Constraints.Common.NAME_USER_SESSION, giangVien.tenGiangVien);
                     Session.Add(Models.Constraints.Common.USER_SESSION, user);
                     return RedirectToAction("Index", "Teacher");
                 }
                 else if (checkGiangVien == Models.Constraints.Common.INVALID_PASSWORDS)
                 {
-                    ModelState.AddModelError("", "Mật khẩu không đúng");
+                    SetAlert("Mật khẩu không đúng", "error");
+                    //ModelState.AddModelError("", "Mật khẩu không đúng");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Tài khoản bị khóa");
+                    SetAlert("Tài khoản bị khóa", "error");
+                    //ModelState.AddModelError("", "Tài khoản bị khóa");
                 }
             }
             return RedirectToAction("Login", "Home");
+        }
+
+        public ActionResult Logout()
+        {
+            Session[Models.Constraints.Common.USER_SESSION] = null;
+            Session[Models.Constraints.Common.NAME_USER_SESSION] = null;
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult ForgotPassword()
         {
