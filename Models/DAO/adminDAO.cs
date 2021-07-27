@@ -12,7 +12,8 @@ namespace Models.DAO
         Db db = new Db();
         public int checkLogin(String maAdmin, String matKhau)
         {
-            admin admin = db.admin.Find(maAdmin);
+            admin admin = db.admins.Find(maAdmin);
+
             if(admin is null)
             {
                 return Constraints.Common.ACCOUNT_NOT_EXISTS;

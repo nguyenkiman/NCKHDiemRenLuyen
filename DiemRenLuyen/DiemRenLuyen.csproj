@@ -60,6 +60,13 @@
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Microsoft.CSharp" />
+
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+
     <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
     </Reference>
@@ -148,7 +155,7 @@
     <Compile Include="Areas\Admin\Controllers\phieuChamDiemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\sinhViensController.cs" />
     <Compile Include="Areas\Admin\Model\LoginModel.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BaseController.cs" /
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfficersController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
@@ -2059,6 +2066,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2085,7 +2093,6 @@
     <Content Include="Areas\Admin\Views\hocPhis\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\hocPhis\Index.cshtml" />
     <Content Include="Areas\Admin\Views\lops\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\lops\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\lops\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\lops\Index.cshtml" />
     <Content Include="Areas\Admin\Views\phieuChamDiems\Create.cshtml" />
@@ -2177,13 +2184,17 @@
     <Content Include="Assets\admin\plugins\summernote\summernote.min.js.map" />
     <Content Include="Assets\admin\plugins\toastr\toastr.js.map" />
     <Content Include="Areas\Admin\Views\Logins\Index.cshtml" />
+
     <Content Include="Areas\Admin\Views\sinhViens\CreateExel.cshtml" />
+
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
