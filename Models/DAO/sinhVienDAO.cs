@@ -74,5 +74,18 @@ namespace Models.DAO
                 return true;
             }
         }
+        public bool checkBHYTBySinhVienAndMaHocKy(sinhVien sinhVien,String maHocKy)
+        {
+            int trangThai = db.baoHiemYTes.Where(x => x.maHocKi.Equals(maHocKy)).Where(x => x.maSinhVien.Equals(sinhVien.maSinhVien)).SingleOrDefault().trangThai;
+            if (trangThai == Constraints.Common.ACTIVATE)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
     }
 }

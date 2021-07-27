@@ -63,6 +63,7 @@
     <Compile Include="Constraints\sinhVienContraints.cs" />
     <Compile Include="DAO\adminDAO.cs" />
     <Compile Include="DAO\giangVienDAO.cs" />
+    <Compile Include="DAO\noiDungDanhGiaDAO.cs" />
     <Compile Include="DAO\sinhVienDAO.cs" />
     <Compile Include="EF\admin.cs" />
     <Compile Include="EF\baoHiemYTe.cs" />
@@ -82,7 +83,11 @@
     <Compile Include="EF\phieuChamDiem.cs" />
     <Compile Include="EF\sinhVien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BHYTServices.cs" />
     <Compile Include="Services\giangVienServices.cs" />
+    <Compile Include="Services\hocKiServices.cs" />
+    <Compile Include="Services\noiDungDanhGiaServices.cs" />
+    <Compile Include="Services\phieuChamDiemServices.cs" />
     <Compile Include="Services\sinhVienServices.cs" />
   </ItemGroup>
   <ItemGroup>
