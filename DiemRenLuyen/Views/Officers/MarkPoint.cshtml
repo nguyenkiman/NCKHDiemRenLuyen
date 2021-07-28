@@ -1,5 +1,4 @@
-﻿
-@model Models.EF.phieuChamDiem
+﻿@model Models.EF.phieuChamDiem
 
 @{
     ViewBag.Title = "Tự đánh giá điểm";
@@ -75,6 +74,7 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Cán bộ lớp chấm</th>
                                             <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
@@ -98,6 +98,7 @@
                                                         @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
                                                     </td>
                                                     <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
                                                     <td>
                                                         @if (item.noiDungDanhGia.cachCham == 3)
                                                         {

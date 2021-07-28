@@ -1,4 +1,5 @@
 ﻿using Models.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,12 @@ namespace Models.DAO
     public class giangVienDAO
     {
         Db db = new Db();
-
+        public IEnumerable<giangVien> ListWhereAll(string keysearch, int page, int pageSize)
+        {
+            if (!string.IsNullOrEmpty(keysearch))
+                return db.giangViens.OrderByDescending(x => x.trangThai).ThenByDescending(x => x.maGiangVien).Where(x => x.maGiangVien.Contains(keysearch) || x.tenGiangVien.Contains(keysearch)).ToPagedList(page, pageSize);
+            return db.giangViens.OrderByDescending(x => x.trangThai).ThenByDescending(x => x.maGiangVien).ToPagedList(page, pageSize);
+        }
         public int checkLoginGiangVien(String maGiaoVien, String matKhaus)
         {
             giangVien giangVien = db.giangViens.Find(maGiaoVien);

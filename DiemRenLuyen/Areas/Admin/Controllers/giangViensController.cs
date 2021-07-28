@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using DiemRenLuyen.Areas.Admin.Model;
+using Models.DAO;
 using Models.EF;
 
 namespace DiemRenLuyen.Areas.Admin.Controllers
@@ -15,24 +17,37 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         private Db db = new Db();
 
         // GET: Admin/giangViens
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 5)
         {
-            return View(db.giangViens.ToList());
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
+            var hocKi = new giangVienDAO();
+            var model = hocKi.ListWhereAll(searchString, page, pageSize);
+            ViewBag.SearchString = searchString;
+            return View(model);
         }
 
         // GET: Admin/giangViens/Details/5
         public ActionResult Details(string id)
         {
-            if (id == null)
+            using (Db db = new Db())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                List<giaoVienChuNhiem> gvcn = db.giaoVienChuNhiems.ToList();
+                List<giangVien> gv = db.giangViens.ToList();
+                var main = from g1 in gv
+                           join g2 in gvcn on g1.maGiangVien equals g2.maGiangVien
+                           where (g2.maGiangVien == id)
+                           select new ViewModel
+                           {
+                               giangVien = g1,
+                               giaoVienChuNhiem = g2
+                           };
+                ViewBag.Main = main;
+                return View();
             }
-            giangVien giangVien = db.giangViens.Find(id);
-            if (giangVien == null)
-            {
-                return HttpNotFound();
-            }
-            return View(giangVien);
         }
 
         // GET: Admin/giangViens/Create

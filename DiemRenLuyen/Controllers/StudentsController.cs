@@ -257,7 +257,18 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult ViewScores()
         {
-            return View();
+            var hocky = sinhVienServices.ListHocKy();
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            hocKi hocKi = hocky.First();
+            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName, hocKi.maHocKi);
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
+            ViewBag.Hocky = hocky;
+            return View(phieuChamDiem);
         }
         public ActionResult UpdatePersonalInfo(string maUser)
         {
