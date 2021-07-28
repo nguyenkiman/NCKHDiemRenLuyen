@@ -1,4 +1,4 @@
-namespace Models.EF
+﻿namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -32,10 +32,12 @@ namespace Models.EF
         [Column(TypeName = "date")]
         public DateTime ngaySinh { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Không được để trống số điện thoại")]
+        [Phone(ErrorMessage = "Vui lòng nhập số điện thoại ho")]
         public string soDienThoai { get; set; }
 
-        [Required]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Không được để trống gmail")]
+        [EmailAddress(ErrorMessage = "Vui lòng nhập email hợp lệ")]
         public string gmail { get; set; }
 
         public int gioiTinh { get; set; }

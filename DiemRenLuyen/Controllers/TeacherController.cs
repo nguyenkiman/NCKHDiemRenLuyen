@@ -66,7 +66,8 @@ namespace DiemRenLuyen.Controllers
                                    {
                                        maSinhVien = s.maSinhVien,
                                        tenSinhVien = s.tenSinhVien,
-                                       tongDiem = c.tongDiem
+                                       tongDiem = c.tongDiem,
+                                       trangThai=c.trangThai
                                      
                                    };
                 var sinhVienInfo = sinhVienChamDiems.SingleOrDefault();
@@ -75,7 +76,8 @@ namespace DiemRenLuyen.Controllers
                     var masinhvien = sinhVienInfo.maSinhVien;
                     var tensinhvien = sinhVienInfo.tenSinhVien;
                     var tongdiem = sinhVienInfo.tongDiem;
-                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien,tensinhvien,tongdiem));
+                    var trangthai = sinhVienInfo.trangThai;
+                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien,tensinhvien,tongdiem, trangthai));
                 }    
                  
             }
@@ -88,6 +90,11 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult UpdatePersonalInfo(string maUser)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var model = giangVienServices.ListWhereAll(maUser);
             var gvcn = giangVienServices.ListClass(maUser);
             ViewBag.GiaoVienChuNhiem = gvcn;
@@ -102,27 +109,40 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult ChangePassword(string maUser)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var gvcn = giangVienServices.ListClass(maUser);
             ViewBag.GiaoVienChuNhiem = gvcn;
             return View();
         }
         [HttpPost]
-        public JsonResult ChangePassword(string maGiangVien, string password, string newPassword)
+        public JsonResult ChangePassword(string maGiangVien, string password, string newPassword, string newPasswordConfirm)
         {
-            bool result;
-            var gv = db.giangViens.Where(x => x.maGiangVien.Equals(maGiangVien)).Where(x => x.matKhau == password).SingleOrDefault();
-            if (gv != null)
+            int NOT_NULL = 0;
+            int CHANGE_SUCCESS = 2;
+            int result;
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(newPasswordConfirm))
             {
-                gv.matKhau = newPassword;
-                db.SaveChanges();
-                Session[Models.Constraints.Common.USER_SESSION] = null;
-                Session[Models.Constraints.Common.NAME_USER_SESSION] = null;
-                result = true;
+                result = NOT_NULL;
             }
             else
             {
-                result = false;
+                var gv = db.giangViens.Where(x => x.maGiangVien.Equals(maGiangVien)).Where(x => x.matKhau == password).SingleOrDefault();
+                if (gv != null)
+                {
+                    gv.matKhau = newPassword;
+                    db.SaveChanges();
+                    result = CHANGE_SUCCESS;
+                }
+                else
+                {
+                    result = Common.INVALID_PASSWORDS;
+                }
             }
+            
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

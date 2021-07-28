@@ -32,7 +32,7 @@
                     </div>
                 }
             </div>
-            @using (Html.BeginForm())
+            @using (Html.BeginForm()) 
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
@@ -80,7 +80,7 @@
     </div>
 
     <div class="form-group mt-3">
-        <div class="alert alert-danger login--note">
+        <div class="alert alert-danger login--note" style="width:100%;">
             <strong>Trường hợp không đăng nhập được?</strong>
             <br>
             <ul>
@@ -110,7 +110,5 @@
         }
     }
 </script>
-<script>
-    $('#AlertBox').removeClass("hide");
-</script>
+
 

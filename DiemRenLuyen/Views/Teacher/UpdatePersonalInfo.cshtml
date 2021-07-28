@@ -25,7 +25,7 @@
         </h1>
         @foreach (var item in Model)
         {
-            <form action="/Teacher/UpdatePersonalInfo" method="post" class="row g-4 needs-validation" novalidate>
+            <form action="/Teacher/UpdatePersonalInfo" method="post" class="row g-4 needs-validation" >
                 <input type="hidden" class="form-control" value="@user.UserName" id="maGiangVien" name="maGiangVien" />
                 <div class="col-md-6 col-sm-5 position-relative my-3 wow animate__fadeInUp" data-wow-duration="1s" style="visibility: visible;">
                     <label for="validationTooltip01" class="form-label">
@@ -53,16 +53,14 @@
                 </div>
                 <div class="col-md-6  my-3 wow animate__fadeInUp" data-wow-duration="1s" style="visibility: visible;">
                     <label for="validationDefault01" class="form-label">Số điện thoại</label>
-                    <input type="text" class="form-control" id="validationDefault01" name="soDienThoai" value="@item.soDienThoai"
-                           required>
+                    <input type="tel"  class="form-control" id="soDienThoai" name="soDienThoai" required pattern="[0-9]{10}" title="Làm ơn nhập 10 kí tự {0-9}" value="@item.soDienThoai">
                 </div>
                 <div class="col-md-4  my-3 offset-md-2 wow animate__fadeInUp" data-wow-duration="1s" style="visibility: visible;">
                     <label for="validationDefaultUsername" class="form-label">Thư điện tử</label>
                     <div class="input-group">
                         <span class="input-group-text" id="inputGroupPrepend2"><img src="~/Assets/client/image/icons-gmail.png" alt="" /></span>
-                        <input type="email" class="form-control" name="gmail" id="validationDefaultUsername"
-                               aria-describedby="inputGroupPrepend2" value="@item.gmail"
-                               required>
+                        <input type="email" class="form-control" name="gmail" id="gmail" required data-val="true" data-val-email="Please enter a valid email" value="@item.gmail">
+                        <span class="field-validation-valid" data-valmsg-for="gmail" data-valmsg-replace="true"></span>
                     </div>
                 </div>
 
