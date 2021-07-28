@@ -41,7 +41,7 @@
                             <th scope="col">Họ Tên</th>
                             <th scope="col">Tổng Điểm</th>
                             <th scope="col">Xếp Loại</th>
-                            <th scope="col">Hành Động</th>
+                            @*<th scope="col">Hành Động</th>*@
                         </tr>
                     </thead>
                     <tbody id="listclass_content">
@@ -93,10 +93,10 @@
                                 } else if (result[key]['tongDiem'] <= 100) {
                                     html += `<td>Xuất sắc</td>`;
                                 }
-                        html +=`<td>
+                        @*html +=`<td>
                                    <a href="@Url.Action("DetailPoint","Teacher")" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
                                 </td>
-                            </tr>`;
+                            </tr>`;*@
                     i++;
                 }
                 document.getElementById('listclass_content').innerHTML = html;

@@ -14,7 +14,10 @@ namespace DiemRenLuyen.Controllers
     {
         // GET: Officers
 
+        
+        Db db = new Db();
         sinhVienServices sinhVienServices = new sinhVienServices();
+        phieuChamDiemServices phieuChamDiemServices = new phieuChamDiemServices();
 
         public ActionResult Index()
         {
@@ -29,12 +32,69 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult ListClass(string maLop)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = db.sinhViens.Where(x => x.maLop.Equals(maLop)).Where(x => x.maSinhVien.Equals(session.UserName)).ToList();
+            var hocky = sinhVienServices.ListHocKy();
+            var sinhvien = sinhVienServices.ListWhereAll(session.UserName);
+
+            Session.Add(Models.Constraints.Common.LOP_USER_SESSION, maLop);
+            if (model != null)
+            {
+                ViewBag.SinhVien = sinhvien;
+                ViewBag.Hocky = hocky;
+                return View(model);
+
+            }
             return View();
+        }
+        [HttpPost]
+        public JsonResult ListClass(string maLop, string maHocKy)
+        {
+            var sinhVien = db.sinhViens.Where(x => x.maLop.Equals(maLop)).Where(x => x.trangThai == Models.Constraints.Common.ACTIVATE).ToList();
+            List<string> maSinhVien = new List<string>();
+            List<PhieuChamDiemModel> sinhVienChamDiem = new List<PhieuChamDiemModel>();
+            foreach (var item in sinhVien)
+            {
+                maSinhVien.Add(item.maSinhVien);
+            }
+            foreach (var items in maSinhVien)
+            {
+                //var sinhVienChamDiems = db.phieuChamDiems.Where(x => x.maSinhVien.Equals(items)).Where(x => x.maHocKi == maHocKy).SingleOrDefault();
+                var sinhVienChamDiems = from s in db.sinhViens
+                                        join c in db.phieuChamDiems
+                                        on s.maSinhVien equals c.maSinhVien
+                                        where c.maSinhVien.Equals(items)
+                                        where c.maHocKi.Equals(maHocKy)
+                                        select new PhieuChamDiemModel //tra ve 1 custom class
+                                        {
+                                            maSinhVien = s.maSinhVien,
+                                            tenSinhVien = s.tenSinhVien,
+                                            tongDiem = c.tongDiem
+
+                                        };
+                var sinhVienInfo = sinhVienChamDiems.SingleOrDefault();
+                if (sinhVienInfo != null)
+                {
+                    var masinhvien = sinhVienInfo.maSinhVien;
+                    var tensinhvien = sinhVienInfo.tenSinhVien;
+                    var tongdiem = sinhVienInfo.tongDiem;
+                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien, tensinhvien, tongdiem));
+                }
+
+            }
+
+            return Json(sinhVienChamDiem, JsonRequestBehavior.AllowGet);
         }
         public ActionResult OfficersMark()
         {
             return View();
         }
+
+        public ActionResult MarkPoint()
+        {
+            return View();
+        }
+
         public ActionResult ViewScores()
         {
             return View();
