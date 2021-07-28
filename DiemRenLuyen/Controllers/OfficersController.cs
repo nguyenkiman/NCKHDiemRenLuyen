@@ -76,7 +76,8 @@ namespace DiemRenLuyen.Controllers
                                         {
                                             maSinhVien = s.maSinhVien,
                                             tenSinhVien = s.tenSinhVien,
-                                            tongDiem = c.tongDiem
+                                            tongDiem = c.tongDiem,
+                                            trangThai=c.trangThai
 
                                         };
                 var sinhVienInfo = sinhVienChamDiems.SingleOrDefault();
@@ -85,7 +86,8 @@ namespace DiemRenLuyen.Controllers
                     var masinhvien = sinhVienInfo.maSinhVien;
                     var tensinhvien = sinhVienInfo.tenSinhVien;
                     var tongdiem = sinhVienInfo.tongDiem;
-                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien, tensinhvien, tongdiem));
+                    var trangthai=sinhVienInfo.trangThai
+                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien, tensinhvien, tongdiem, trangthai));
                 }
 
             }
@@ -328,7 +330,22 @@ namespace DiemRenLuyen.Controllers
                 return RedirectToAction("Login", "Home");
             }
             hocKi hocKi = hocky.First();
-            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName, hocKi.maHocKi);
+            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy("1811505310345", "120");
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
+            ViewBag.Hocky = hocky;
+            return View(phieuChamDiem);
+        }
+        public ActionResult ViewScores(string maSinhVien, string maHocKy)
+        {
+            var hocky = sinhVienServices.ListHocKy();
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            hocKi hocKi = hocky.First();
+            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy("1811505310345", "120");
             var model = sinhVienServices.ListWhereAll(session.UserName);
             ViewBag.SinhVien = model;
             ViewBag.Hocky = hocky;
