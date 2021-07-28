@@ -198,7 +198,7 @@ namespace DiemRenLuyen.Controllers
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 22, diemTuCham_22, 0, 0, minhchungpath22);
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 23, diemTuCham_23, 0, 0, minhchungpath23);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("NotifySuccess","Students");
         }
         public ActionResult ListClass(string maLop)
         {

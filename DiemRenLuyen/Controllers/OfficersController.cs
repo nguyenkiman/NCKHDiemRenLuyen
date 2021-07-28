@@ -108,6 +108,20 @@ namespace DiemRenLuyen.Controllers
             ViewBag.SinhVien = model;
             return View(phieuChamDiem);
         }
+        public ActionResult NotifySuccess()
+        {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
+            return View();
+        }
+        public ActionResult OfficersSuccess()
+        {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
+            return View();
+        }
         [HttpGet]
         public ActionResult ToastError()
         {
@@ -183,7 +197,7 @@ namespace DiemRenLuyen.Controllers
             phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 22, diemTuCham_22);
             phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 23, diemTuCham_23);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("OfficersSuccess", "Officers");
         }
 
         [HttpGet]
@@ -330,9 +344,7 @@ namespace DiemRenLuyen.Controllers
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 22, diemTuCham_22, 0, 0, minhchungpath22);
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 23, diemTuCham_23, 0, 0, minhchungpath23);
 
-            
-
-            return RedirectToAction("Index");
+            return RedirectToAction("NotifySuccess", "Officers");
         }
 
         public ActionResult ViewScores()
