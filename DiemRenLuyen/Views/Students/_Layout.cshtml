@@ -81,17 +81,11 @@
                                         <li>
                                             <a href="@Url.Action("MarkPoint","Students")" class="nav-icon "><i class="fas fa-edit mr-2"></i>Tự đánh giá điểm rèn luyện</a>
                                         </li>
-                                        @foreach (var item in sinhvien)
-                                        {
-                                            <li>
-                                                <a href="@Url.Action("ListClass", "Students", new { maLop = @item.maLop })" class="nav-icon "><i class="fas fa-file-excel mr-2"></i>Xem điểm cả lớp</a>
-                                            </li>
-                                        }
+                                        <li><a href="@Url.Action("ViewScores","Students")"></i>Xem điểm cá nhân</a></li>
                                         <li>
                                             <a href="" class=""><i class="fas fa-exclamation-triangle mr-2"></i>Quy định</a>
                                         </li>
                                         <li><a href="" class=""><i class="fas fa-file-word mr-2"></i>Hướng dẫn </a></li>
-                                        <li><a href="@Url.Action("Notification","Students")"><i class="fas fa-question-circle mr-2"></i>Thông tin chấm điểm rèn luyện</a></li>
                                         <li>
                                             <a href="@Url.Action("ChangePassword","Students",new { maUser = @user.UserName })">
                                                 <i class="fas fa-key mr-2"></i>Thay đổi mật
@@ -138,19 +132,12 @@
                                     <ul class="parent">
                                         <li><a href="index.php">Trang Chủ</a></li>
                                         <li><a href="@Url.Action("MarkPoint","Students")">Tự đánh giá rèn luyện</a></li>
-                                        @foreach (var item in sinhvien)
-                                        {
-                                            <li><a href="@Url.Action("ListClass", "Students", new { maLop = @item.maLop })">Xem điểm cả lớp</a></li>
-                                        }
+                                        <li><a href="@Url.Action("ViewScores","Students")"></i>Xem điểm cá nhân</a></li>
                                         <li>
                                             <a href="#" target="_blank"> Quy định</a>
                                         </li>
                                         <li>
                                             <a href="#" target="_blank"> Hướng dẫn</a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Notification","Students")" target="_blank"> Thông báo</a>
-
                                         </li>
                                         <li>
                                             <a href="#" target="_blank">
