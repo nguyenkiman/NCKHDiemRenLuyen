@@ -9,12 +9,7 @@
 <main>
 
     <div id="crumbs" class="wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
-        <ul>
-            <li><a href="@Url.Action("Index","Officers")" class="breadcrumb">Trang chủ</a></li>
-            <li><a href="#" class="breadcrumb">Đánh giá lại điểm</a></li>
-            <li><a href="" class="breadcrumb">18T1</a></li>
-            <li><a href="" class="breadcrumb">Ngô Kim Hoàng Minh</a></li>
-        </ul>
+       
     </div>
     <div class="page-body bs-danger">
         <div class="evaluate mt-2">
@@ -29,7 +24,7 @@
             </div>
             <!--evaluate-->
             <div class="evaluate__student-point p-2">
-                @using (Html.BeginForm("MarkPoint", "Officers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("OfficersMark", "Officers", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     <div class="evaluate__student-point-sum wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;" id="point_sum">
                         <div class="d-flex justify-content-center">
@@ -43,13 +38,14 @@
                                 <td class="align-middle">Lớp đánh giá</td>
                             </tr>
                             <tr class="text-danger fw-bold">
-
+                                <input type="hidden" name="maSinhVien" value="@Model.maSinhVien">
                                 <td class="text-center">100</td>
+
+                                <td class="text-center" style="background: cornsilk;">
+                                    <p id="txt_total_Lop">@Html.DisplayFor(model => model.tongDiemSV)</p>
+                                </td>
                                 <td class="text-center">
                                     <p id="txt_total">@Html.DisplayFor(model => model.tongDiem)</p>
-                                </td>
-                                <td class="text-center" style="background: cornsilk;">
-                                    <p id="txt_total_Lop"></p>
                                 </td>
                             </tr>
                         </table>
@@ -98,38 +94,70 @@
 
                                             if (item.noiDungDanhGia.maDanhMuc == 1)
                                             {
-                                    <tr class="text-muted">
-                                        <th scope="row">1</th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
-                                        </td>
-                                        <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 3)
-                                            {
-                                                //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
-                                            }
-                                            else
-                                            {
-                                                if (item.diemTuCham.HasValue)
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucThamGiaHocTap()">
-                                                }
-                                                else
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHocTap()">
-                                                }
-                                            }
-                                        </td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 2)
-                                            {
-                                                @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
-                                            }
-                                        </td>
-                                    </tr>
+                                                <tr class="text-muted">
+                                                    <th scope="row">@Html.DisplayFor(modelItem => item.maNoiDung)</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucThamGiaHocTap()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHocTap()">
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            <div class="proof__detail">
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                    <i class="fas fa-file"></i> Minh Chứng
+                                                                </button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <img src="~/@item.minhChung"
+                                                                                     alt="minh_chung">
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                            background: #F76C12;
+                                                            border-radius: 25px;
+                                                            width: 90px;">
+                                                                                    Đóng
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                </tr>
                                             }
                                         }
 
@@ -146,6 +174,8 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Lớp đánh giá</th>
+                                            <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -165,38 +195,70 @@
 
                                             if (item.noiDungDanhGia.maDanhMuc == 2)
                                             {
-                                    <tr class="text-muted">
-                                        <th scope="row">1</th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
-                                        </td>
-                                        <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 3)
-                                            {
-                                                //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
-                                            }
-                                            else
-                                            {
-                                                if (item.diemTuCham.HasValue)
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="QuyCheNhaTruong()">
-                                                }
-                                                else
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="QuyCheNhaTruong()">
-                                                }
-                                            }
-                                        </td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 2)
-                                            {
-                                                @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
-                                            }
-                                        </td>
-                                    </tr>
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="QuyCheNhaTruong()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="QuyCheNhaTruong()">
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            <div class="proof__detail">
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                    <i class="fas fa-file"></i> Minh Chứng
+                                                                </button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <img src="~/@item.minhChung"
+                                                                                     alt="minh_chung">
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                            background: #F76C12;
+                                                            border-radius: 25px;
+                                                            width: 90px;">
+                                                                                    Đóng
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                </tr>
                                             }
                                         }
                                     </tbody>
@@ -212,6 +274,7 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Lớp đánh giá</th>
                                             <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
@@ -234,39 +297,71 @@
 
                                             if (item.noiDungDanhGia.maDanhMuc == 3)
                                             {
-                                    <tr class="text-muted">
-                                        <th scope="row">1</th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
-                                        </td>
-                                        <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 3)
-                                            {
-                                                //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
-                                            }
-                                            else
-                                            {
-                                                if (item.diemTuCham.HasValue)
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucThamGiaHoatDongChinhTri()">
-                                                }
-                                                else
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHoatDongChinhTri()">
-                                                }
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucThamGiaHoatDongChinhTri()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHoatDongChinhTri()">
+                                                            }
 
-                                            }
-                                        </td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 2)
-                                            {
-                                                @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
-                                            }
-                                        </td>
-                                    </tr>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            <div class="proof__detail">
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                    <i class="fas fa-file"></i> Minh Chứng
+                                                                </button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <img src="~/@item.minhChung"
+                                                                                     alt="minh_chung">
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                            background: #F76C12;
+                                                            border-radius: 25px;
+                                                            width: 90px;">
+                                                                                    Đóng
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                </tr>
                                             }
                                         }
                                     </tbody>
@@ -282,6 +377,7 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Lớp đánh giá</th>
                                             <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
@@ -305,39 +401,71 @@
 
                                             if (item.noiDungDanhGia.maDanhMuc == 4)
                                             {
-                                    <tr class="text-muted">
-                                        <th scope="row">1</th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
-                                        </td>
-                                        <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 3)
-                                            {
-                                                //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
-                                            }
-                                            else
-                                            {
-                                                if (item.diemTuCham.HasValue)
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucCongDan()">
-                                                }
-                                                else
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucCongDan()">
-                                                }
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucCongDan()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucCongDan()">
+                                                            }
 
-                                            }
-                                        </td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 2)
-                                            {
-                                                @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
-                                            }
-                                        </td>
-                                    </tr>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            <div class="proof__detail">
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                    <i class="fas fa-file"></i> Minh Chứng
+                                                                </button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <img src="~/@item.minhChung"
+                                                                                     alt="minh_chung">
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                            background: #F76C12;
+                                                            border-radius: 25px;
+                                                            width: 90px;">
+                                                                                    Đóng
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                </tr>
                                             }
                                         }
                                     </tbody>
@@ -353,6 +481,7 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Lớp đánh giá</th>
                                             <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
@@ -377,39 +506,71 @@
 
                                             if (item.noiDungDanhGia.maDanhMuc == 5)
                                             {
-                                    <tr class="text-muted">
-                                        <th scope="row">1</th>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
-                                        </td>
-                                        <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 3)
-                                            {
-                                                //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
-                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
-                                            }
-                                            else
-                                            {
-                                                if (item.diemTuCham.HasValue)
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="ThamGiaCongTacLop()">
-                                                }
-                                                else
-                                                {
-                                                    <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="ThamGiaCongTacLop()">
-                                                }
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="ThamGiaCongTacLop()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="ThamGiaCongTacLop()">
+                                                            }
 
-                                            }
-                                        </td>
-                                        <td>
-                                            @if (item.noiDungDanhGia.cachCham == 2)
-                                            {
-                                                @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
-                                            }
-                                        </td>
-                                    </tr>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            <div class="proof__detail">
+                                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                    <i class="fas fa-file"></i> Minh Chứng
+                                                                </button>
+                                                                <!-- Modal -->
+                                                                <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <img src="~/@item.minhChung"
+                                                                                     alt="minh_chung">
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                            background: #F76C12;
+                                                            border-radius: 25px;
+                                                            width: 90px;">
+                                                                                    Đóng
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </td>
+                                                </tr>
 
                                             }
                                         }
