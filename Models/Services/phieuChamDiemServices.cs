@@ -167,5 +167,14 @@ namespace Models.Services
             db.Entry(query).State = EntityState.Modified;
             db.SaveChanges();
         }
+        public void GVCNUpdateChiTietPhieuCham(int maPhieuCham, int maNoiDung, int diemGVCNCham)
+        {
+            var query = (from dht in db.chiTietPhieuChams
+                         where dht.maPhieuChamDiem.Equals(maPhieuCham) && dht.maNoiDung.Equals(maNoiDung)
+                         select dht).FirstOrDefault();
+            query.diemGVCNCham = diemGVCNCham;
+            db.Entry(query).State = EntityState.Modified;
+            db.SaveChanges();
+        }
     }
 }
