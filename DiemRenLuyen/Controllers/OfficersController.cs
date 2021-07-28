@@ -86,7 +86,7 @@ namespace DiemRenLuyen.Controllers
                     var masinhvien = sinhVienInfo.maSinhVien;
                     var tensinhvien = sinhVienInfo.tenSinhVien;
                     var tongdiem = sinhVienInfo.tongDiem;
-                    var trangthai=sinhVienInfo.trangThai
+                    var trangthai=sinhVienInfo.trangThai;
                     sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien, tensinhvien, tongdiem, trangthai));
                 }
 
@@ -112,9 +112,10 @@ namespace DiemRenLuyen.Controllers
         public ActionResult ToastError()
         {
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
-            var model = sinhVienServices.ListWhereAll(session.UserName);
-            ViewBag.SinhVien = model;
-            return View();
+            var sinhvien = sinhVienServices.ListWhereAll(session.UserName);
+            var model = sinhVienServices.ListHocKy();
+            ViewBag.SinhVien = sinhvien;
+            return View(model);
         }
         [HttpPost]
         public ActionResult OfficersMark(string maSinhVien,int diemTuCham_1, int diemTuCham_2, int diemTuCham_3, int diemTuCham_4, int diemTuCham_5, int diemTuCham_6, int diemTuCham_7,

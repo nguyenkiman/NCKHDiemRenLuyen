@@ -12,7 +12,7 @@ namespace Models.ViewModel
         [Required]
         public string maSinhVien { get; set; }
         public string tenSinhVien { get; set; }
-        public int tongDiem { get; set;
+        public int tongDiem { get; set; }
         public int trangThai { get; set; }
 
         public PhieuChamDiemModel()

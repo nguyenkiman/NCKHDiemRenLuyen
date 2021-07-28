@@ -66,7 +66,8 @@ namespace DiemRenLuyen.Controllers
                                    {
                                        maSinhVien = s.maSinhVien,
                                        tenSinhVien = s.tenSinhVien,
-                                       tongDiem = c.tongDiem
+                                       tongDiem = c.tongDiem,
+                                       trangThai=c.trangThai
                                      
                                    };
                 var sinhVienInfo = sinhVienChamDiems.SingleOrDefault();
@@ -75,7 +76,8 @@ namespace DiemRenLuyen.Controllers
                     var masinhvien = sinhVienInfo.maSinhVien;
                     var tensinhvien = sinhVienInfo.tenSinhVien;
                     var tongdiem = sinhVienInfo.tongDiem;
-                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien,tensinhvien,tongdiem));
+                    var trangthai = sinhVienInfo.trangThai;
+                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien,tensinhvien,tongdiem, trangthai));
                 }    
                  
             }

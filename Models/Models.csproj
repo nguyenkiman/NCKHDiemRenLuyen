@@ -70,6 +70,7 @@
     <Compile Include="DAO\hocKisDAO.cs" />
     <Compile Include="DAO\lopsDAO.cs" />
     <Compile Include="DAO\noiDungDanhGiaDAO.cs" />
+    <Compile Include="DAO\phieuChamDiemsDAO.cs" />
     <Compile Include="DAO\sinhVienDAO.cs" />
     <Compile Include="EF\admin.cs" />
     <Compile Include="EF\baoHiemYTe.cs" />
