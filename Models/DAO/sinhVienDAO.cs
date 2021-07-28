@@ -1,4 +1,5 @@
 ﻿using Models.EF;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -109,5 +110,16 @@ namespace Models.DAO
         {
             return db.hocKis.OrderByDescending(x => x.maHocKi).ToList();
         }
+
+        public IEnumerable<sinhVien> ListWhereAll(string keysearch, int page, int pagesize)
+        {
+            IQueryable<sinhVien> model = db.sinhViens;
+            if (!string.IsNullOrEmpty(keysearch))
+            {
+                model = model.Where(x => x.maSinhVien.Contains(keysearch));
+            }
+            return model.OrderBy(x => x.maSinhVien).ToPagedList(page, pagesize);
+        }
+
     }
 }

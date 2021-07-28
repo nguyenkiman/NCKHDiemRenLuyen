@@ -2181,6 +2181,8 @@
     <Content Include="Assets\admin\plugins\toastr\toastr.js.map" />
     <Content Include="Areas\Admin\Views\Logins\Index.cshtml" />
     <Content Include="Areas\Admin\Views\sinhViens\CreateExel.cshtml" />
+    <Content Include="Areas\Admin\Views\hocPhis\CreateExel.cshtml" />
+    <Content Include="Areas\Admin\Views\diemHocTaps\CreateExel.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
