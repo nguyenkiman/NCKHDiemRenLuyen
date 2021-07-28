@@ -32,5 +32,17 @@ namespace Models.Services
         {
             return sinhVienDAO.isCanBoLop(maSinhVien);
         }
+        public List<sinhVien> ListWhereAll(string maSinhVien)
+        {
+            return sinhVienDAO.ListWhereAll(maSinhVien);
+        }
+        public string UpdatePersonalInfo(sinhVien sv)
+        {
+            return sinhVienDAO.UpdatePersonalInfo(sv);
+        }
+        public List<hocKi> ListHocKy()
+        {
+            return sinhVienDAO.ListHocKy();
+        }
     }
 }

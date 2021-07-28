@@ -16,7 +16,7 @@ namespace Models.DAO
             sinhVien sinhVien =  db.sinhViens.Find(maSinhVien);
             if(sinhVien.trangThai == Constraints.Common.ACTIVATE)
             {
-                return sinhVien;
+                return sinhVien; 
             }
             else
             {
@@ -91,6 +91,7 @@ namespace Models.DAO
             db.SaveChanges();
             return sv.tenSinhVien;
         }
+        
         public bool checkBHYTBySinhVienAndMaHocKy(sinhVien sinhVien, String maHocKy)
         {
             int trangThai = db.baoHiemYTes.Where(x => x.maHocKi.Equals(maHocKy)).Where(x => x.maSinhVien.Equals(sinhVien.maSinhVien)).SingleOrDefault().trangThai;
@@ -102,6 +103,11 @@ namespace Models.DAO
             {
                 return false;
             }
+        }
+        
+        public List<hocKi> ListHocKy()
+        {
+            return db.hocKis.OrderByDescending(x => x.maHocKi).ToList();
         }
     }
 }
