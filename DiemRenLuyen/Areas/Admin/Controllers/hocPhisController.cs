@@ -22,6 +22,11 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/hocPhis
         public ActionResult Index(int page = 1, int pagesize = 10)
         {
+            var session = (DiemRenLuyen.Areas.Admin.Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
             var hocPhis = db.hocPhis.Include(h => h.hocKi).Include(h => h.sinhVien);
             ViewBag.maLop = new SelectList(db.lops, "maLop", "maLop");
             ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh");
@@ -140,7 +145,11 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
 
         public ActionResult CreateExel()
         {
-
+            var session = (Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
             return View();
         }
 
@@ -181,12 +190,20 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                         {
                             if (a.maSinhVien != "" && a.maHocKi != "" && a.trangThai == 1 || a.trangThai == 0)
                             {
-                                hocPhi TU = new hocPhi();
-                                TU.maSinhVien = a.maSinhVien;
-                                TU.maHocKi = a.maHocKi;
-                                TU.trangThai = a.trangThai;
-                                db.hocPhis.Add(TU);
-                                db.SaveChanges();
+                                try
+                                {
+                                    hocPhi TU = new hocPhi();
+                                    TU.maSinhVien = a.maSinhVien;
+                                    TU.maHocKi = a.maHocKi;
+                                    TU.trangThai = a.trangThai;
+                                    db.hocPhis.Add(TU);
+                                    db.SaveChanges();
+                                }
+                                catch
+                                {
+                                    return RedirectToAction("CreateExel", "hocPhis");
+                                }
+                                
                             }
                             else
                             {
