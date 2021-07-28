@@ -39,5 +39,10 @@ namespace Models.Services
         {
             return giangVienDAO.ListHocKy();
         }
+
+        public object ListGVCN(object maLop, string userName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

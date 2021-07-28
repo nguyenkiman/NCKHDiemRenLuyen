@@ -31,6 +31,14 @@ namespace DiemRenLuyen.Controllers
             ViewBag.GiaoVienChuNhiem = model;
             return View();
         }
+        public ActionResult TeacherSuccess()
+        {
+            var session = (LoginModel)Session[Common.USER_SESSION];
+            var maLop = Session[Common.LOP_USER_SESSION];
+            var model = giangVienServices.ListGVCN(maLop, session.UserName);
+            ViewBag.GiaoVienChuNhiem = model;
+            return View();
+        }
         public ActionResult ListClass(string maLop)
         {
             var session = (LoginModel)Session[Common.USER_SESSION];
@@ -156,7 +164,7 @@ namespace DiemRenLuyen.Controllers
             phieuChamDiemServices.GVCNUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 22, diemTuCham_22);
             phieuChamDiemServices.GVCNUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 23, diemTuCham_23);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("OfficersSuccess", "Teacher");
         }
         public ActionResult UpdatePersonalInfo(string maUser)
         {
