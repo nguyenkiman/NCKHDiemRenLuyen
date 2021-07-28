@@ -41,7 +41,6 @@ namespace DiemRenLuyen.Controllers
                 ViewBag.GiaoVienChuNhiem = model;
                 ViewBag.Hocky = hocky;
                 return View(model);
-                
             }
             return View();
         }

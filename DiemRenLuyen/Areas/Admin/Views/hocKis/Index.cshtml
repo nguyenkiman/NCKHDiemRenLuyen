@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<Models.EF.hocKi>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Danh sách học kì </h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content container-fluid">
+    <div class="row">
+        <div class="offset-7 col-md-5 mb-2">
+            @using (Html.BeginForm("Index", "hocKis", FormMethod.Get))
+            {
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 offset-4">
+                            <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa tìm kiếm" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" value="Tìm kiếm" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <div class="col-md-12">
+            <table class="table table-striped table-hover text-center">
+                <tr>
+                    <th>Mã học kì</th>
+                    <th>Ngày bắt đầu chấm</th>
+                    <th>Ngày kết thúc chấm</th>
+                    <th>Người tạo</th>
+                    <th>Ngày tạo</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.maHocKi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ngayBatDauCham)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ngayKetThucCham)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.admin.hoTen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ngayTao)
+                        </td>
+                        <td>
+                            <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                    data-placement="top" title="Edit" onclick="window.location.href='@Url.Action("Edit",new { id = item.maHocKi })'">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+        <div class="col-md-12 d-flex justify-content-end">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
+        </div>
+    </div>
+
+</section>
