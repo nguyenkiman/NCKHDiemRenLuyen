@@ -2080,8 +2080,6 @@
     <Content Include="Areas\Admin\Views\diemHocTaps\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\diemHocTaps\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\diemHocTaps\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\baoHiemYTes\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\baoHiemYTes\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\baoHiemYTes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\baoHiemYTes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\hocPhis\Create.cshtml" />

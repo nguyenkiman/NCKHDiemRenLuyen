@@ -81,6 +81,12 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             lop lop = db.lops.Find(id);
+            // cái ni có mã lớp dúng haandeens service tạo hàm 1 tìm lớp 
+            // 2 viết hàm tìm cán bộ lớp và giáo viên chủ nhiệm hiện tại (status =1 lớp = mã lớp) 
+            // 3 lấy được thì sửa được thôi mà em,
+            // còn view thì em làm 2 cái selectlist  là select list sinh vien của lớp(cái ni hình như thầy làm r mà bỏ thêm pagelist r e coi viết lại)
+            // list thứ 2 là giảng viên, ời all giảng viên chứ k làm gv theo khoa ngành được
+            // hiểu hân
             if (lop == null)
             {
                 return HttpNotFound();
