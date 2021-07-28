@@ -56,6 +56,11 @@ namespace Models.DAO
                 return null;
             }
         }
+        public giangVien findBygmai(String maGiangVien)
+        {
+            return db.giangViens.Where(x => x.gmail.Equals(maGiangVien)).SingleOrDefault();
+           
+        }
         public List<giangVien> ListWhereAll(string maGiangVien)
         {
             return db.giangViens.Where(x => x.maGiangVien == maGiangVien).ToList();

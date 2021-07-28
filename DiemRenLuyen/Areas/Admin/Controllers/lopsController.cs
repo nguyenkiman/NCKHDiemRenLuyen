@@ -50,6 +50,11 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/lops/Create
         public ActionResult Create()
         {
+            var session = (Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
             ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh");
             return View();
         }

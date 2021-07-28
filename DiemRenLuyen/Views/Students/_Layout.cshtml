@@ -145,7 +145,7 @@
                                                 {@name_user}&nbsp;<i class="fa fa-chevron-circle-down fa-fw"></i>
                                             </a>
                                             <ul class="sub-menu">
-                                                <li><a href="@Url.Action("ChangePassword","Students",new { maUser = user.UserName })" target="_blank"><i class="fas fa-key mr-2"></i>Thay đổi mật khẩu</a></li>
+                                                <li><a href="@Url.Action("ChangePassword","Students",new { maUser = user.UserName })"><i class="fas fa-key mr-2"></i>Thay đổi mật khẩu</a></li>
                                                 <li><a href="@Url.Action("UpdatePersonalInfo","Students",new { maUser = user.UserName })"><i class="fas fa-user mr-2"></i>Thông tin cá nhân</a></li>
                                                 <li><a href="@Url.Action("ViewScores","Students")"><i class="fas fa-star mr-2"></i>Xem điểm cá nhân</a></li>
                                                 <li><a href="@Url.Action("Logout","Home")"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></li>

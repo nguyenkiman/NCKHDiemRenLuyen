@@ -70,6 +70,7 @@
     <Compile Include="DAO\hocKisDAO.cs" />
     <Compile Include="DAO\lopsDAO.cs" />
     <Compile Include="DAO\noiDungDanhGiaDAO.cs" />
+    <Compile Include="DAO\phieuChamDiemsDAO.cs" />
     <Compile Include="DAO\sinhVienDAO.cs" />
     <Compile Include="EF\admin.cs" />
     <Compile Include="EF\baoHiemYTe.cs" />
@@ -91,7 +92,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\giangVienServices.cs" />
     <Compile Include="Services\hocKiServices.cs" />
+    <Compile Include="Services\MailServices.cs" />
     <Compile Include="Services\phieuChamDiemServices.cs" />
+    <Compile Include="Services\ResetmatkhauServices.cs" />
     <Compile Include="Services\sinhVienServices.cs" />
     <Compile Include="ViewModel\PhieuChamDiemModel.cs" />
   </ItemGroup>

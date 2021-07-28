@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Models.EF.chiTietPhieuCham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">CHI TIẾT PHIẾU CHẤM</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard v1</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<table class="table table-striped table-hover text-center">
+    <tr>
+        <th>STT </th>
+        <th>
+            Tên nội dung
+        </th>
+        <th>
+            Điểm tự chấm
+        <th>
+            Điểm CBL chấm
+        </th>
+        <th>
+            Điểm GVCN chấm
+        </th>
+        <th></th>
+    </tr>
+    @{int i = 1;
+        String sv="", gv="", cbl="";
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@i</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diemTuCham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diemCBLCham)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diemGVCNCham)
+            </td>
+            <td>
+            </td>
+        </tr>
+        i++;
+
+        sv = item.phieuChamDiem.tongDiemSV.ToString();
+        gv = item.phieuChamDiem.tongDiemGVCN.ToString();
+        cbl = item.phieuChamDiem.tongDiemCBL.ToString();
+
+    }
+    <tr>
+        <td></td>
+        <td>Tổng điểm</td>
+        <td>@sv</td>
+        <td>@cbl</td>
+        <td>@gv</td>
+    </tr>
+</table>

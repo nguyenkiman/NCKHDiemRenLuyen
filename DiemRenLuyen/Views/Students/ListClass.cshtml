@@ -74,7 +74,10 @@
                 html = ``;
                 var i = 1;
                 for (const [key, value] of Object.entries(result)) {
+                    var a = result[key]['maSinhVien'];
                     console.log(result[key]['masinhvien']);
+                    var maSinhVien = result[key]['masinhvien'];
+                    var fullUrl = this.Url.Action("MarkPoint", "Officers", new { maSinhVien = maSinhVien , maHocKy=maHocKy});
                     html += ` <tr>
                                 <th scope="row">${i}</th>
                                 <td>${result[key]['maSinhVien']}</td>
@@ -93,10 +96,10 @@
                                 } else if (result[key]['tongDiem'] <= 100) {
                                     html += `<td>Xuất sắc</td>`;
                                 }
-                        @*html +=`<td>
-                                   <a href="@Url.Action("DetailPoint","Teacher")" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
+                    html += `<td>
+                                   <a href="${fullUrl}" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
                                 </td>
-                            </tr>`;*@
+                            </tr>`;
                     i++;
                 }
                 document.getElementById('listclass_content').innerHTML = html;
