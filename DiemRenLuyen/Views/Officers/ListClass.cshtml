@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Models.Constraints
+
+@{
+    var hocky = (List<Models.EF.hocKi>)ViewBag.Hocky;
     ViewBag.Title = "Danh sách lớp";
     Layout = "~/Views/Officers/_layout.cshtml";
 }
@@ -7,23 +10,30 @@
 
     <div id="crumbs" class="wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
         <ul>
-            <li><a href="teacher.php" class="breadcrumb">Trang chủ</a></li>
-            <li><a href="listClass.php" class="breadcrumb">Đánh giá lại điểm</a></li>
-            <li><a href="listClass.php" class="breadcrumb">18T1</a></li>
+            @{
+                var maLop = Session[Common.LOP_USER_SESSION];
+            }
+            <li><a href="@Url.Action("Index","Officers")" class="breadcrumb">Trang chủ</a></li>
+            <li><a href="@Url.Action("ListClass","Officers",new { maLop = @maLop })" class="breadcrumb">Danh sách lớp</a></li>
+            <li><a href="@Url.Action("ListClass","Officers",new { maLop = @maLop })" class="breadcrumb">@maLop</a></li>
         </ul>
     </div>
     <div class="page-body">
-        <div class="list__class mt-3 p-2 " style="visibility: visible; margin: 0 0.5rem;">
-            <div class="list__class_appraise wow animate__fadeInUp" data-wow-duration="2s">
+        <div class="list__class mt-3 p-2">
+            @foreach (var item in Model)
+            {
+                <input type="hidden" value="@item.maLop" id="malop" />
+            }
+            <div class="list__class_appraise wow animate__fadeInUp" data-wow-duration="1s" style="visibility: visible;">
                 <label class="list__class_appraise--title">Đợt đánh giá: </label>
-                <select class="list__class_appraise--time">
-                    <option>Đợt đánh giá HK 220</option>
-                    <option>Đợt đánh giá HK 120</option>
-                    <option>Đợt đánh giá HK 119</option>
-                    <option>Đợt đánh giá HK 219</option>
+                <select class="list__class_appraise--time" id="hocky_form" onchange="filterHocKy(this)">
+                    @foreach (var item in hocky)
+                    {
+                        <option value="@item.maHocKi">Đợt đánh giá HK @item.maHocKi</option>
+                    }
                 </select>
             </div>
-            <div class="table-lg-responsive list_class--info t ">
+            <div class="list_class--info ">
                 <table class="table table-bordered table-hover mt-2 d-table">
                     <thead>
                         <tr class="list list-group-item-heading">
@@ -35,49 +45,7 @@
                             <th scope="col">Hành Động</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>1811505310131</td>
-                            <td>Ngô Kim Hoàng Minh</td>
-                            <td>85</td>
-                            <td>Tốt</td>
-                            <td>
-                                <a href="officerMark.php" class="text-primary" target="_blank"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>1811505310131</td>
-                            <td>Ngô Kim Hoàng Minh</td>
-                            <td>85</td>
-                            <td>Tốt</td>
-                            <td><a href="officerMark.php" class="text-primary" target="_blank"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>1811505310131</td>
-                            <td>Ngô Kim Hoàng Minh</td>
-                            <td>85</td>
-                            <td>Tốt</td>
-                            <td><a href="#" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>1811505310131</td>
-                            <td>Ngô Kim Hoàng Minh</td>
-                            <td>85</td>
-                            <td>Tốt</td>
-                            <td><a href="#" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>1811505310131</td>
-                            <td>Ngô Kim Hoàng Minh</td>
-                            <td>85</td>
-                            <td>Tốt</td>
-                            <td><a href="#" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a></td>
-                        </tr>
+                    <tbody id="listclass_content">
                     </tbody>
                 </table>
             </div>
@@ -85,4 +53,60 @@
     </div>
     <hr>
 </main>
+<script>
+    var maLop = $('#malop').val();
+    var maHocKy = $('#hocky_form').val();
+    $(document).ready(function () {
+        sinhVienByClass();
+    });
+    function sinhVienByClass() {
+        console.log("minh");
 
+        console.log(maHocKy);
+        console.log(maLop);
+        $.ajax({
+            type: "POST",
+            url: "/Officers/ListClass",
+            data: {
+                maLop: maLop,
+                maHocKy: maHocKy
+            },
+            success: function (result) {
+                html = ``;
+                var i = 1;
+                for (const [key, value] of Object.entries(result)) {
+                    console.log(result[key]['masinhvien']);
+                    html += ` <tr>
+                                <th scope="row">${i}</th>
+                                <td>${result[key]['maSinhVien']}</td>
+                                <td>${result[key]['tenSinhVien']}</td>
+                                <td>${result[key]['tongDiem']}</td>`;
+                                if (result[key]['tongDiem'] < 35) {
+                                    html += `<td>Kém</td>`;
+                                } else if (result[key]['tongDiem'] < 50) {
+                                    html += `<td>Yếu</td>`;
+                                } else if (result[key]['tongDiem'] < 65) {
+                                    html += `<td>Trung Bình</td>`;
+                                } else if (result[key]['tongDiem'] < 80) {
+                                    html += `<td>Khá</td>`;
+                                } else if (result[key]['tongDiem'] < 90) {
+                                    html += `<td>Tốt</td>`;
+                                } else if (result[key]['tongDiem'] <= 100) {
+                                    html += `<td>Xuất sắc</td>`;
+                                }
+                        html +=`<td>
+                                   <a href="Officers/OfficersMark/${result[key]['masinhvien']}/${maHocKy}" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
+                                </td>
+                            </tr>`;
+                    i++;
+                }
+                document.getElementById('listclass_content').innerHTML = html;
+                console.log(result);
+            }
+        })
+    }
+    function filterHocKy(obj) {
+        maHocKy = obj.value;
+        sinhVienByClass();
+    }
+</script>

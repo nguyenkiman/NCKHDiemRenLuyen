@@ -1,7 +1,7 @@
 ﻿@using Models.Constraints
 @using DiemRenLuyen.Model
-@model IEnumerable<Models.EF.giaoVienChuNhiem>
 @{
+    var gvcn = (List<Models.EF.giaoVienChuNhiem>)ViewBag.GiaoVienChuNhiem;
     Layout = null;
 }
 
@@ -82,7 +82,7 @@
                                         <li>
                                             <a href="#" class=""><i class="fas fa-address-card mr-2"></i>Danh sách lớp</a>
                                             <ul class="sub-menu--hambuger">
-                                                @foreach (var item in Model)
+                                                @foreach (var item in gvcn)
                                                 {
                                                     <li>
                                                         <a href="@Url.Action("ListClass", "Teacher", new { maLop = @item.maLop })">
@@ -93,7 +93,7 @@
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="@Url.Action("ChangePassword","Teacher")">
+                                            <a href="@Url.Action("ChangePassword","Teacher",new { maUser = @user.UserName })">
                                                 <i class="fas fa-key mr-2"></i>Thay đổi mật
                                                 khẩu
                                             </a>
@@ -144,7 +144,7 @@
                                         <li>
                                             <a href="" target="_blank">Danh sách lớp</a>
                                             <ul class="sub-menu">
-                                                @foreach (var item in Model)
+                                                @foreach (var item in gvcn)
                                                 {
                                                     <li>
                                                         <a href="@Url.Action("ListClass", "Teacher", new { maLop = @item.maLop })">
@@ -172,7 +172,7 @@
                                             </a>
                                             <ul class="sub-menu">
                                                 <li>
-                                                    <a href="@Url.Action("ChangePassword","Teacher")" target="_blank">
+                                                    <a href="@Url.Action("ChangePassword","Teacher",new { maUser = @user.UserName })" target="_blank">
                                                         <i class="fas fa-key mr-2"></i>Thay đổi mật khẩu
                                                     </a>
                                                 </li>

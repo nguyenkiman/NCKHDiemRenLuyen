@@ -55,7 +55,7 @@
 
                 </div>
                 <div class="col-md-6 col-sm-5 position-relative my-3 wow animate__fadeInUp" data-wow-duration="1s" style="visibility: visible;">
-                    <label for="validationTooltip01" class="form-label">Ngày sinh:@item.ngaySinh</label>
+                    <label for="validationTooltip01" class="form-label">Ngày sinh:@item.ngaySinh.ToString("dd - MM - yyyy")</label>
                 </div>
                 <div class="col-md-4 col-sm-5 position-relative my-3 offset-md-2 offset-sm-2 wow animate__fadeInUp" data-wow-duration="1s" style="visibility: visible;">
                     @if (item.gioiTinh == 1)
