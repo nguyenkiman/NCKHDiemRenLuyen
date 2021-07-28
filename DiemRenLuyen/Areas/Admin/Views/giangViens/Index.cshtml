@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Models.EF.giangVien>
-
+﻿@model PagedList.IPagedList<Models.EF.giangVien>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
 }
@@ -24,38 +24,21 @@
 <!-- Main content -->
 <section class="content container-fluid">
     <div class="row">
-        <div class="col-md-2">
-            <select class="input-sm form-control w-sm inline v-middle" id="cb_khoa">
-                <option value="0">Khoa</option>
-                <option value="1">Delete selected</option>
-                <option value="2">Bulk edit</option>
-                <option value="3">Export</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select class="input-sm form-control w-sm inline v-middle" id="cb_khoa">
-                <option value="0">Ngành</option>
-                <option value="1">Delete selected</option>
-                <option value="2">Bulk edit</option>
-                <option value="3">Export</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select class="input-sm form-control w-sm inline v-middle" id="cb_khoa">
-                <option value="0">Lớp</option>
-                <option value="1">Delete selected</option>
-                <option value="2">Bulk edit</option>
-                <option value="3">Export</option>
-            </select>
-        </div>
-        <div class="offset-1 col-md-5 mb-2">
-            <div class="input-group rounded">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                       aria-describedby="search-addon" />
-                <span class="input-group-text border-0" id="search-addon">
-                    <i class="fas fa-search"></i>
-                </span>
-            </div>
+        <div class="offset-7 col-md-5 mb-2">
+            @using (Html.BeginForm("Index", "giangViens", FormMethod.Get))
+            {
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 offset-4">
+                            <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa tìm kiếm" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" value="Tìm kiếm" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
 
         <div class="col-md-12">
@@ -66,132 +49,72 @@
                     <th>Ngày sinh</th>
                     <th>Số điện thoại</th>
                     <th>Gmail</th>
+                    <th>Giới tính</th>
                     <th>Trạng thái</th>
                     <th></th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>GV0001</td>
-                    <td>Hoàng Thị Mỹ Lệ</td>
-                    <td>02/06/1967</td>
-                    <td>0385763449</td>
-                    <td>htmlUTE@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>GV0001</td>
-                    <td>Hoàng Thị Mỹ Lệ</td>
-                    <td>02/06/1967</td>
-                    <td>0385763449</td>
-                    <td>htmlUTE@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>GV0001</td>
-                    <td>Hoàng Thị Mỹ Lệ</td>
-                    <td>02/06/1967</td>
-                    <td>0385763449</td>
-                    <td>htmlUTE@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>GV0001</td>
-                    <td>Hoàng Thị Mỹ Lệ</td>
-                    <td>02/06/1967</td>
-                    <td>0385763449</td>
-                    <td>htmlUTE@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>GV0001</td>
-                    <td>Hoàng Thị Mỹ Lệ</td>
-                    <td>02/06/1967</td>
-                    <td>0385763449</td>
-                    <td>htmlUTE@ute.udn.vn</td>
-                    <td class="text-success">Hiện</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.maGiangVien)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tenGiangVien)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ngaySinh)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.soDienThoai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gmail)
+                        </td>
+                        @if (item.gioiTinh == 1)
+                        {
+                            <td>
+                                Nam
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                Nữ
+                            </td>
+                        }
+                        @if (item.trangThai == 1)
+                        {
+                            <td class="text-success">
+                                Hiện
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-danger">
+                                Ẩn
+                            </td>
+                        }
+
+                        <td>
+                            <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                    data-placement="top" title="Edit" onclick="window.location.href='@Url.Action("Edit",new { id = item.maGiangVien })'">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-light btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                    data-placement="top" title="Edit" onclick="window.location.href='@Url.Action("Details",new { id = item.maGiangVien })'">
+                                <i class="fa fa-info-circle"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
             </table>
         </div>
         <div class="col-md-12 d-flex justify-content-end">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
         </div>
     </div>
 
