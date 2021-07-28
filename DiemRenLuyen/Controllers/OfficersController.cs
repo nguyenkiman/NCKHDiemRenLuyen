@@ -34,6 +34,12 @@ namespace DiemRenLuyen.Controllers
         {
             return View();
         }
+
+        public ActionResult MarkPoint()
+        {
+            return View();
+        }
+
         public ActionResult ViewScores()
         {
             return View();
