@@ -149,12 +149,16 @@ namespace DiemRenLuyen.Controllers
 
             db.Entry(phieuChamDiem).State = EntityState.Modified;
             db.SaveChanges();
-            
-
-            
 
 
-            
+
+
+            //var rs = MailServices.Send(oldphieuChamDiem.sinhVien.gmail, "CẬP NHẬT ĐIỂM RÈN LUYỆN", "Điểm rèn luyện của " + oldphieuChamDiem.sinhVien.tenSinhVien + "" +
+            //    "  đã được " + sinhVienServices.findByMaSinhVien(session.UserName).tenSinhVien + " cập nhật lại");
+
+            var rs = MailServices.Send("hoangminhcp10@gmail.com", "CẬP NHẬT ĐIỂM RÈN LUYỆN", "Điểm rèn luyện của " + oldphieuChamDiem.sinhVien.tenSinhVien + "" +
+     "  đã được cán bộ lớp " + sinhVienServices.findByMaSinhVien(session.UserName).tenSinhVien + " cập nhật lại");
+
             phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 1, diemTuCham_1);
             phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 2, diemTuCham_2);
             phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 3, diemTuCham_3);
@@ -299,7 +303,7 @@ namespace DiemRenLuyen.Controllers
                 minhchung23.SaveAs(path);
 
             }
-
+            
             var maphieuchamdiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName, hocKi.maHocKi).maPhieuChamDiem;
 
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 1, diemTuCham_1, 0, 0, null);
@@ -325,6 +329,8 @@ namespace DiemRenLuyen.Controllers
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 21, diemTuCham_21, 0, 0, minhchungpath21);
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 22, diemTuCham_22, 0, 0, minhchungpath22);
             phieuChamDiemServices.saveChiTietPhieuCham(maphieuchamdiem, 23, diemTuCham_23, 0, 0, minhchungpath23);
+
+            
 
             return RedirectToAction("Index");
         }

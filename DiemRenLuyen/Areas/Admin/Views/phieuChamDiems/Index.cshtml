@@ -50,42 +50,49 @@
                 </tr>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.maPhieuChamDiem)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.sinhVien.tenSinhVien)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.maHocKi)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ngayCham)
-                    </td>
-                    @{ if (item.trangThai == 1)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.maPhieuChamDiem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sinhVien.tenSinhVien)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.maHocKi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ngayCham)
+                </td>
+                @{ if (item.trangThai == 1)
+                    {
+
+
+                        <td class="text-success">Đã chấm</td>
+                    }
+                    else
+                    {
+                        if (item.trangThai == 2)
                         {
-
-
-                            <td class="text-success">Đã chấm</td>
+                            <td class="text-danger">CBL chấm</td>
                         }
                         else
                         {
-                            <td class="text-danger">Chưa chấm</td>
-
+                            <td class="text-danger">GVCN chấm</td>
                         }
 
                     }
-                    <td>
-                        @Html.DisplayFor(modelItem => item.tongDiem)
-                    </td>
-                    <td>
-                        <button class="btn btn-light btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit" onclick="window.location.href='@Url.Action("Index","chiTietPhieuChams", new { id = item.maPhieuChamDiem })'">
-                            <i class="fa fa-info-circle"></i>
-                        </button>
-                    </td>
-                </tr>
+
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.tongDiem)
+                </td>
+                <td>
+                    <button class="btn btn-light btn-sm rounded-0" type="button" data-toggle="tooltip"
+                            data-placement="top" title="Edit" onclick="window.location.href='@Url.Action("Index","chiTietPhieuChams", new { id = item.maPhieuChamDiem })'">
+                        <i class="fa fa-info-circle"></i>
+                    </button>
+                </td>
+            </tr>
                 }
 
 

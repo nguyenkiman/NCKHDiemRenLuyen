@@ -92,7 +92,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\giangVienServices.cs" />
     <Compile Include="Services\hocKiServices.cs" />
+    <Compile Include="Services\MailServices.cs" />
     <Compile Include="Services\phieuChamDiemServices.cs" />
+    <Compile Include="Services\ResetmatkhauServices.cs" />
     <Compile Include="Services\sinhVienServices.cs" />
     <Compile Include="ViewModel\PhieuChamDiemModel.cs" />
   </ItemGroup>

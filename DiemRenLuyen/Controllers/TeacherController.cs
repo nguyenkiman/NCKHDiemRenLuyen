@@ -132,6 +132,9 @@ namespace DiemRenLuyen.Controllers
             db.Entry(phieuChamDiem).State = EntityState.Modified;
             db.SaveChanges();
 
+            var rs = MailServices.Send("hoangminhcp10@gmail.com", "CẬP NHẬT ĐIỂM RÈN LUYỆN", "Điểm rèn luyện của " + oldphieuChamDiem.sinhVien.tenSinhVien + "" +
+    "  đã được GVCN cập nhật lại");
+
             phieuChamDiemServices.GVCNUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 1, diemTuCham_1);
             phieuChamDiemServices.GVCNUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 2, diemTuCham_2);
             phieuChamDiemServices.GVCNUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 3, diemTuCham_3);

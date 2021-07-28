@@ -24,6 +24,11 @@ namespace Models.DAO
                 return null;
             }
         }
+        public sinhVien findByGmail(String gmail)
+        {
+            sinhVien sinhVien = db.sinhViens.Where(x=>x.gmail.Equals(gmail)).SingleOrDefault();
+            return sinhVien;
+        }
         public ICollection<sinhVien> findByMaLop(String maLop)
         {
             return db.lops.Where(x => x.maLop.Equals(maLop)).Where(x => x.trangThai == Constraints.Common.ACTIVATE).SingleOrDefault().sinhViens;
@@ -120,6 +125,7 @@ namespace Models.DAO
             }
             return model.OrderBy(x => x.maSinhVien).ToPagedList(page, pagesize);
         }
+
 
     }
 }
