@@ -260,21 +260,38 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult UpdatePersonalInfo(string maUser)
         {
-
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var model = sinhVienServices.ListWhereAll(maUser);
             var sinhvien = sinhVienServices.ListWhereAll(maUser);
             ViewBag.SinhVien = sinhvien;
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdatePersonalInfo(sinhVien sv)
         {
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
-            sinhVienServices.UpdatePersonalInfo(sv);
+            
+                sinhVienServices.UpdatePersonalInfo(sv);
+                
+            
+           
             return RedirectToAction("UpdatePersonalInfo", "Students", new { maUser = session.UserName });
+            
+            
+
         }
         public ActionResult ChangePassword(string maUser)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var sinhvien = sinhVienServices.ListWhereAll(maUser);
             ViewBag.SinhVien = sinhvien;
             return View();
@@ -300,11 +317,20 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult Notification()
         {
-
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
             return View();
         }
         public ActionResult DetailNotification()
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
             return View();
         }
     }

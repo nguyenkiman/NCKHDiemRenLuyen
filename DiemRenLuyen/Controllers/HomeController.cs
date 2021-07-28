@@ -48,6 +48,7 @@ namespace DiemRenLuyen.Controllers
                         Session.Add(Models.Constraints.Common.USER_SESSION, user);
                         Session.Add(Models.Constraints.Common.NAME_USER_SESSION, sinhVien.tenSinhVien);
                         Session.Add(Models.Constraints.Common.LOP_USER_SESSION, sinhVien.maLop);
+                        SetAlert("Đăng nhập thành công", "success");
                         if (sinhVienServices.isCanBoLop(user.UserName))
                         {
                             return RedirectToAction("Index", "Officers");
@@ -76,6 +77,7 @@ namespace DiemRenLuyen.Controllers
                     var giangVien = giangVienServices.findByMaGiangVien(user.UserName);
                     Session.Add(Models.Constraints.Common.NAME_USER_SESSION, giangVien.tenGiangVien);
                     Session.Add(Models.Constraints.Common.USER_SESSION, user);
+                    SetAlert("Đăng nhập thành công", "success");
                     return RedirectToAction("Index", "Teacher");
                 }
                 else if (checkGiangVien == Models.Constraints.Common.INVALID_PASSWORDS)

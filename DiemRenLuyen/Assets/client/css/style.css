@@ -439,16 +439,29 @@ ul.sub-menu li:hover {
         background: #002878;
         color: #fff;
     }
+.field-validation-error {
+    color: red
+}
 
+.validation-summary-errors {
+    color: red
+}
 .alert {
     position: relative;
-    padding: 0px !important;
     margin-top: 1rem !important;
     margin-bottom: 0px !important;
-    
+    padding: 8px 5px !important;
+    width: 73%;
+    border-radius: 6px;
 }
-alert-error {
-    color: #CC0000!important;
+.alert-error {
+    color: #CC0000 !important;
+    background: bisque;
+}
+.alert-success {
+    color: #3bcf33 !important;
+    background: aliceblue;
+   
 }
 .alert-danger {
     color: #b94a48

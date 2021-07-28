@@ -89,6 +89,11 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult UpdatePersonalInfo(string maUser)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var model = giangVienServices.ListWhereAll(maUser);
             var gvcn = giangVienServices.ListClass(maUser);
             ViewBag.GiaoVienChuNhiem = gvcn;
@@ -103,6 +108,11 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult ChangePassword(string maUser)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var gvcn = giangVienServices.ListClass(maUser);
             ViewBag.GiaoVienChuNhiem = gvcn;
             return View();

@@ -29,6 +29,9 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult ListClass(string maLop)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
             return View();
         }
         public ActionResult OfficersMark()
