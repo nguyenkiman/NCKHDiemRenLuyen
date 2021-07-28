@@ -158,5 +158,14 @@ namespace Models.Services
 
             }
         }
+        public void CBLUpdateChiTietPhieuCham(int maPhieuCham,int maNoiDung,int diemCBLCham)
+        {
+            var query = (from dht in db.chiTietPhieuChams
+                         where dht.maPhieuChamDiem.Equals(maPhieuCham) && dht.maNoiDung.Equals(maNoiDung)
+                         select dht).FirstOrDefault();
+            query.diemCBLCham = diemCBLCham;
+            db.Entry(query).State = EntityState.Modified;
+            db.SaveChanges();
+        }
     }
 }

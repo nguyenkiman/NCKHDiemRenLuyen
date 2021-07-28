@@ -1,20 +1,14 @@
 ﻿@model Models.EF.phieuChamDiem
 
 @{
-    ViewBag.Title = "Xem điểm cả lớp";
+    var hocky = (List<Models.EF.hocKi>)ViewBag.Hocky;
+    ViewBag.Title = "Xem điểm cá nhân";
     Layout = "~/Views/Officers/_layout.cshtml";
 }
 
 <main>
 
-    <div id="crumbs" class="wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
-        <ul>
-            <li><a href="@Url.Action("Index","Officers")" class="breadcrumb">Trang chủ</a></li>
-            <li><a href="@Url.Action("ListClass","Officers")p" class="breadcrumb">Xem điểm cả lớp</a></li>
-            <li><a href="@Url.Action("ListClass","Officers")" class="breadcrumb">18T1</a></li>
-            <li><a href="@Url.Action("ViewScores","Officers")" class="breadcrumb">Ngô Kim Hoàng Minh</a></li>
-        </ul>
-    </div>
+    
     <div class="page-body bs-danger">
         <div class="evaluate mt-2">
             <div class="evaluate__student-info d-flex ">
@@ -33,7 +27,7 @@
             </div>
             <div class="evalue__student--drl mt-1 d-flex align-items-center wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
                 <p><i class="fas fa-certificate mr-2"></i>Điểm rèn luyện:</p>
-                <p id="txt_drl" class="ml-1"></p>
+                <p id="txt_drl" class="ml-1">@Html.DisplayFor(model => model.tongDiem)</p>
             </div>
             <!--evaluate-->
             <div class="evaluate__student-point p-2">
@@ -104,28 +98,61 @@
 
                                         if (item.noiDungDanhGia.maDanhMuc == 1)
                                         {
-                                <tr class="text-muted">
-                                    <th scope="row">1</th>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
-                                    </td>
-                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.diemTuCham)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.diemCBLCham)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.diemGVCNCham)
-                                    </td>
-                                    <td>
-                                        @if (item.noiDungDanhGia.cachCham == 2)
-                                        {
-                                            @Html.DisplayFor(modelItem => item.minhChung)
-                                        }
-                                    </td>
-                                </tr>
+                                            <tr class="text-muted">
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                </td>
+                                                <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemTuCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemCBLCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemGVCNCham)
+                                                </td>
+                                                <td>
+
+                                                    @if (item.noiDungDanhGia.cachCham == 2)
+                                                    {
+                                                        <div class="proof__detail">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                <i class="fas fa-file"></i> Minh Chứng
+                                                            </button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <img src="~/@item.minhChung"
+                                                                                 alt="minh_chung">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                            background: #F76C12;
+                                                            border-radius: 25px;
+                                                            width: 90px;">
+                                                                                Đóng
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </td>
+                                            </tr>
                                         }
                                     }
 
@@ -160,53 +187,68 @@
                                         <td><p class="txt_rs_chny"></p></td>
                                         <td><p class="txt_rs_chny"></p></td>
                                     </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row">6</th>
-                                        <td>
-                                            Có ý thức chấp hành các văn bản chỉ đạo của ngành, cấp trên và
-                                            ĐHĐN
-                                            được thực hiện trong nhà trường (6 điểm)
-                                        </td>
-                                        <td>6</td>
-                                        <td><p class="txt_vbcd">3</p></td>
-                                        <td><p class="txt_vbcd">2</p></td>
-                                        <td><p class="txt_vbcd">3</p></td>
-                                    </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row">7</th>
-                                        <td>
-                                            Có ý thức tham gia đầy đủ, đạt yêu cầu các cuộc vận động, sinh
-                                            hoạt chính trị
-                                            theo chủ trương, của cấp trên, ĐHĐN và nhà trường (4 điểm)
-                                        </td>
-                                        <td>4</td>
-                                        <td><p class="txt_vd">4</p></td>
-                                        <td><p class="txt_vd">4</p></td>
-                                        <td><p class="txt_vd">2</p></td>
-                                    </tr>
-                                    <!--8-->
-                                    <tr class="text-muted">
-                                        <th scope="row" style="vertical-align: bottom;"
-                                            class="border-bottom-0 pb-0">8</th>
-                                        <td class="border-bottom-0 pb-0">
-                                            Có ý thức chấp hành nội quy, quy
-                                            chế và các quy định của nhà trường (10 điểm)
-                                        </td>
-                                        <td class="border-bottom-0">10</td>
-                                        <td class="border-bottom-0"><p class="txt_noiquy">6</p> </td>
-                                        <td class="border-bottom-0"><p class="txt_noiquy">6</p></td>
-                                        <td class="border-bottom-0"><p class="txt_noiquy">6</p></td>
-                                    </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row" class="border-top-0"></th>
-                                        <td class="border-top-0 pt-0">
-                                            Đóng học phí và các khoản thu khác đầy đủ, đúng hạn (5 điểm)
-                                        </td>
-                                        <td class="border-top-0 pt-0">5</td>
-                                        <td class="border-top-0 pt-0"><p class="txt_hocphi">5</p></td>
-                                        <td class="border-top-0 pt-0"><p class="txt_hocphi">5</p></td>
-                                        <td class="border-top-0 pt-0"><p class="txt_hocphi">5</p></td>
-                                    </tr>
+                                    @foreach (var item in Model.chiTietPhieuChams)
+                                    {
+
+                                        if (item.noiDungDanhGia.maDanhMuc == 2)
+                                        {
+                                            <tr class="text-muted">
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                </td>
+                                                <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemTuCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemCBLCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemGVCNCham)
+                                                </td>
+                                                <td>
+
+                                                    @if (item.noiDungDanhGia.cachCham == 2)
+                                                    {
+                                                        <div class="proof__detail">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                <i class="fas fa-file"></i> Minh Chứng
+                                                            </button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <img src="~/@item.minhChung"
+                                                                                 alt="minh_chung">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                            background: #F76C12;
+                                                            border-radius: 25px;
+                                                            width: 90px;">
+                                                                                Đóng
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
                                     <!--8-->
                                 </tbody>
                             </table>
@@ -242,98 +284,69 @@
                                         <td><p class="txt_rs_hdct"></p></td>
                                         <td></td>
                                     </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row" class="border-bottom-0 pb-0"
-                                            style="vertical-align: bottom;">9</th>
-                                        <td class="border-bottom-0 pb-0">
-                                            Tham gia đầy đủ, đạt yêu cầu “Tuần
-                                            sinh hoạt công dân sinh viên” đầu khóa,
-                                            năm học và cuối khóa (10 điểm)
-                                        </td>
-                                        <td class="border-bottom-0">10</td>
-                                        <td class="border-bottom-0"><p class="txt_shcd">10</p></td>
-                                        <td class="border-bottom-0"><p class="txt_shcd">10</p>
+                                    @foreach (var item in Model.chiTietPhieuChams)
+                                    {
 
-                                        <td class="border-bottom-0"><p class="txt_shcd">10</p></td>
-                                        <td class="border-bottom-0">
-                                        </td>
-                                    </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row" class="border-top-0"></th>
-                                        <td class="border-top-0 pt-0">
-                                            Có ý thức tham gia đầy đủ, nghiêm túc hoạt động rèn luyện về
-                                            chính trị, xã hội,
-                                            văn hóa, văn nghệ, thể thao do nhà trường và ĐHĐN tổ chức, điều
-                                            động (6 điểm)
-                                        </td>
-                                        <td class="border-top-0 pt-0">6</td>
-                                        <td class="border-top-0 pt-0"><p class="txt_rlct">4</p></td>
-                                        <td class="border-top-0 pt-0"><p class="txt_rlct">4</p></td>
+                                        if (item.noiDungDanhGia.maDanhMuc == 3)
+                                        {
+                                            <tr class="text-muted">
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                </td>
+                                                <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemTuCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemCBLCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemGVCNCham)
+                                                </td>
+                                                <td>
 
-                                        <td class="border-top-0 pt-0"><p class="txt_rlct">4</p></td>
-                                        <td class="border-top-0 pt-0">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">10</th>
-                                        <td>
-                                            Có ý thức tham gia các hoạt động công ích, tình nguyện, công tác
-                                            xã hội trong
-                                            nhà trường (2 điểm)
-                                        </td>
-                                        <td>2</td>
-                                        <td><p class="txt_hdci">2</p></td>
-                                        <td><p class="txt_hdci">2</p></td>
-                                        <td><p class="txt_hdci">2</p></td>
-                                        <td>
-                                            <div class="proof__detail">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="font-family: serif;
+                                                    @if (item.noiDungDanhGia.cachCham == 2)
+                                                    {
+                                                        <div class="proof__detail">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
                                                     width: 100px;
                                                         font-size: 12px;
                                                         border-radius: 25px;">
-                                                    <i class="fas fa-file"></i> Minh Chứng
-                                                </button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img src="~/Assets/client/image/blood.jpg"
-                                                                     alt="minh_chung">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                                <i class="fas fa-file"></i> Minh Chứng
+                                                            </button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <img src="~/@item.minhChung"
+                                                                                 alt="minh_chung">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" style="
                                                             background: #F76C12;
                                                             border-radius: 25px;
                                                             width: 90px;">
-                                                                    Đóng
-                                                                </button>
+                                                                                Đóng
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">11</th>
-                                        <td>
-                                            Có ý thức tham gia tuyên truyền, phòng chống tội phạm và các tệ
-                                            nạn xã hội (2
-                                            điểm)
-                                        </td>
-                                        <td>2</td>
-                                        <td><p class="txt_tnxh">2</p></td>
-                                        <td><p class="txt_tnxh">2</p></td>
-                                        <td><p class="txt_tnxh">2</p></td>
-                                        <td></td>
-                                    </tr>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -369,123 +382,68 @@
                                     </tr>
 
                                     <!--12-->
-                                    <tr class="text-muted">
-                                        <th scope="row" class="border-bottom-0"></th>
-                                        <td class="border-bottom-0 pb-0">
-                                            Có ý thức chấp hành, tham gia tuyên
-                                            truyền các chủ trương của Đảng, chính
-                                            sách, pháp luật của Nhà nước (4 điểm)
-                                        </td>
-                                        <td class="border-bottom-0">4</td>
-                                        <td class="border-bottom-0">
-                                            <p class="txt_ctcd">4</p>
-                                        </td>
-                                        <td class="border-bottom-0"><p class="txt_ctcd">4</p></td>
-                                        <td class="border-bottom-0"><p class="txt_ctcd">4</p></td>
-                                        <td class="border-bottom-0"></td>
-                                    </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row" class="border-top-0 border-bottom-0 pt-0 pb-0">
-                                            12
-                                        </th>
-                                        <td class="border-top-0 border-bottom-0 pt-0 pb-0">
-                                            Có tham gia bảo hiểm y tế (bắt buộc) theo Luật bảo hiểm y tế (10
-                                            điểm)
-                                        </td>
-                                        <td class="border-top-0 border-bottom-0 pt-0 pb-0">10</td>
-                                        <td class="border-top-0 border-bottom-0 pt-0 pb-0">
-                                            <p class="txt_bhyt">5</p>
-                                        </td>
-                                        <td class="border-top-0 border-bottom-0 pt-0 pb-0">
-                                            <p class="txt_bhyt">5</p>
-                                        </td>
-                                        <td class="border-top-0 border-bottom-0 pt-0 pb-0">
-                                            <p class="txt_bhyt">5</p>
-                                        </td>
-                                        <td class="border-top-0 border-bottom-0 pt-0 pb-0">
-                                        </td>
-                                    </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row" class="border-top-0 "></th>
-                                        <td class="border-top-0 ">
-                                            Có ý thức chấp hành, tham gia tuyên truyền các quy định về bảo
-                                            đảm an toàn
-                                            giao thông và “văn hóa giao thông”(5 điểm)
-                                        </td>
-                                        <td class="border-top-0 ">5</td>
-                                        <td class="border-top-0 ">
-                                            <p class="txt_vhgt">5</p>
-                                        </td>
-                                        <td class="border-top-0 ">
-                                            <p class="txt_vhgt">5</p>
-                                        </td>
-                                        <td class="border-top-0 ">
-                                            <p class="txt_vhgt">5</p>
-                                        </td>
-                                        <td class="border-top-0 "></td>
-                                    </tr>
-                                    <!--12-->
+                                    @foreach (var item in Model.chiTietPhieuChams)
+                                    {
 
+                                        if (item.noiDungDanhGia.maDanhMuc == 4)
+                                        {
+                                            <tr class="text-muted">
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                </td>
+                                                <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemTuCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemCBLCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemGVCNCham)
+                                                </td>
+                                                <td>
 
-                                    <tr>
-                                        <th scope="row">13</th>
-                                        <td>
-                                            Có ý thức tham gia các hoạt động xã hội có thành tích được ghi
-                                            nhận, biểu
-                                            dương, khen thưởng (4 điểm)
-                                        </td>
-                                        <td>4</td>
-                                        <td><p class="txt_hdxh">4</p></td>
-                                        <td><p class="txt_hdxh">4</p></td>
-                                        <td><p class="txt_hdxh">4</p></td>
-                                        <td>
-                                            <div class="proof__detail">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalIV" style="font-family: serif;
-                                                width: 100px;
-                                                    font-size: 12px;
-                                                    border-radius: 25px;">
-                                                    <i class="fas fa-file"></i> Minh Chứng
-                                                </button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalIV" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img src="~/Assets/client/image/blood.jpg"
-                                                                     alt="minh_chung">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
-                                                        background: #F76C12;
-                                                        border-radius: 25px;
-                                                        width: 90px;">
-                                                                    Đóng
-                                                                </button>
+                                                    @if (item.noiDungDanhGia.cachCham == 2)
+                                                    {
+                                                        <div class="proof__detail">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                <i class="fas fa-file"></i> Minh Chứng
+                                                            </button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <img src="~/@item.minhChung"
+                                                                                 alt="minh_chung">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                                            background: #F76C12;
+                                                            border-radius: 25px;
+                                                            width: 90px;">
+                                                                                Đóng
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">14</th>
-                                        <td>
-                                            Có tinh thần chia sẻ, giúp đỡ người gặp khó khăn, hoạn nạn (2
-                                            điểm)
-                                        </td>
-                                        <td>2</td>
-                                        <td><p class="txt_gdnkk">2</p></td>
-                                        <td><p class="txt_gdnkk">2</p></td>
-                                        <td><p class="txt_gdnkk">2</p></td>
-                                        <td></td>
-                                    </tr>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -522,127 +480,69 @@
                                         <td><p class="txt_rs_tgctl"></p></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">15</th>
-                                        <td>
-                                            Có ý thức, uy tín và hoàn thành tốt nhiệm vụ quản lý lớp, các tổ
-                                            chức Đảng,
-                                            Đoàn Thanh niên, Hội Sinh viên, tổ chức khác trong nhà trường (3
-                                            điểm)
-                                        </td>
-                                        <td>3</td>
-                                        <td><p class="txt_qll">3</p></td>
-                                        <td><p class="txt_qll">3</p></td>
-                                        <td><p class="txt_qll">0</p></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">16</th>
-                                        <td>
-                                            Có kỹ năng tổ chức, quản lý lớp, các tổ chức Đảng, Đoàn Thanh
-                                            niên, Hội Sinh
-                                            viên và các tổ chức khác trong nhà trường (2 điểm)
-                                        </td>
-                                        <td>2</td>
-                                        <td><p class="txt_tcd">2</p></td>
-                                        <td><p class="txt_tcd">2</p></td>
-                                        <td><p class="txt_tcd">0</p></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">17</th>
-                                        <td>
-                                            Hỗ trợ và tham gia tích cực vào các hoạt động chung của lớp, tập
-                                            thể, khoa,
-                                            trường và Đại học Đà Nẵng (3 điểm)
-                                        </td>
-                                        <td>3</td>
-                                        <td><p class="txt_tghdl">3</p></td>
-                                        <td><p class="txt_tghdl">3</p></td>
-                                        <td><p class="txt_tghdl">3</p></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">18</th>
-                                        <td>
-                                            Đạt thành tích trong học tập, rèn luyện (được tặng bằng khen,
-                                            giấy khen, chứng
-                                            nhận, thư khen của các cấp) (2 điểm)
-                                        </td>
-                                        <td>2</td>
-                                        <td><p class="txt_dtt">2</p></td>
-                                        <td><p class="txt_dtt">2</p></td>
-                                        <td><p class="txt_dtt">2</p></td>
-                                        <td>
-                                            <div class="proof__detail">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalV_1" style="font-family: serif;
-                                                width: 100px;
-                                                    font-size: 12px;
-                                                    border-radius: 25px;">
-                                                    <i class="fas fa-file"></i> Minh Chứng
-                                                </button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalV_1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabelV">Minh Chứng</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img src="~/Assets/client/image/blood.jpg"
-                                                                     alt="minh_chung">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
+                                    @foreach (var item in Model.chiTietPhieuChams)
+                                    {
+
+                                        if (item.noiDungDanhGia.maDanhMuc == 5)
+                                        {
+                                            <tr class="text-muted">
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                </td>
+                                                <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemTuCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemCBLCham)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.diemGVCNCham)
+                                                </td>
+                                                <td>
+
+                                                    @if (item.noiDungDanhGia.cachCham == 2)
+                                                    {
+                                                        <div class="proof__detail">
+                                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal_@item.maNoiDung" style="font-family: serif;
+                                                    width: 100px;
+                                                        font-size: 12px;
+                                                        border-radius: 25px;">
+                                                                <i class="fas fa-file"></i> Minh Chứng
+                                                            </button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="exampleModal_@item.maNoiDung" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Minh Chứng</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+
+                                                                            <img src="~/@item.minhChung"
+                                                                                 alt="minh_chung">
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-danger" data-dismiss="modal" style="
                                                             background: #F76C12;
                                                             border-radius: 25px;
                                                             width: 90px;">
-                                                                    Đóng
-                                                                </button>
+                                                                                Đóng
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="proof__detail">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalV_2" style="font-family: serif;
-                                                width: 100px;
-                                                    font-size: 12px;
-                                                    border-radius: 25px;">
-                                                    <i class="fas fa-file"></i> Minh Chứng
-                                                </button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModalV_2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabelV">Minh Chứng</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <img src="~/Assets/client/image/blood.jpg"
-                                                                     alt="minh_chung">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-danger" data-dismiss="modal" style="
-                                                            background: #F76C12;
-                                                            border-radius: 25px;
-                                                            width: 90px;">
-                                                                    Đóng
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
                                 </tbody>
                             </table>
                         </div>
