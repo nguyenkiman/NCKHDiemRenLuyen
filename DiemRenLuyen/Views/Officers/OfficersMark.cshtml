@@ -38,13 +38,14 @@
                                 <td class="align-middle">Lớp đánh giá</td>
                             </tr>
                             <tr class="text-danger fw-bold">
-                                <input type="hidden"  name="maSinhVien" value="@Model.maSinhVien">
+                                <input type="hidden" name="maSinhVien" value="@Model.maSinhVien">
                                 <td class="text-center">100</td>
+
+                                <td class="text-center" style="background: cornsilk;">
+                                    <p id="txt_total_Lop">@Html.DisplayFor(model => model.tongDiemSV)</p>
+                                </td>
                                 <td class="text-center">
                                     <p id="txt_total">@Html.DisplayFor(model => model.tongDiem)</p>
-                                </td>
-                                <td class="text-center" style="background: cornsilk;">
-                                    <p id="txt_total_Lop"></p>
                                 </td>
                             </tr>
                         </table>
@@ -94,7 +95,7 @@
                                             if (item.noiDungDanhGia.maDanhMuc == 1)
                                             {
                                                 <tr class="text-muted">
-                                                    <th scope="row">1</th>
+                                                    <th scope="row">@Html.DisplayFor(modelItem => item.maNoiDung)</th>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
                                                     </td>
@@ -173,6 +174,8 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Lớp đánh giá</th>
+                                            <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -271,6 +274,7 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Lớp đánh giá</th>
                                             <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
@@ -373,6 +377,7 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Lớp đánh giá</th>
                                             <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
@@ -476,6 +481,7 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Lớp đánh giá</th>
                                             <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>

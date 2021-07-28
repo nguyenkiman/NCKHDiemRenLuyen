@@ -13,6 +13,8 @@ using System.IO;
 using System.Configuration;
 using System.Data.SqlClient;
 using LinqToExcel;
+using Models.DAO;
+using PagedList;
 
 namespace DiemRenLuyen.Areas.Admin.Controllers
 {
@@ -21,10 +23,26 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         private Db db = new Db();
 
         // GET: Admin/sinhViens
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pagesize = 10)
         {
             var sinhViens = db.sinhViens.Include(s => s.lop);
-            return View(sinhViens.ToList());
+            ViewBag.maLop = new SelectList(db.lops, "maLop", "maLop");
+            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh");
+            ViewBag.maKhoa = new SelectList(db.khoas, "maKhoa", "tenKhoa");
+
+            var model = db.sinhViens.ToList();
+            return View(model.ToPagedList(page, pagesize));
+        }
+        [HttpPost]
+        public ActionResult Index(string searchString, int page = 1, int pagesize = 10)
+        {
+            ViewBag.maLop = new SelectList(db.lops, "maLop", "maLop");
+            ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh");
+            ViewBag.maKhoa = new SelectList(db.khoas, "maKhoa", "tenKhoa");
+            var sv = new sinhVienDAO();
+            var model = sv.ListWhereAll(searchString, page, pagesize);
+            ViewBag.SearchString = searchString;
+            return View(model.ToPagedList(page, pagesize));
         }
 
         // GET: Admin/sinhViens/Details/5
