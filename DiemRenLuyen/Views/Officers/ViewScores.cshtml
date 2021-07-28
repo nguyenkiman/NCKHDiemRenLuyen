@@ -19,10 +19,10 @@
             <div class="list__class_appraise mt-1 wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
                 <label class="list__class_appraise--title">Đợt đánh giá: </label>
                 <select class="list__class_appraise--time">
-                    <option>Đợt đánh giá HK 220</option>
-                    <option>Đợt đánh giá HK 120</option>
-                    <option>Đợt đánh giá HK 119</option>
-                    <option>Đợt đánh giá HK 219</option>
+                    @foreach (var item in hocky)
+                    {
+                        <option value="@item.maHocKi">Đợt đánh giá HK @item.maHocKi</option>
+                    }
                 </select>
             </div>
             <div class="evalue__student--drl mt-1 d-flex align-items-center wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">

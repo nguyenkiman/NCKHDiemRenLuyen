@@ -239,7 +239,8 @@ namespace DiemRenLuyen.Controllers
                                         {
                                             maSinhVien = s.maSinhVien,
                                             tenSinhVien = s.tenSinhVien,
-                                            tongDiem = c.tongDiem
+                                            tongDiem = c.tongDiem,
+                                            trangThai=c.trangThai
 
                                         };
                 var sinhVienInfo = sinhVienChamDiems.SingleOrDefault();
@@ -248,7 +249,8 @@ namespace DiemRenLuyen.Controllers
                     var masinhvien = sinhVienInfo.maSinhVien;
                     var tensinhvien = sinhVienInfo.tenSinhVien;
                     var tongdiem = sinhVienInfo.tongDiem;
-                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien, tensinhvien, tongdiem));
+                    var trangthai = sinhVienInfo.trangThai;
+                    sinhVienChamDiem.Add(new PhieuChamDiemModel(masinhvien, tensinhvien, tongdiem, trangthai));
                 }
 
             }
@@ -272,51 +274,80 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult UpdatePersonalInfo(string maUser)
         {
-
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var model = sinhVienServices.ListWhereAll(maUser);
             var sinhvien = sinhVienServices.ListWhereAll(maUser);
             ViewBag.SinhVien = sinhvien;
             return View(model);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UpdatePersonalInfo(sinhVien sv)
         {
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            
             sinhVienServices.UpdatePersonalInfo(sv);
+               
             return RedirectToAction("UpdatePersonalInfo", "Students", new { maUser = session.UserName });
         }
         public ActionResult ChangePassword(string maUser)
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var sinhvien = sinhVienServices.ListWhereAll(maUser);
             ViewBag.SinhVien = sinhvien;
             return View();
         }
         [HttpPost]
-        public JsonResult ChangePassword(string maSinhVien, string password, string newPassword)
+        public JsonResult ChangePassword(string maSinhVien, string password, string newPassword, string newPasswordConfirm)
         {
-            bool result;
-            var sv = db.sinhViens.Where(x => x.maSinhVien.Equals(maSinhVien)).Where(x => x.matKhau == password).SingleOrDefault();
-            if (sv != null)
+            int NOT_NULL = 0;
+            int CHANGE_SUCCESS = 2;
+            int result;
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(newPasswordConfirm))
             {
-                sv.matKhau = newPassword;
-                db.SaveChanges();
-                Session[Models.Constraints.Common.USER_SESSION] = null;
-                Session[Models.Constraints.Common.NAME_USER_SESSION] = null;
-                result = true;
+                result = NOT_NULL;
             }
             else
             {
-                result = false;
-            }
+                var sv = db.sinhViens.Where(x => x.maSinhVien.Equals(maSinhVien)).Where(x => x.matKhau == password).SingleOrDefault();
+                if (sv != null)
+                {
+                    sv.matKhau = newPassword;
+                    db.SaveChanges();
+                    result = CHANGE_SUCCESS;
+                }
+                else
+                {
+                    result = Models.Constraints.Common.INVALID_PASSWORDS;
+                }
+            }    
+            
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Notification()
         {
-
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
             return View();
         }
         public ActionResult DetailNotification()
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
             return View();
         }
     }

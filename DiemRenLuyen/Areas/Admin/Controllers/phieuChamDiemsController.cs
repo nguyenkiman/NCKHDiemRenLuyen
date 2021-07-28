@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Models.DAO;
 using Models.EF;
 
 namespace DiemRenLuyen.Areas.Admin.Controllers
@@ -15,25 +16,24 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         private Db db = new Db();
 
         // GET: Admin/phieuChamDiems
-        public ActionResult Index()
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
-            var phieuChamDiems = db.phieuChamDiems.Include(p => p.hocKi).Include(p => p.sinhVien);
-            return View(phieuChamDiems.ToList());
+            var session = (DiemRenLuyen.Areas.Admin.Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
+            var phieu = new phieuChamDiemsDAO();
+            var model = phieu.ListWhereAll(searchString, page, pageSize);
+            ViewBag.SearchString = searchString;
+            return View(model);
         }
 
         // GET: Admin/phieuChamDiems/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            phieuChamDiem phieuChamDiem = db.phieuChamDiems.Find(id);
-            if (phieuChamDiem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(phieuChamDiem);
+            var chiTietPhieuChams = db.chiTietPhieuChams.Include(c => c.noiDungDanhGia).Include(c => c.phieuChamDiem);
+            return View(chiTietPhieuChams.ToList());
         }
 
         // GET: Admin/phieuChamDiems/Create

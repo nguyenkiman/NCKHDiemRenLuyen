@@ -13,14 +13,16 @@ namespace Models.ViewModel
         public string maSinhVien { get; set; }
         public string tenSinhVien { get; set; }
         public int tongDiem { get; set; }
+        public int trangThai { get; set; }
 
         public PhieuChamDiemModel()
         { }
-        public PhieuChamDiemModel(string maSinhVien, string tenSinhVien, int tongDiem)
+        public PhieuChamDiemModel(string maSinhVien, string tenSinhVien, int tongDiem, int trangThai)
         {
             this.maSinhVien = maSinhVien;
             this.tenSinhVien = tenSinhVien;
             this.tongDiem = tongDiem;
+            this.trangThai = trangThai;
         }
     }
 }
