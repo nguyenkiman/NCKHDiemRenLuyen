@@ -108,7 +108,14 @@ namespace DiemRenLuyen.Controllers
             ViewBag.SinhVien = model;
             return View(phieuChamDiem);
         }
-
+        [HttpGet]
+        public ActionResult ToastError()
+        {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
+            return View();
+        }
         [HttpPost]
         public ActionResult OfficersMark(string maSinhVien,int diemTuCham_1, int diemTuCham_2, int diemTuCham_3, int diemTuCham_4, int diemTuCham_5, int diemTuCham_6, int diemTuCham_7,
             int diemTuCham_8, int diemTuCham_9, int diemTuCham_10, int diemTuCham_11, int diemTuCham_12, int diemTuCham_13, int diemTuCham_14, int diemTuCham_15, int diemTuCham_16
@@ -334,6 +341,10 @@ namespace DiemRenLuyen.Controllers
             var model = sinhVienServices.ListWhereAll(session.UserName);
             ViewBag.SinhVien = model;
             ViewBag.Hocky = hocky;
+            if(phieuChamDiem is null)
+            {
+                return RedirectToAction("ToastError", "Officers");
+            }    
             return View(phieuChamDiem);
         }
         public ActionResult ViewScores(string maSinhVien, string maHocKy)
