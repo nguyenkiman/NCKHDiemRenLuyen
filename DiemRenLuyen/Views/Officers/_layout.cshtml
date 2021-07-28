@@ -76,7 +76,7 @@
                                             <a id="" class="" href="index.php.php"><i class="fas fa-home mr-2"></i>Trang chủ</a>
                                         </li>
                                         <li>
-                                            <a href="personalScores.php"></i>Xem điểm cá nhân</a>
+                                            <a href="@Url.Action("ViewScores","Officers")"></i>Xem điểm cá nhân</a>
                                         </li>
                                         <li>
                                             <a href="@Url.Action("MarkPoint","Officers")" class="nav-icon "><i class="fas fa-edit mr-2"></i>Tự chấm điểm</a>
@@ -138,7 +138,7 @@
                                         <li><a href="@Url.Action("Index","Officers")">Trang Chủ</a></li>
                                         <li><a href="@Url.Action("MarkPoint","Officers")">Tự đánh giá rèn luyện</a></li>
                                         <li>
-                                            <a href="personalScores.php"></i>Xem điểm cá nhân</a>
+                                            <a href="@Url.Action("ViewScores","Officers")"></i>Xem điểm cá nhân</a>
                                         </li>
                                         @foreach (var item in sinhvien)
                                         {
