@@ -1,0 +1,54 @@
+﻿@model Models.EF.hocKi
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h1 class="m-0">Chỉnh sửa học kì<b> @Model.maHocKi.</b> </h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.maHocKi)
+    <!-- Date and time -->
+    <div class="form-group col-md-10">
+        <label>Ngày bắt đầu chấm</label>
+        <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
+            @Html.ValidationMessageFor(model => model.ngayBatDauCham, "", new { @class = "text-danger" })
+            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime" name="ngayBatDauCham" value="@Model.ngayBatDauCham"/>
+            <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+    </div>
+    <!-- Date and time -->
+    <div class="form-group col-md-10">
+        <label>Ngày kết thúc chấm</label>
+        @Html.ValidationMessageFor(model => model.ngayKetThucCham, "", new { @class = "text-danger" })
+        <div class="input-group date" id="reservationdatetime1" data-target-input="nearest">
+            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdatetime1" name="ngayKetThucCham" value="@Model.ngayKetThucCham"/>
+            <div class="input-group-append" data-target="#reservationdatetime1" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Cập nhật" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+    }
+
+
+
