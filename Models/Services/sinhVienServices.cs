@@ -44,5 +44,10 @@ namespace Models.Services
         {
             return sinhVienDAO.ListHocKy();
         }
+        public sinhVien findByGmail(string gmail)
+        {
+            return sinhVienDAO.findByGmail(gmail);
+        }
+        
     }
 }

@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Models.Services;
 using System.Web.UI;
 using Microsoft.Build.Tasks;
+using Models.EF;
+using System.Data.Entity;
 
 namespace DiemRenLuyen.Controllers
 {
@@ -126,6 +128,14 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult ForgotPassword()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ForgotPassword(string userField)
+        {
+            var rs = MailServices.Send(userField, "RESET MẬT KHẨU", "Mật khẩu mới của bạn là 123456789");
+            var rset = new ResetmatkhauServices();
+            rset.resetmatkhau(userField);
             return View();
         }
         public ActionResult UpdatePersonalInfo()
