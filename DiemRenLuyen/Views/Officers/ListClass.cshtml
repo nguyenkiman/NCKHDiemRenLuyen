@@ -76,29 +76,29 @@
                 var i = 1;
                 for (const [key, value] of Object.entries(result)) {
                     console.log(result[key]['masinhvien']);
-                    html += ` <tr>
-                                <th scope="row">${i}</th>
-                                <td>${result[key]['maSinhVien']}</td>
-                                <td>${result[key]['tenSinhVien']}</td>
-                                <td>${result[key]['tongDiem']}</td>`;
-                                if (result[key]['tongDiem'] < 35) {
-                                    html += `<td>Kém</td>`;
-                                } else if (result[key]['tongDiem'] < 50) {
-                                    html += `<td>Yếu</td>`;
-                                } else if (result[key]['tongDiem'] < 65) {
-                                    html += `<td>Trung Bình</td>`;
-                                } else if (result[key]['tongDiem'] < 80) {
-                                    html += `<td>Khá</td>`;
-                                } else if (result[key]['tongDiem'] < 90) {
-                                    html += `<td>Tốt</td>`;
-                                } else if (result[key]['tongDiem'] <= 100) {
-                                    html += `<td>Xuất sắc</td>`;
-                                }
+                        html += ` <tr>
+                        <th scope="row">${i}</th>
+                        <td>${result[key]['maSinhVien']}</td>
+                        <td>${result[key]['tenSinhVien']}</td>
+                        <td>${result[key]['tongDiem']}</td>`;
+                        if (result[key]['tongDiem'] < 35) {
+                            html += `<td>Kém</td>`;
+                        } else if (result[key]['tongDiem'] < 50) {
+                            html += `<td>Yếu</td>`;
+                        } else if (result[key]['tongDiem'] < 65) {
+                            html += `<td>Trung Bình</td>`;
+                        } else if (result[key]['tongDiem'] < 80) {
+                            html += `<td>Khá</td>`;
+                        } else if (result[key]['tongDiem'] < 90) {
+                            html += `<td>Tốt</td>`;
+                        } else if (result[key]['tongDiem'] <= 100) {
+                            html += `<td>Xuất sắc</td>`;
+                        }
                         html +=`<td>
-                                   <a href="Officers/OfficersMark/${result[key]['masinhvien']}/${maHocKy}" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
+                                   <a href="@Url.Action("MarkPoint", "Officers")?maSinhVien=${result[key]['maSinhVien']}?maHocKy=${maHocKy}" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
                                 </td>
                             </tr>`;
-                    i++;
+                        i++;
                 }
                 document.getElementById('listclass_content').innerHTML = html;
                 console.log(result);

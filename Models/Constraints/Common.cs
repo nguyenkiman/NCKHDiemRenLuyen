@@ -19,6 +19,7 @@ namespace Models.Constraints
         public const string USER_SESSION = "USER_SESSION";
         public const string NAME_USER_SESSION = "MA_USER_SESSION";
         public const string LOP_USER_SESSION = "LOP_USER_SESSION";
+        public const string IS_CAN_BO_SESSION = "IS_CAN_BO_SESSION";
 
 
         public const int PAGE_SIZE = 10;

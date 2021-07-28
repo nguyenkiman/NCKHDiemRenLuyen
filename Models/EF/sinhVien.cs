@@ -33,10 +33,11 @@
         public DateTime ngaySinh { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Không được để trống số điện thoại")]
-        [Phone(ErrorMessage = "Please enter a valid Phone No")]
+        [Phone(ErrorMessage = "Vui lòng nhập số điện thoại ho")]
         public string soDienThoai { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Không được để trống gmail")]
+        [EmailAddress(ErrorMessage = "Vui lòng nhập email hợp lệ")]
         public string gmail { get; set; }
 
         public int gioiTinh { get; set; }

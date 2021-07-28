@@ -117,22 +117,30 @@ namespace DiemRenLuyen.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult ChangePassword(string maGiangVien, string password, string newPassword)
+        public JsonResult ChangePassword(string maGiangVien, string password, string newPassword, string newPasswordConfirm)
         {
-            bool result;
-            var gv = db.giangViens.Where(x => x.maGiangVien.Equals(maGiangVien)).Where(x => x.matKhau == password).SingleOrDefault();
-            if (gv != null)
+            int NOT_NULL = 0;
+            int CHANGE_SUCCESS = 2;
+            int result;
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(newPasswordConfirm))
             {
-                gv.matKhau = newPassword;
-                db.SaveChanges();
-                Session[Models.Constraints.Common.USER_SESSION] = null;
-                Session[Models.Constraints.Common.NAME_USER_SESSION] = null;
-                result = true;
+                result = NOT_NULL;
             }
             else
             {
-                result = false;
+                var gv = db.giangViens.Where(x => x.maGiangVien.Equals(maGiangVien)).Where(x => x.matKhau == password).SingleOrDefault();
+                if (gv != null)
+                {
+                    gv.matKhau = newPassword;
+                    db.SaveChanges();
+                    result = CHANGE_SUCCESS;
+                }
+                else
+                {
+                    result = Common.INVALID_PASSWORDS;
+                }
             }
+            
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

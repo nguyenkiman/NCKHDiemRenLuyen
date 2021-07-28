@@ -276,14 +276,9 @@ namespace DiemRenLuyen.Controllers
         {
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
             
-                sinhVienServices.UpdatePersonalInfo(sv);
-                
-            
-           
+            sinhVienServices.UpdatePersonalInfo(sv);
+               
             return RedirectToAction("UpdatePersonalInfo", "Students", new { maUser = session.UserName });
-            
-            
-
         }
         public ActionResult ChangePassword(string maUser)
         {
@@ -297,22 +292,30 @@ namespace DiemRenLuyen.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult ChangePassword(string maSinhVien, string password, string newPassword)
+        public JsonResult ChangePassword(string maSinhVien, string password, string newPassword, string newPasswordConfirm)
         {
-            bool result;
-            var sv = db.sinhViens.Where(x => x.maSinhVien.Equals(maSinhVien)).Where(x => x.matKhau == password).SingleOrDefault();
-            if (sv != null)
+            int NOT_NULL = 0;
+            int CHANGE_SUCCESS = 2;
+            int result;
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(newPasswordConfirm))
             {
-                sv.matKhau = newPassword;
-                db.SaveChanges();
-                Session[Models.Constraints.Common.USER_SESSION] = null;
-                Session[Models.Constraints.Common.NAME_USER_SESSION] = null;
-                result = true;
+                result = NOT_NULL;
             }
             else
             {
-                result = false;
-            }
+                var sv = db.sinhViens.Where(x => x.maSinhVien.Equals(maSinhVien)).Where(x => x.matKhau == password).SingleOrDefault();
+                if (sv != null)
+                {
+                    sv.matKhau = newPassword;
+                    db.SaveChanges();
+                    result = CHANGE_SUCCESS;
+                }
+                else
+                {
+                    result = Models.Constraints.Common.INVALID_PASSWORDS;
+                }
+            }    
+            
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Notification()

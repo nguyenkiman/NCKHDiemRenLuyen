@@ -446,12 +446,18 @@ ul.sub-menu li:hover {
 .validation-summary-errors {
     color: red
 }
+#toast_error {
+    background: antiquewhite;
+    padding: 8px 15px;
+    color: chocolate;
+    border-radius: 3px;
+}
 .alert {
     position: relative;
     margin-top: 1rem !important;
     margin-bottom: 0px !important;
     padding: 8px 5px !important;
-    width: 73%;
+    width: 60%;
     border-radius: 6px;
 }
 .alert-error {

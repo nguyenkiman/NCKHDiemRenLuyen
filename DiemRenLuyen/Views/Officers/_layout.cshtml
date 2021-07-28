@@ -150,7 +150,6 @@
                                         <li>
                                             <a href="#" target="_blank"> Hướng dẫn</a>
                                         </li>
-                                        </li>
                                         <li>
                                             <a href="#" target="_blank">
                                                 @if (name_user != null)
@@ -159,7 +158,7 @@
                                             </a>
                                             <ul class="sub-menu">
                                                 <li>
-                                                    <a href="@Url.Action("ChangePassword","Students")" target="_blank">
+                                                    <a href="@Url.Action("ChangePassword","Students",new { maUser = @user.UserName })">
                                                         <i class="fas fa-key mr-2"></i>Thay đổi mật khẩu
                                                     </a>
                                                 </li>
