@@ -23,17 +23,22 @@ namespace DiemRenLuyen.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
             var model = giangVienServices.ListClass(session.UserName);
-            return View(model);
+            ViewBag.GiaoVienChuNhiem = model;
+            return View();
         }
         public ActionResult ListClass(string maLop)
         {
             var session = (LoginModel)Session[Common.USER_SESSION];
             var model = giangVienServices.ListGVCN(maLop, session.UserName);
             var hocky = giangVienServices.ListHocKy();
+            var gvcn = giangVienServices.ListClass(session.UserName);
+            
             Session.Add(Common.LOP_USER_SESSION, maLop);
             if (model != null)
             {
+                ViewBag.GiaoVienChuNhiem = model;
                 ViewBag.Hocky = hocky;
                 return View(model);
                 
@@ -85,6 +90,8 @@ namespace DiemRenLuyen.Controllers
         public ActionResult UpdatePersonalInfo(string maUser)
         {
             var model = giangVienServices.ListWhereAll(maUser);
+            var gvcn = giangVienServices.ListClass(maUser);
+            ViewBag.GiaoVienChuNhiem = gvcn;
             return View(model);
         }
         [HttpPost]
@@ -93,6 +100,12 @@ namespace DiemRenLuyen.Controllers
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
             giangVienServices.UpdatePersonalInfo(gv);
             return RedirectToAction("UpdatePersonalInfo", "Teacher", new { maUser = session.UserName });
+        }
+        public ActionResult ChangePassword(string maUser)
+        {
+            var gvcn = giangVienServices.ListClass(maUser);
+            ViewBag.GiaoVienChuNhiem = gvcn;
+            return View();
         }
         [HttpPost]
         public JsonResult ChangePassword(string maGiangVien, string password, string newPassword)

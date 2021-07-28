@@ -445,9 +445,11 @@ ul.sub-menu li:hover {
     padding: 0px !important;
     margin-top: 1rem !important;
     margin-bottom: 0px !important;
-    color: #CC0000;
+    
 }
-
+alert-error {
+    color: #CC0000!important;
+}
 .alert-danger {
     color: #b94a48
 }

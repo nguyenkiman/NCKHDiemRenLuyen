@@ -24,7 +24,8 @@ namespace DiemRenLuyen.Controllers
                 return RedirectToAction("Login", "Home");
             }
             var model = sinhVienServices.ListWhereAll(session.UserName);
-            return View(model);
+            ViewBag.SinhVien = model;
+            return View();
         }
         public ActionResult ListClass(string maLop)
         {
