@@ -65,6 +65,7 @@
     <Compile Include="DAO\adminDAO.cs" />
     <Compile Include="DAO\baoHiemYTesDAO.cs" />
     <Compile Include="DAO\giangVienDAO.cs" />
+    <Compile Include="DAO\hocKisDAO.cs" />
     <Compile Include="DAO\lopsDAO.cs" />
     <Compile Include="DAO\noiDungDanhGiaDAO.cs" />
     <Compile Include="DAO\sinhVienDAO.cs" />

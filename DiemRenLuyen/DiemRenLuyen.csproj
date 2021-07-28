@@ -145,6 +145,7 @@
     <Compile Include="Areas\Admin\Controllers\baoHiemYTesController.cs" />
     <Compile Include="Areas\Admin\Controllers\diemHocTapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\giangViensController.cs" />
+    <Compile Include="Areas\Admin\Controllers\hocKisController.cs" />
     <Compile Include="Areas\Admin\Controllers\hocPhisController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginsController.cs" />
     <Compile Include="Areas\Admin\Controllers\lopsController.cs" />
@@ -2179,6 +2180,9 @@
     <Content Include="Assets\admin\plugins\toastr\toastr.js.map" />
     <Content Include="Areas\Admin\Views\Logins\Index.cshtml" />
     <Content Include="Areas\Admin\Views\sinhViens\CreateExel.cshtml" />
+    <Content Include="Areas\Admin\Views\hocKis\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\hocKis\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\hocKis\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
