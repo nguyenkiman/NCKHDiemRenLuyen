@@ -26,87 +26,85 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="row">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Mã sinh viên</label>
-                    <div>
-                        @Html.EditorFor(model => model.maSinhVien, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.maSinhVien, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Tên sinh viên</label>
-                    <div>
-                        @Html.EditorFor(model => model.tenSinhVien, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.tenSinhVien, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Mật khẩu</label>
-                    <div>
-                        @Html.EditorFor(model => model.matKhau, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.matKhau, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Lớp</label>
-                    <div>
-                        @Html.DropDownList("maLop", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.maLop, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Ngày sinh</label>
-                    <div>
-                        @Html.EditorFor(model => model.ngaySinh, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.ngaySinh, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Số điện thoại</label>
-                    <div>
-                        @Html.EditorFor(model => model.soDienThoai, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.soDienThoai, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Email</label>
-                    <div>
-                        @Html.EditorFor(model => model.gmail, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.gmail, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="exampleInputEmail1">Giới tính</label>
-                    <div>
-                        <select name="gioiTinh" class="form-control">
-                            <option value="1">Nam</option>
-                            <option value="0">Nữ</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-12">
-                    <label for="exampleInputEmail1">Trạng thái</label>
-
-                    <div>
-                        <select name="trangThai" class="form-control">
-                            <option value="1">Hiện</option>
-                            <option value="0">Ẩn</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Thêm</button>
-
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Mã sinh viên</label>
+                <div>
+                    @Html.EditorFor(model => model.maSinhVien, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.maSinhVien, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Tên sinh viên</label>
+                <div>
+                    @Html.EditorFor(model => model.tenSinhVien, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.tenSinhVien, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Mật khẩu</label>
+                <div>
+                    @Html.EditorFor(model => model.matKhau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.matKhau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Lớp</label>
+                <div>
+                    @Html.DropDownList("maLop", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.maLop, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="ngaySinh">Ngày sinh</label>
+                <input type="date" class="form-control" name="ngaySinh" id="ngaySinh" placeholder="Nhập ngày sinh">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Số điện thoại</label>
+                <div>
+                    @Html.EditorFor(model => model.soDienThoai, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.soDienThoai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Email</label>
+                <div>
+                    @Html.EditorFor(model => model.gmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.gmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">Giới tính</label>
+                <div>
+                    <select name="gioiTinh" class="form-control">
+                        <option value="1">Nam</option>
+                        <option value="0">Nữ</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="exampleInputEmail1">Trạng thái</label>
+
+                <div>
+                    <select name="trangThai" class="form-control">
+                        <option value="1">Hiện</option>
+                        <option value="0">Ẩn</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Thêm</button>
+
+            </div>
+        </div>
         }
     </div>
 </section>
