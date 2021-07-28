@@ -152,6 +152,7 @@
     <Compile Include="Areas\Admin\Controllers\phieuChamDiemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\sinhViensController.cs" />
     <Compile Include="Areas\Admin\Model\LoginModel.cs" />
+    <Compile Include="Areas\Admin\Model\ViewModel.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfficersController.cs" />
@@ -2096,7 +2097,6 @@
     <Content Include="Areas\Admin\Views\phieuChamDiems\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\phieuChamDiems\Index.cshtml" />
     <Content Include="Areas\Admin\Views\giangViens\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\giangViens\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\giangViens\Details.cshtml" />
     <Content Include="Areas\Admin\Views\giangViens\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\giangViens\Index.cshtml" />
@@ -2180,9 +2180,12 @@
     <Content Include="Assets\admin\plugins\toastr\toastr.js.map" />
     <Content Include="Areas\Admin\Views\Logins\Index.cshtml" />
     <Content Include="Areas\Admin\Views\sinhViens\CreateExel.cshtml" />
+    <Content Include="Areas\Admin\Views\hocPhis\CreateExel.cshtml" />
+    <Content Include="Areas\Admin\Views\diemHocTaps\CreateExel.cshtml" />
     <Content Include="Areas\Admin\Views\hocKis\Create.cshtml" />
     <Content Include="Areas\Admin\Views\hocKis\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\hocKis\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

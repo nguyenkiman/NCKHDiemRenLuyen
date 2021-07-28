@@ -82,15 +82,15 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="listTeacher.html" class="nav-link ">
+                                    <a href="@Url.Action("Index","giangViens")" class="nav-link ">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Danh sách giáo viên</p>
+                                        <p>Danh sách giảng viên</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="addTeacher.html" class="nav-link">
+                                    <a href="@Url.Action("Create","giangViens")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm giáo viên</p>
+                                        <p>Thêm giảng viên</p>
                                     </a>
                                 </li>
                             </ul>
@@ -204,15 +204,38 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="listTuition.html" class="nav-link">
+                                    <a href="@Url.Action("Index","hocPhis")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh sách nộp học phí</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="addTuition.html" class="nav-link">
+                                    <a href="@Url.Action("CreateExel","hocPhis")" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Thêm SV nộp học phí</p>
+                                        <p>Nhập từ file exel</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item menu">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Điểm học tập
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="@Url.Action("Index","diemHocTaps")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Danh sách điểm học tập</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="@Url.Action("CreateExel","diemHocTaps")" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Nhập từ file exel</p>
                                     </a>
                                 </li>
                             </ul>

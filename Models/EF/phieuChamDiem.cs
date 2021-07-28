@@ -29,6 +29,12 @@ namespace Models.EF
 
         public int trangThai { get; set; }
 
+        public int tongDiemSV { get; set; }
+
+        public int tongDiemCBL { get; set; }
+
+        public int tongDiemGVCN { get; set; }
+
         public int tongDiem { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

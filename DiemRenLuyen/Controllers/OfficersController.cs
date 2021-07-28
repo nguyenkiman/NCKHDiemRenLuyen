@@ -35,6 +35,11 @@ namespace DiemRenLuyen.Controllers
         public ActionResult ListClass(string maLop)
         {
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            
             var model = db.sinhViens.Where(x => x.maLop.Equals(maLop)).Where(x => x.maSinhVien.Equals(session.UserName)).ToList();
             var hocky = sinhVienServices.ListHocKy();
             var sinhvien = sinhVienServices.ListWhereAll(session.UserName);
@@ -88,21 +93,85 @@ namespace DiemRenLuyen.Controllers
             return Json(sinhVienChamDiem, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
-        public ActionResult OfficersMark(/*string maSinhVien,string maHocKy*/)
+        public ActionResult OfficersMark(string masinhvien, string maHocKy)
         {
-            //var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
-            //if (session == null)
-            //{
-            //    return RedirectToAction("Login", "Home");
-            //}
-            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy("1811505310301","220");
-
-
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(masinhvien, maHocKy);
+
             var model = sinhVienServices.ListWhereAll(session.UserName);
             ViewBag.SinhVien = model;
             return View(phieuChamDiem);
         }
+
+        [HttpPost]
+        public ActionResult OfficersMark(string maSinhVien,int diemTuCham_1, int diemTuCham_2, int diemTuCham_3, int diemTuCham_4, int diemTuCham_5, int diemTuCham_6, int diemTuCham_7,
+            int diemTuCham_8, int diemTuCham_9, int diemTuCham_10, int diemTuCham_11, int diemTuCham_12, int diemTuCham_13, int diemTuCham_14, int diemTuCham_15, int diemTuCham_16
+            , int diemTuCham_17, int diemTuCham_18, int diemTuCham_19, int diemTuCham_20, int diemTuCham_21, int diemTuCham_22, int diemTuCham_23)
+        {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            hocKi hocKi = new hocKiServices().getCurrentHocKi();
+            phieuChamDiem phieuChamDiem = new phieuChamDiem(); 
+            phieuChamDiem oldphieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(maSinhVien, hocKi.maHocKi);
+            
+            phieuChamDiem.maPhieuChamDiem = oldphieuChamDiem.maPhieuChamDiem;
+            phieuChamDiem.maSinhVien = oldphieuChamDiem.maSinhVien;
+            phieuChamDiem.maHocKi = oldphieuChamDiem.maHocKi;
+            phieuChamDiem.ngayCham = oldphieuChamDiem.ngayCham;
+            phieuChamDiem.tongDiemSV = oldphieuChamDiem.tongDiemSV;
+            phieuChamDiem.trangThai = 2;
+            phieuChamDiem.tongDiem = diemTuCham_1 + diemTuCham_2 + diemTuCham_3 + diemTuCham_4 + diemTuCham_5 + diemTuCham_6 + diemTuCham_7 + diemTuCham_8 + diemTuCham_9 + diemTuCham_10 + diemTuCham_11
+                + diemTuCham_12 + diemTuCham_13 + diemTuCham_14 + diemTuCham_15 + diemTuCham_16 + diemTuCham_17 + diemTuCham_18 + diemTuCham_19 + diemTuCham_20 + diemTuCham_21 + diemTuCham_22 + diemTuCham_23;
+
+            phieuChamDiem.tongDiemCBL = diemTuCham_1 + diemTuCham_2 + diemTuCham_3 + diemTuCham_4 + diemTuCham_5 + diemTuCham_6 + diemTuCham_7 + diemTuCham_8 + diemTuCham_9 + diemTuCham_10 + diemTuCham_11
+                + diemTuCham_12 + diemTuCham_13 + diemTuCham_14 + diemTuCham_15 + diemTuCham_16 + diemTuCham_17 + diemTuCham_18 + diemTuCham_19 + diemTuCham_20 + diemTuCham_21 + diemTuCham_22 + diemTuCham_23;
+            
+
+
+
+            db.Entry(phieuChamDiem).State = EntityState.Modified;
+            db.SaveChanges();
+            
+
+            
+
+
+            
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 1, diemTuCham_1);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 2, diemTuCham_2);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 3, diemTuCham_3);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 4, diemTuCham_4);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 5, diemTuCham_5);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 6, diemTuCham_6);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 7, diemTuCham_7);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 8, diemTuCham_8);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 9, diemTuCham_9);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 10, diemTuCham_10);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 11, diemTuCham_11);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 12, diemTuCham_12);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 13, diemTuCham_13);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 14, diemTuCham_14);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 15, diemTuCham_15);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 16, diemTuCham_16);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 17, diemTuCham_17);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 18, diemTuCham_18);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 19, diemTuCham_19);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 20, diemTuCham_20);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 21, diemTuCham_21);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 22, diemTuCham_22);
+            phieuChamDiemServices.CBLUpdateChiTietPhieuCham(phieuChamDiem.maPhieuChamDiem, 23, diemTuCham_23);
+
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public ActionResult MarkPoint()
         {
@@ -157,6 +226,8 @@ namespace DiemRenLuyen.Controllers
             newphieuChamDiem.tongDiem = diemTuCham_1 + diemTuCham_2 + diemTuCham_3 + diemTuCham_4 + diemTuCham_5 + diemTuCham_6 + diemTuCham_7 + diemTuCham_8 + diemTuCham_9 + diemTuCham_10 + diemTuCham_11
                 + diemTuCham_12 + diemTuCham_13 + diemTuCham_14 + diemTuCham_15 + diemTuCham_16 + diemTuCham_17 + diemTuCham_18 + diemTuCham_19 + diemTuCham_20 + diemTuCham_21 + diemTuCham_22 + diemTuCham_23;
 
+            newphieuChamDiem.tongDiemSV = diemTuCham_1 + diemTuCham_2 + diemTuCham_3 + diemTuCham_4 + diemTuCham_5 + diemTuCham_6 + diemTuCham_7 + diemTuCham_8 + diemTuCham_9 + diemTuCham_10 + diemTuCham_11
+                + diemTuCham_12 + diemTuCham_13 + diemTuCham_14 + diemTuCham_15 + diemTuCham_16 + diemTuCham_17 + diemTuCham_18 + diemTuCham_19 + diemTuCham_20 + diemTuCham_21 + diemTuCham_22 + diemTuCham_23;
             if (phieuChamDiem is null)
             {
 
@@ -250,7 +321,18 @@ namespace DiemRenLuyen.Controllers
 
         public ActionResult ViewScores()
         {
-            return View();
+            var hocky = sinhVienServices.ListHocKy();
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            hocKi hocKi = hocky.First();
+            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName, hocKi.maHocKi);
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
+            ViewBag.Hocky = hocky;
+            return View(phieuChamDiem);
         }
     }
 }

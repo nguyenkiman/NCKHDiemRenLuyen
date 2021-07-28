@@ -1,4 +1,4 @@
-namespace Models.EF
+﻿namespace Models.EF
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace Models.EF
         [StringLength(50)]
         public string maHocKi { get; set; }
 
+        [Display(Name = "Điểm trung bình")]
         public double? diemTrungBinh { get; set; }
 
         public virtual hocKi hocKi { get; set; }

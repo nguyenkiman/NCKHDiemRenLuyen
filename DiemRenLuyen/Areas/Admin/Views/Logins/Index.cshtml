@@ -32,7 +32,7 @@
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
                     <div class="input-group mb-3">
-                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Mời nhập tên đăng nhập", @autofocus = "autofocus" })
+                        <input type="text" required="" class="form-control" name="UserName" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        @Html.TextBoxFor(model => model.PassWord, new { @class = "form-control", @placeholder = "Mời nhập mật khẩu", @type = "password" })
+                        <input type="password" required="" class="form-control" name="PassWord" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
