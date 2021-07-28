@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Models.EF.baoHiemYTe>
-
+﻿@model PagedList.IPagedList<Models.EF.baoHiemYTe>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
 }
@@ -25,13 +25,20 @@
 <section class="content container-fluid">
     <div class="row">
         <div class="offset-7 col-md-5 mb-2">
-            <div class="input-group rounded">
-                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                       aria-describedby="search-addon" />
-                <span class="input-group-text border-0" id="search-addon">
-                    <i class="fas fa-search"></i>
-                </span>
-            </div>
+            @using (Html.BeginForm("Index", "baoHiemYTes", FormMethod.Get))
+            {
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 offset-4">
+                            <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa tìm kiếm" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" value="Tìm kiếm" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+
+            }
         </div>
 
         <div class="col-md-12">
@@ -40,135 +47,56 @@
                     <th>Mã sinh viên</th>
                     <th>Tên sinh viên</th>
                     <th>Lớp</th>
-                    <th>Ngành</th>
                     <th>Học kỳ</th>
-                    <th>Mã BHYT</th>
+                    <th>Trạng thái</th>
                     <th></th>
-                    <th></th>
                 </tr>
-                <tr>
-                    <td>1811505310345</td>
-                    <td>Nguyễn Văn Trí</td>
-                    <td>18T3</td>
-                    <td>Công nghệ thông tin</td>
-                    <td>221</td>
-                    <td>662 388 3537</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1811505310345</td>
-                    <td>Nguyễn Văn Trí</td>
-                    <td>18T3</td>
-                    <td>Công nghệ thông tin</td>
-                    <td>221</td>
-                    <td>662 388 3537</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1811505310345</td>
-                    <td>Nguyễn Văn Trí</td>
-                    <td>18T3</td>
-                    <td>Công nghệ thông tin</td>
-                    <td>221</td>
-                    <td>662 388 3537</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1811505310345</td>
-                    <td>Nguyễn Văn Trí</td>
-                    <td>18T3</td>
-                    <td>Công nghệ thông tin</td>
-                    <td>221</td>
-                    <td>662 388 3537</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1811505310345</td>
-                    <td>Nguyễn Văn Trí</td>
-                    <td>18T3</td>
-                    <td>Công nghệ thông tin</td>
-                    <td>221</td>
-                    <td>662 388 3537</td>
-                    <td>
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Edit">
-                            <i class="fa fa-edit"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
-                                data-placement="top" title="Delete">
-                            <i class="fa fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.maSinhVien)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sinhVien.tenSinhVien)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sinhVien.maLop)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.maHocKi)
+                        </td>
+                        @if (item.trangThai == 1)
+                        {
+                            <td class="text-success">
+                                Đã nộp
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="text-danger">
+                                Chưa nộp
+                            </td>
+                        }
+                        <td>
+                            <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                    data-placement="top" title="Edit" onclick="window.location.href='@Url.Action("Edit",new { maSinhVien = item.maSinhVien, maHocKi = item.maHocKi })'">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
+                        @*<td>
+                                <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip"
+                                        data-placement="top" title="Delete" onclick="window.location.href='@Url.Action("Delete",new { maSinhVien = item.maSinhVien, maHocKi = item.maHocKi })'">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>*@
+                    </tr>
+                }
 
             </table>
         </div>
         <div class="col-md-12 d-flex justify-content-end">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.SearchString }))
         </div>
     </div>
 

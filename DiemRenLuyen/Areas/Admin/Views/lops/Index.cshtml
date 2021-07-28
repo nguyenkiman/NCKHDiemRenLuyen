@@ -24,31 +24,7 @@
 <!-- Main content -->
 <section class="content container-fluid">
     <div class="row">
-        <div class="col-md-2">
-            <select class="input-sm form-control w-sm inline v-middle" id="cb_khoa">
-                <option value="0">Khoa</option>
-                <option value="1">Delete selected</option>
-                <option value="2">Bulk edit</option>
-                <option value="3">Export</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select class="input-sm form-control w-sm inline v-middle" id="cb_khoa">
-                <option value="0">Ngành</option>
-                <option value="1">Delete selected</option>
-                <option value="2">Bulk edit</option>
-                <option value="3">Export</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select class="input-sm form-control w-sm inline v-middle" id="cb_khoa">
-                <option value="0">Lớp</option>
-                <option value="1">Delete selected</option>
-                <option value="2">Bulk edit</option>
-                <option value="3">Export</option>
-            </select>
-        </div>
-        <div class="col-md-6 mb-2">
+        <div class="offset-6 col-md-6 mb-2">
             @using (Html.BeginForm("Index", "lops", FormMethod.Get))
             {
                 <div class="container-fluid">

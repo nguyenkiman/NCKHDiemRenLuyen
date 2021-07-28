@@ -62,6 +62,7 @@
     <Compile Include="Constraints\Common.cs" />
     <Compile Include="Constraints\sinhVienContraints.cs" />
     <Compile Include="DAO\adminDAO.cs" />
+    <Compile Include="DAO\baoHiemYTesDAO.cs" />
     <Compile Include="DAO\giangVienDAO.cs" />
     <Compile Include="DAO\lopsDAO.cs" />
     <Compile Include="DAO\noiDungDanhGiaDAO.cs" />
