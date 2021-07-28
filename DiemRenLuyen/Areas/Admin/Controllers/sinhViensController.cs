@@ -30,7 +30,6 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index", "Logins");
             }
-
             var sinhViens = db.sinhViens.Include(s => s.lop);
             ViewBag.maLop = new SelectList(db.lops, "maLop", "maLop");
             ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh");
@@ -69,8 +68,12 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/sinhViens/Create
         public ActionResult Create()
         {
+            var session = (Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
             ViewBag.maLop = new SelectList(db.lops, "maLop", "maLop");
-
             return View();
         }
 
@@ -146,10 +149,29 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
-
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert-success";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
+        }
         public ActionResult CreateExel()
         {
-
+            var session = (Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
             return View();
         }
 
@@ -190,18 +212,26 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                         {
                             if (a.maSinhVien != "" && a.matKhau != "" && a.tenSinhVien != "" && a.soDienThoai != "" && a.gmail != "" && a.gioiTinh != null && a.trangThai != null && a.maLop != "")
                             {
-                                sinhVien TU = new sinhVien();
-                                TU.maSinhVien = a.maSinhVien;
-                                TU.matKhau = a.matKhau;
-                                TU.tenSinhVien = a.tenSinhVien;
-                                TU.ngaySinh = a.ngaySinh;
-                                TU.soDienThoai = a.soDienThoai;
-                                TU.gmail = a.gmail;
-                                TU.gioiTinh = a.gioiTinh;
-                                TU.trangThai = a.trangThai;
-                                TU.maLop = a.maLop;
-                                db.sinhViens.Add(TU);
-                                db.SaveChanges();
+                                try
+                                {
+                                    sinhVien TU = new sinhVien();
+                                    TU.maSinhVien = a.maSinhVien;
+                                    TU.matKhau = a.matKhau;
+                                    TU.tenSinhVien = a.tenSinhVien;
+                                    TU.ngaySinh = a.ngaySinh;
+                                    TU.soDienThoai = a.soDienThoai;
+                                    TU.gmail = a.gmail;
+                                    TU.gioiTinh = a.gioiTinh;
+                                    TU.trangThai = a.trangThai;
+                                    TU.maLop = a.maLop;
+                                    db.sinhViens.Add(TU);
+                                    db.SaveChanges();
+                                }
+                                catch {
+                                    SetAlert("File Exel không đúng định dạng hoặc khóa ngoại không tồn tại", "warning");
+                                    return RedirectToAction("CreateExel", "sinhViens");
+                                }
+                               
                             }
                             else
                             {
@@ -230,7 +260,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                     {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "sinhViens");
                 }
                 else
                 {
@@ -239,7 +269,7 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                     data.Add("<li>Only Excel file format is allowed</li>");
                     data.Add("</ul>");
                     data.ToArray();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("CreateExel");
                 }
             }
             else

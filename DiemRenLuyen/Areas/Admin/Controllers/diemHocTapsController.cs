@@ -22,12 +22,11 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/diemHocTaps
         public ActionResult Index(int page = 1, int pagesize = 10)
         {
-            var session = (DiemRenLuyen.Areas.Admin.Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var session = (Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
             if (session == null)
             {
                 return RedirectToAction("Index", "Logins");
             }
-
             var diemHocTaps = db.diemHocTaps.Include(d => d.hocKi).Include(d => d.sinhVien);
             ViewBag.maLop = new SelectList(db.lops, "maLop", "maLop");
             ViewBag.maNganh = new SelectList(db.nganhs, "maNganh", "tenNganh");
@@ -162,7 +161,11 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
 
         public ActionResult CreateExel()
         {
-
+            var session = (Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
             return View();
         }
 
@@ -203,12 +206,20 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
                         {
                             if (a.maSinhVien != "" && a.maHocKi != "" && a.diemTrungBinh >= 0 || a.diemTrungBinh <= 10)
                             {
-                                diemHocTap TU = new diemHocTap();
-                                TU.maSinhVien = a.maSinhVien;
-                                TU.maHocKi = a.maHocKi;
-                                TU.diemTrungBinh = a.diemTrungBinh;
-                                db.diemHocTaps.Add(TU);
-                                db.SaveChanges();
+                                try
+                                {
+                                    diemHocTap TU = new diemHocTap();
+                                    TU.maSinhVien = a.maSinhVien;
+                                    TU.maHocKi = a.maHocKi;
+                                    TU.diemTrungBinh = a.diemTrungBinh;
+                                    db.diemHocTaps.Add(TU);
+                                    db.SaveChanges();
+                                }
+                                catch
+                                {
+                                    return RedirectToAction("CreateExel", "diemHocTaps");
+                                }
+                                
                             }
                             else
                             {

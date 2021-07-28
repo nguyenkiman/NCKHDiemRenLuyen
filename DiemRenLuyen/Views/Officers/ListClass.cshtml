@@ -95,7 +95,7 @@
                                     html += `<td>Xuất sắc</td>`;
                                 }
                         html +=`<td>
-                                   <a href="Officers/OfficersMark/${result[key]['maSinhVien']}/${maHocKy}" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
+                                   <a href="@Url.Action("OfficersMark", "Officers")?masinhvien=${result[key]['maSinhVien']}&maHocKy=${maHocKy}" class="text-primary"><i class="fas fa-eye mr-1"></i>Xem chi tiết</a>
                                 </td>
                             </tr>`;
                     i++;

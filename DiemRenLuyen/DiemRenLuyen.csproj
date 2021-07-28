@@ -143,6 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\baoHiemYTesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\chiTietPhieuChamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\diemHocTapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\giangViensController.cs" />
     <Compile Include="Areas\Admin\Controllers\hocKisController.cs" />
@@ -2093,7 +2094,6 @@
     <Content Include="Areas\Admin\Views\lops\Index.cshtml" />
     <Content Include="Areas\Admin\Views\phieuChamDiems\Create.cshtml" />
     <Content Include="Areas\Admin\Views\phieuChamDiems\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\phieuChamDiems\Details.cshtml" />
     <Content Include="Areas\Admin\Views\phieuChamDiems\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\phieuChamDiems\Index.cshtml" />
     <Content Include="Areas\Admin\Views\giangViens\Create.cshtml" />
@@ -2185,6 +2185,8 @@
     <Content Include="Areas\Admin\Views\hocKis\Create.cshtml" />
     <Content Include="Areas\Admin\Views\hocKis\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\hocKis\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\baoHiemYTes\CreateExel.cshtml" />
+    <Content Include="Areas\Admin\Views\chiTietPhieuChams\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
