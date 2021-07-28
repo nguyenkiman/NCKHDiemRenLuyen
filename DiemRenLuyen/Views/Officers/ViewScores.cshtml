@@ -1,4 +1,5 @@
-﻿
+﻿@model Models.EF.phieuChamDiem
+
 @{
     ViewBag.Title = "Xem điểm cả lớp";
     Layout = "~/Views/Officers/_layout.cshtml";
@@ -17,10 +18,9 @@
     <div class="page-body bs-danger">
         <div class="evaluate mt-2">
             <div class="evaluate__student-info d-flex ">
-                <p class="ml-0 wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-male mr-2"></i>Ngô Kim Hoàng Minh</p>
-                <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-address-card mr-2"></i>Lớp 18T1</p>
-                <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-barcode mr-2"></i>1811505310131</p>
-                <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-certificate mr-2"></i>Điểm TK Học Phần:3.4</p>
+                <p class="ml-0 wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-male mr-2"></i>@Html.DisplayFor(model => model.sinhVien.tenSinhVien)</p>
+                <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-address-card mr-2"></i>@Html.DisplayFor(model => model.maSinhVien)</p>
+                <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-barcode mr-2"></i>@Html.DisplayFor(model => model.hocKi.maHocKi)</p>
             </div>
             <div class="list__class_appraise mt-1 wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
                 <label class="list__class_appraise--title">Đợt đánh giá: </label>
@@ -50,13 +50,13 @@
 
                             <td class="text-center">100</td>
                             <td class="text-center">
-                                <p id="txt_total"></p>
+                                <p id="txt_total">@Html.DisplayFor(model => model.tongDiemSV)</p>
                             </td>
                             <td class="text-center">
-                                <p id="txt_total_Lop"></p>
+                                <p id="txt_total_Lop">@Html.DisplayFor(model => model.tongDiemCBL)</p>
                             </td>
                             <td class="text-center" style="background: cornsilk;">
-                                <p id="txt_total_Giaovien"></p>
+                                <p id="txt_total_Giaovien">@Html.DisplayFor(model => model.tongDiemGVCN)</p>
                             </td>
                         </tr>
                     </table>
@@ -99,99 +99,35 @@
                                         <td><p class="txt_rs_yttght_view"></p></td>
                                         <td><p class="txt_rs_yttght_view"></p></td>
                                     </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row">1</th>
-                                        <td>
-                                            Có đi học chuyên cần, đúng giờ, nghiêm túc trong giờ học; đủ
-                                            điều kiện dự thi
-                                            tất cả các học phần (4 điểm)
-                                        </td>
-                                        <td>4</td>
-                                        <td>
-                                            <p class="txt_chuyencan_view">2</p>
-                                        </td>
-                                        <td><p class="txt_chuyencan_view">2</p></td>
-                                        <td><p class="txt_chuyencan_view">3</p></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" class="border-bottom-0 pb-0"
-                                            style="vertical-align: bottom;">2</th>
-                                        <td class="border-bottom-0 pb-0">
-                                            Có ý thức tham gia các câu lạc bộ
-                                            học thuật, các hoạt động học thuật, hoạt động
-                                            ngoại khoá (2 điểm)
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            2
-                                        </td>
-                                        <td class="border-bottom-0 ">
-                                            <p class="txt_clb_view">2</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="txt_clb_view">2</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="txt_clb_view">2</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row" class="border-top-0"></th>
-                                        <td class="border-top-0 pt-0">
-                                            Có đăng ký, thực hiện, báo cáo đề tài NCKH đúng tiến độ hoặc có
-                                            đăng ký,
-                                            tham dự kỳ thi sinh viên giỏi các cấp (2 điểm)
-                                        </td>
-                                        <td class="border-top-0 pt-0">
-                                            2
-                                        </td>
-                                        <td class="border-top-0 pt-0">
-                                            <p class="txt_nckh_view">2</p>
-                                        </td>
-                                        <td class="border-top-0 pt-0">
-                                            <p class="txt_nckh_view">2</p>
-                                        </td>
-                                        <td class="border-top-0 pt-0">
-                                            <p class="txt_nckh_view">2</p>
-                                        </td>
-                                    </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row">3</th>
-                                        <td>Không vi phạm quy chế thi và kiểm tra (6 điểm)</td>
-                                        <td>6</td>
-                                        <td>
-                                            <p class="txt_quychethi_view">6</p>
-                                        </td>
-                                        <td><p class="txt_quychethi_view">6</p></td>
-                                        <td><p class="txt_quychethi_view">4</p></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">4</th>
-                                        <td>
-                                            Được tập thể lớp công nhận có tinh thần vượt khó, phấn đấu vươn
-                                            lên trong học
-                                            tập (2 điểm)
-                                        </td>
-                                        <td>2</td>
-                                        <td>
-                                            <p class="txt_vuonlen_view">2</p>
-                                        </td>
-                                        <td><p class="txt_vuonlen_view">2</p></td>
-                                        <td><p class="txt_vuonlen_view">2</p></td>
-                                    </tr>
-                                    <tr class="text-muted">
-                                        <th scope="row">5</th>
-                                        <td>
-                                            ĐTBCHK từ 3,2 đến 4,0 (4 điểm) <br>
-                                            ĐTBCHK từ 2,0 đến 3,19 (2 điểm) <br>
-                                            ĐTBCHK dưới 2,0 (0 điểm)
-                                        </td>
-                                        <td>4</td>
-                                        <td>
-                                            <p class="txt_dtb_view">4</p>
-                                        </td>
-                                        <td><p class="txt_dtb_view">4</p></td>
-                                        <td><p class="txt_dtb_view">4</p></td>
-                                    </tr>
+                                    @foreach (var item in Model.chiTietPhieuChams)
+                                    {
+
+                                        if (item.noiDungDanhGia.maDanhMuc == 1)
+                                        {
+                                <tr class="text-muted">
+                                    <th scope="row">1</th>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                    </td>
+                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.diemTuCham)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.diemCBLCham)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.diemGVCNCham)
+                                    </td>
+                                    <td>
+                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.minhChung)
+                                        }
+                                    </td>
+                                </tr>
+                                        }
+                                    }
 
                                 </tbody>
                             </table>

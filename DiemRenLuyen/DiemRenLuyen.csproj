@@ -145,6 +145,7 @@
     <Compile Include="Areas\Admin\Controllers\baoHiemYTesController.cs" />
     <Compile Include="Areas\Admin\Controllers\diemHocTapsController.cs" />
     <Compile Include="Areas\Admin\Controllers\giangViensController.cs" />
+    <Compile Include="Areas\Admin\Controllers\hocKisController.cs" />
     <Compile Include="Areas\Admin\Controllers\hocPhisController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginsController.cs" />
     <Compile Include="Areas\Admin\Controllers\lopsController.cs" />
@@ -2080,8 +2081,6 @@
     <Content Include="Areas\Admin\Views\diemHocTaps\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\diemHocTaps\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\diemHocTaps\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\baoHiemYTes\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\baoHiemYTes\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\baoHiemYTes\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\baoHiemYTes\Index.cshtml" />
     <Content Include="Areas\Admin\Views\hocPhis\Create.cshtml" />
@@ -2183,6 +2182,9 @@
     <Content Include="Areas\Admin\Views\sinhViens\CreateExel.cshtml" />
     <Content Include="Areas\Admin\Views\hocPhis\CreateExel.cshtml" />
     <Content Include="Areas\Admin\Views\diemHocTaps\CreateExel.cshtml" />
+    <Content Include="Areas\Admin\Views\hocKis\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\hocKis\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\hocKis\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2233,6 +2235,7 @@
     <Content Include="Views\Teacher\ChangePassword.cshtml" />
     <Content Include="Views\Students\NotifySuccess.cshtml" />
     <Content Include="Views\Students\NotifyError.cshtml" />
+    <Content Include="Views\Officers\MarkPoint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

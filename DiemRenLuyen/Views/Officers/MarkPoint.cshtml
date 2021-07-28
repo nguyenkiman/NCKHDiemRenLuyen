@@ -1,0 +1,418 @@
+﻿
+@model Models.EF.phieuChamDiem
+
+@{
+    ViewBag.Title = "Tự đánh giá điểm";
+    Layout = "~/Views/Officers/_Layout.cshtml";
+}
+
+<main>
+
+    <div id="crumbs" class="wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
+        <ul>
+            <li><a href="@Url.Action("Index","Officers")" class="breadcrumb">Trang chủ</a></li>
+            <li><a href="@Url.Action("MarkPoint","Officers")" class="breadcrumb">Chấm điểm rèn luyện</a></li>
+
+        </ul>
+    </div>
+    <div class="page-body bs-danger">
+        <div class="evaluate mt-2">
+            <div class="evaluate__student-info d-flex">
+                <p class="ml-0 wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-male mr-2"></i>@Html.DisplayFor(model => model.sinhVien.tenSinhVien)</p>
+                <p class="wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-address-card mr-2"></i>@Html.DisplayFor(model => model.maSinhVien)</p>
+                <p class=" wow animate__fadeInUp" data-wow-duration="2s"><i class="fas fa-certificate mr-2"></i>@Html.DisplayFor(model => model.hocKi.maHocKi)</p>
+            </div>
+            <div class="evalue__student--drl mt-1 d-flex align-items-center wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
+                <p><i class="fas fa-certificate mr-2"></i>Điểm rèn luyện:</p>
+                <p id="txt_drl" class="ml-1"></p>
+            </div>
+            <!--evaluate-->
+            <div class="evaluate__student-point p-2">
+                @using (Html.BeginForm("MarkPoint", "Officers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="evaluate__student-point-sum wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;" id="point_sum">
+                        <div class="d-flex justify-content-center">
+                            <input type="submit" class="btn btn-success d-flex align-items-center" value="Chấm điểm"><img src="../../../assets/client/image/icons-check.png" alt="" class="mr-1" />
+                        </div>
+                        <table class=" table-bordered mt-2">
+                            <tr class="font-weight-bold" style="background: floralwhite">
+                                <td rowspan="2" class="text-danger" style="padding-top: 22px;">Tổng điểm</td>
+                                <td class="align-middle">Điểm tối đa</td>
+                                <td class="align-middle">Sinh viên đánh giá</td>
+                            </tr>
+                            <tr class="text-danger fw-bold">
+
+                                <td class="text-center">100</td>
+                                <td class="text-center">
+                                    <p id="txt_total"></p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tabbed round mt-3 d-flex justify-content-center wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;">
+                        <ul class="nav nav-tabs">
+                            <li class="tabitem active" onclick="openCity(event,'v-pilss-mucI')"><a data-toggle="tab">Mục I <p id="total_mucI" class="text-center"></p></a></li>
+                            <div class="arrow"></div>
+                            <li class="tabitem " onclick="openCity(event,'v-pilss-mucII')"><a data-toggle="tab">Mục II <p id="total_mucII" class="text-center"></p></a></li>
+                            <div class="arrow"></div>
+                            <li class="tabitem " onclick="openCity(event,'v-pilss-mucIII')"><a data-toggle="tab">Mục III<p id="total_mucIII" class="text-center"></p></a></li>
+                            <div class="arrow"></div>
+                            <li class="tabitem " onclick="openCity(event,'v-pilss-mucIV')"><a data-toggle="tab">Mục IV<p id="total_mucIV" class="text-center"></p></a></li>
+                            <div class="arrow"></div>
+                            <li class="tabitem mr-0 " onclick="openCity(event,'v-pilss-mucV')"><a data-toggle="tab">Mục V<p id="total_mucV" class="text-center"></p></a></li>
+                        </ul>
+                    </div>
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="tab-content">
+                        <div id="v-pilss-mucI" class="tabcontent w3-animate-left fade in active show">
+                            <div class="table-lg-responsive">
+                                <table class="table table-bordered border-primary d-table">
+                                    <thead class="text-center fw-bold">
+                                        <tr>
+                                            <th scope="col" class="align-middle">STT</th>
+                                            <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
+                                            <th scope="col" class="align-middle">Điểm tối đa</th>
+                                            <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Minh chứng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-danger font-weight-bold">
+                                            <th scope="row">I</th>
+                                            <td>ĐÁNH GIÁ VỀ Ý THỨC THAM GIA HỌC TẬP (20 ĐIỂM)</td>
+                                            <td>20</td>
+                                            <td>
+                                                <p class="txt_rs_yttght"></p>
+                                            </td>
+                                        </tr>
+                                        @foreach (var item in Model.chiTietPhieuChams)
+                                        {
+
+                                            if (item.noiDungDanhGia.maDanhMuc == 1)
+                                            {
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucThamGiaHocTap()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHocTap()">
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="v-pilss-mucII" class="tabcontent w3-animate-left">
+                            <div class="table-lg-responsive">
+                                <table class="table table-bordered border-primary d-table">
+                                    <thead class="text-center fw-bold">
+                                        <tr>
+                                            <th scope="col" class="align-middle">STT</th>
+                                            <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
+                                            <th scope="col" class="align-middle">Điểm tối đa</th>
+                                            <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-danger font-weight-bold">
+                                            <th scope="row">II</th>
+                                            <td>
+                                                ĐÁNH GIÁ VỀ Ý THỨC CHẤP HÀNH NỘI QUY, QUY CHẾ TRONG NHÀ TRƯỜNG
+                                                (25 điểm)
+                                            </td>
+                                            <td>25</td>
+                                            <td>
+                                                <p class="txt_rs_chny"></p>
+                                            </td>
+                                        </tr>
+                                        @foreach (var item in Model.chiTietPhieuChams)
+                                        {
+
+                                            if (item.noiDungDanhGia.maDanhMuc == 2)
+                                            {
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="QuyCheNhaTruong()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="QuyCheNhaTruong()">
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="v-pilss-mucIII" class="tabcontent w3-animate-left">
+                            <div class="table-lg-responsive">
+                                <table class="table table-bordered border-primary ">
+                                    <thead class="text-center fw-bold">
+                                        <tr>
+                                            <th scope="col" class="align-middle">STT</th>
+                                            <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
+                                            <th scope="col" class="align-middle">Điểm tối đa</th>
+                                            <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Minh chứng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-danger font-weight-bold">
+                                            <th scope="row">III</th>
+                                            <td>
+                                                ĐÁNH GIÁ VỀ Ý THỨC THAM GIA CÁC HOẠT ĐỘNG CHÍNH TRỊ- XÃ HỘI,
+                                                VHVN, TDTT,
+                                                PHÒNG CHỐNG TÔI PHẠM VÀ CÁC TỆ NẠN XÃ HỘI (20 điểm)
+                                            </td>
+                                            <td>20</td>
+                                            <td>
+                                                <p class="txt_rs_hdct"></p>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        @foreach (var item in Model.chiTietPhieuChams)
+                                        {
+
+                                            if (item.noiDungDanhGia.maDanhMuc == 3)
+                                            {
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucThamGiaHoatDongChinhTri()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucThamGiaHoatDongChinhTri()">
+                                                            }
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="v-pilss-mucIV" class="tabcontent w3-animate-left  ">
+                            <div class="table-lg-responsive">
+                                <table class="table table-bordered border-primary ">
+                                    <thead class="text-center fw-bold">
+                                        <tr>
+                                            <th scope="col" class="align-middle">STT</th>
+                                            <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
+                                            <th scope="col" class="align-middle">Điểm tối đa</th>
+                                            <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Minh chứng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-danger font-weight-bold">
+                                            <th scope="row">IV</th>
+                                            <td>
+                                                ĐÁNH GIÁ VỀ Ý THỨC CÔNG DÂN TRONG QUAN HỆ VỚI CỘNG ĐỒNG (25
+                                                điểm)
+                                            </td>
+                                            <td>25</td>
+                                            <td>
+                                                <p class="txt_rs_ytcd"></p>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <!--12-->
+                                        @foreach (var item in Model.chiTietPhieuChams)
+                                        {
+
+                                            if (item.noiDungDanhGia.maDanhMuc == 4)
+                                            {
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="YThucCongDan()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="YThucCongDan()">
+                                                            }
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="v-pilss-mucV" class="tabcontent w3-animate-left">
+                            <div class="table-lg-responsive">
+                                <table class="table table-bordered border-primary ">
+                                    <thead class="text-center fw-bold">
+                                        <tr>
+                                            <th scope="col" class="align-middle">STT</th>
+                                            <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
+                                            <th scope="col" class="align-middle">Điểm tối đa</th>
+                                            <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
+                                            <th scope="col" class="align-middle">Minh chứng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-danger font-weight-bold">
+                                            <th scope="row">V</th>
+                                            <td>
+                                                ĐÁNH GIÁ VỀ Ý THỨC VÀ KẾT QUẢ KHI THAM GIA CÔNG TÁC CÁN BỘ LỚP,
+                                                CÁC
+                                                ĐOÀN THỂ, TỔ CHỨC TRONG NHÀ TRƯỜNG HOẶC SINH VIÊN ĐẠT ĐƯỢC THÀNH
+                                                TÍCH
+                                                TRONG HỌC TẬP, RÈN LUYỆN (10 điểm)
+                                            </td>
+                                            <td>10</td>
+                                            <td>
+                                                <p class="txt_rs_tgctl"></p>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        @foreach (var item in Model.chiTietPhieuChams)
+                                        {
+
+                                            if (item.noiDungDanhGia.maDanhMuc == 5)
+                                            {
+                                                <tr class="text-muted">
+                                                    <th scope="row">1</th>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
+                                                    </td>
+                                                    <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 3)
+                                                        {
+                                                            //@Html.EditorFor(modelItem => item.diemTuCham , new { htmlAttributes = new { @class = "form-control", min = "0", max = item.noiDungDanhGia.diemToiDa, value = item.diemTuCham, @disabled = "disabled" } })
+                                                            <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" readonly="readonly">
+                                                        }
+                                                        else
+                                                        {
+                                                            if (item.diemTuCham.HasValue)
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value="@item.diemTuCham" onclick="ThamGiaCongTacLop()">
+                                                            }
+                                                            else
+                                                            {
+                                                                <input class="form-control text-box single-line diemTuCham_@item.maNoiDung" data-val="true" data-val-number="The field diemTuCham must be a number." id="diemTuCham_@item.maNoiDung" max=@item.noiDungDanhGia.diemToiDa min="0" name="diemTuCham_@item.maNoiDung" type="number" value=0 onclick="ThamGiaCongTacLop()">
+                                                            }
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.noiDungDanhGia.cachCham == 2)
+                                                        {
+                                                            @Html.TextBox("minhchung" + item.noiDungDanhGia.maNoiDung, "", new { type = "file" })
+                                                        }
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+            <!--evaluate-->
+        </div>
+    </div>
+</main>
+

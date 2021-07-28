@@ -27,19 +27,32 @@ namespace DiemRenLuyen.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
             var model = sinhVienServices.ListWhereAll(session.UserName);
-            return View(model);
+            ViewBag.SinhVien = model;
+            return View();
         }
 
         public ActionResult NotifyError()
         {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
             return View();
         }
-
+        public ActionResult NotifySuccess()
+        {
+            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            ViewBag.SinhVien = model;
+            return View();
+        }
         [HttpGet]
         public ActionResult MarkPoint()
         {
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            var model = sinhVienServices.ListWhereAll(session.UserName);
+            
             if (session == null)
             {
                 return RedirectToAction("Login", "Home");
@@ -55,10 +68,12 @@ namespace DiemRenLuyen.Controllers
                 if (phieuChamDiem is null)
                 {
                     phieuChamDiem = phieuChamDiemServices.generateNewPhieuChamDiem(session.UserName);
+                    ViewBag.SinhVien = model;
                     return View(phieuChamDiem);
                 }
                 else
                 {
+                    ViewBag.SinhVien = model;
                     return View(phieuChamDiem);
                 }
 
@@ -93,7 +108,8 @@ namespace DiemRenLuyen.Controllers
             newphieuChamDiem.trangThai = 1;
             newphieuChamDiem.tongDiem = diemTuCham_1 + diemTuCham_2 + diemTuCham_3 + diemTuCham_4 + diemTuCham_5 + diemTuCham_6 + diemTuCham_7 + diemTuCham_8 + diemTuCham_9 + diemTuCham_10 + diemTuCham_11
                 + diemTuCham_12 + diemTuCham_13 + diemTuCham_14 + diemTuCham_15 + diemTuCham_16 + diemTuCham_17 + diemTuCham_18 + diemTuCham_19 + diemTuCham_20 + diemTuCham_21 + diemTuCham_22 + diemTuCham_23;
-
+            newphieuChamDiem.tongDiemSV = diemTuCham_1 + diemTuCham_2 + diemTuCham_3 + diemTuCham_4 + diemTuCham_5 + diemTuCham_6 + diemTuCham_7 + diemTuCham_8 + diemTuCham_9 + diemTuCham_10 + diemTuCham_11
+                + diemTuCham_12 + diemTuCham_13 + diemTuCham_14 + diemTuCham_15 + diemTuCham_16 + diemTuCham_17 + diemTuCham_18 + diemTuCham_19 + diemTuCham_20 + diemTuCham_21 + diemTuCham_22 + diemTuCham_23;
             if (phieuChamDiem is null)
             {
                 
@@ -189,9 +205,12 @@ namespace DiemRenLuyen.Controllers
             var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
             var model = db.sinhViens.Where(x => x.maLop.Equals(maLop)).Where(x => x.maSinhVien.Equals(session.UserName)).ToList();
             var hocky = sinhVienServices.ListHocKy();
+            var sinhvien = sinhVienServices.ListWhereAll(session.UserName);
+            
             Session.Add(Models.Constraints.Common.LOP_USER_SESSION, maLop);
             if (model != null)
             {
+                ViewBag.SinhVien = sinhvien;
                 ViewBag.Hocky = hocky;
                 return View(model);
 
@@ -244,6 +263,8 @@ namespace DiemRenLuyen.Controllers
         {
 
             var model = sinhVienServices.ListWhereAll(maUser);
+            var sinhvien = sinhVienServices.ListWhereAll(maUser);
+            ViewBag.SinhVien = sinhvien;
             return View(model);
         }
         [HttpPost]
@@ -253,8 +274,10 @@ namespace DiemRenLuyen.Controllers
             sinhVienServices.UpdatePersonalInfo(sv);
             return RedirectToAction("UpdatePersonalInfo", "Students", new { maUser = session.UserName });
         }
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(string maUser)
         {
+            var sinhvien = sinhVienServices.ListWhereAll(maUser);
+            ViewBag.SinhVien = sinhvien;
             return View();
         }
         [HttpPost]
@@ -278,6 +301,7 @@ namespace DiemRenLuyen.Controllers
         }
         public ActionResult Notification()
         {
+
             return View();
         }
         public ActionResult DetailNotification()

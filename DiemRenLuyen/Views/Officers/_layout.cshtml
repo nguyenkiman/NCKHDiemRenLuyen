@@ -1,7 +1,7 @@
 ﻿@using Models.Constraints
 @using DiemRenLuyen.Model
-@model IEnumerable<Models.EF.sinhVien>
 @{
+    var sinhvien = (List<Models.EF.sinhVien>)ViewBag.SinhVien;
     Layout = null;
 }
 
@@ -76,22 +76,23 @@
                                             <a id="" class="" href="index.php.php"><i class="fas fa-home mr-2"></i>Trang chủ</a>
                                         </li>
                                         <li>
-                                            <a href="@Url.Action("MarkPoint","Students")" class="nav-icon "><i class="fas fa-edit mr-2"></i>Con cặc</a>
-                                        
+                                            <a href="@Url.Action("ViewScores","Officers")"></i>Xem điểm cá nhân</a>
                                         </li>
-                                        @foreach (var item in Model)
+                                        <li>
+                                            <a href="@Url.Action("MarkPoint","Officers")" class="nav-icon "><i class="fas fa-edit mr-2"></i>Tự chấm điểm</a>
+                                        </li>
+                                        @foreach (var item in sinhvien)
                                         {
                                             <li>
-                                                <a href="@Url.Action("ListClass", "Students", new { maLop = @item.maLop })" class="nav-icon "><i class="fas fa-file-excel mr-2"></i>Xem điểm cả lớp</a>
+                                                <a href="@Url.Action("ListClass", "Officers", new { maLop = @item.maLop })" class="nav-icon "><i class="fas fa-file-excel mr-2"></i>Xem điểm cả lớp</a>
                                             </li>
                                         }
-                                        <li><a href="@Url.Action("ListClass","Officers")" class="nav-icon "><i class="far fa-edit mr-2"></i>Đánh giá lại điểm</a>
                                         <li>
                                             <a href="" class=""><i class="fas fa-exclamation-triangle mr-2"></i>Quy định</a>
                                         </li>
                                         <li><a href="" class=""><i class="fas fa-file-word mr-2"></i>Hướng dẫn </a></li>
                                         <li><a href="#"><i class="fas fa-question-circle mr-2"></i>Thông tin chấm điểm rèn luyện</a></li>
-                                        <li><a href="@Url.Action("ChangePassword","Students")"><i class="fas fa-key mr-2"></i>Thay đổi mật khẩu</a></li>
+                                        <li><a href="@Url.Action("ChangePassword","Students",new { maUser = @user.UserName })"><i class="fas fa-key mr-2"></i>Thay đổi mật khẩu</a></li>
                                         <li><a href="@Url.Action("UpdatePersonalInfo","Students",new { maUser = @user.UserName })"><i class="fas fa-user mr-2"></i>Thông tin cá nhân</a></li>
                                         <li><a href="personalScores.php"><i class="fas fa-star mr-2"></i>Xem điểm cá nhân</a></li>
                                         <li><a href="@Url.Action("Index","Home")"><i class="fas fa-sign-out-alt mr-2"></i>Đăng xuất</a></li>
@@ -136,11 +137,13 @@
                                     <ul class="parent">
                                         <li><a href="@Url.Action("Index","Officers")">Trang Chủ</a></li>
                                         <li><a href="@Url.Action("MarkPoint","Officers")">Tự đánh giá rèn luyện</a></li>
-                                        @foreach (var item in Model)
+                                        <li>
+                                            <a href="@Url.Action("ViewScores","Officers")"></i>Xem điểm cá nhân</a>
+                                        </li>
+                                        @foreach (var item in sinhvien)
                                         {
-                                            <li><a href="@Url.Action("ListClass", "Students", new { maLop = @item.maLop })">Xem điểm cả lớp</a></li>
+                                            <li><a href="@Url.Action("ListClass", "Officers", new { maLop = @item.maLop })">Xem điểm cả lớp</a></li>
                                         }
-                                        <li><a href="@Url.Action("ListClass","Officers")">Đánh giá lại điểm</a></li>
                                         <li>
                                             <a href="#" target="_blank"> Quy định</a>
                                         </li>
@@ -164,9 +167,6 @@
                                                     <a href="@Url.Action("UpdatePersonalInfo","Students",new { maUser = @user.UserName })">
                                                         <i class="fas fa-user mr-2"></i>Thông tin cá nhân
                                                     </a>
-                                                </li>
-                                                <li>
-                                                    <a href="notification.php"><i class="fas fa-question-circle mr-2"></i>Thông báo</a>
                                                 </li>
                                                 <li>
                                                     <a href="personalScores.php"><i class="fas fa-star mr-2"></i>Xem điểm cá nhân</a>
