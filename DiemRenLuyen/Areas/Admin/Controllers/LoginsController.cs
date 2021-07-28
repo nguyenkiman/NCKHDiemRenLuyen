@@ -44,5 +44,10 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
             }
             return View("Index");
         }
+        public ActionResult Logout()
+        {
+            Session[Models.Constraints.Common.USER_SESSION] = null;
+            return RedirectToAction("Index", "Logins");
+        }
     }
 }

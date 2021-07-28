@@ -18,6 +18,11 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/baoHiemYTes
         public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
         {
+            var session = (DiemRenLuyen.Areas.Admin.Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
             var bhyt = new baoHiemYTesDAO();
             var model = bhyt.ListWhereAll(searchString, page, pageSize);
             ViewBag.SearchString = searchString;

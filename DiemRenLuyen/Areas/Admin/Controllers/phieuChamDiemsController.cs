@@ -17,6 +17,12 @@ namespace DiemRenLuyen.Areas.Admin.Controllers
         // GET: Admin/phieuChamDiems
         public ActionResult Index()
         {
+            var session = (DiemRenLuyen.Areas.Admin.Model.LoginModel)Session[Models.Constraints.Common.USER_SESSION];
+            if (session == null)
+            {
+                return RedirectToAction("Index", "Logins");
+            }
+
             var phieuChamDiems = db.phieuChamDiems.Include(p => p.hocKi).Include(p => p.sinhVien);
             return View(phieuChamDiems.ToList());
         }
