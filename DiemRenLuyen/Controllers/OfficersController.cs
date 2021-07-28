@@ -330,7 +330,7 @@ namespace DiemRenLuyen.Controllers
                 return RedirectToAction("Login", "Home");
             }
             hocKi hocKi = hocky.First();
-            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy("1811505310345", "120");
+            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(session.UserName,hocKi.maHocKi);
             var model = sinhVienServices.ListWhereAll(session.UserName);
             ViewBag.SinhVien = model;
             ViewBag.Hocky = hocky;
@@ -345,7 +345,7 @@ namespace DiemRenLuyen.Controllers
                 return RedirectToAction("Login", "Home");
             }
             hocKi hocKi = hocky.First();
-            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy("1811505310345", "120");
+            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(maSinhVien, maHocKy);
             var model = sinhVienServices.ListWhereAll(session.UserName);
             ViewBag.SinhVien = model;
             ViewBag.Hocky = hocky;
