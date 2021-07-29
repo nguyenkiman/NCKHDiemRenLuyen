@@ -29,10 +29,16 @@
             <div class="evaluate__student-point p-2">
                 @using (Html.BeginForm("MarkPoint", "Officers", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
-                    <div class="evaluate__student-point-sum wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;" id="point_sum">
-                        <div class="d-flex justify-content-center">
-                            <input type="submit" class="btn btn-success d-flex align-items-center" value="Chấm điểm"><img src="../../../assets/client/image/icons-check.png" alt="" class="mr-1" />
-                        </div>
+
+
+<div class="evaluate__student-point-sum wow animate__fadeInUp" data-wow-duration="2s" style="visibility: visible;" id="point_sum">
+    <div class="d-flex justify-content-center">
+        @if (DateTime.Compare(Model.hocKi.ngayKetThucCham, DateTime.Today) > 1)
+        {
+            <input type="submit" class="btn btn-success d-flex align-items-center" value="Chấm điểm"><img src="../../../assets/client/image/icons-check.png" alt="" class="mr-1" />
+            }
+
+    </div>
                         <table class=" table-bordered mt-2">
                             <tr class="font-weight-bold" style="background: floralwhite">
                                 <td rowspan="2" class="text-danger" style="padding-top: 22px;">Tổng điểm</td>
@@ -74,7 +80,7 @@
                                             <th scope="col" class="align-middle pl-4 pr-4">Nội dung đánh giá</th>
                                             <th scope="col" class="align-middle">Điểm tối đa</th>
                                             <th scope="col" class="align-middle">Sinh viên tự đánh giá</th>
-                                            <th scope="col" class="align-middle">Cán bộ lớp chấm</th>
+                                            
                                             <th scope="col" class="align-middle">Minh chứng</th>
                                         </tr>
                                     </thead>
@@ -98,7 +104,7 @@
                                                         @Html.DisplayFor(modelItem => item.noiDungDanhGia.tenNoiDung)
                                                     </td>
                                                     <td> @Html.DisplayFor(modelItem => item.noiDungDanhGia.diemToiDa)</td>
-                                                    <td> @Html.DisplayFor(modelItem => item.diemTuCham)</td>
+                                                    
                                                     <td>
                                                         @if (item.noiDungDanhGia.cachCham == 3)
                                                         {

@@ -360,26 +360,13 @@ namespace DiemRenLuyen.Controllers
             var model = sinhVienServices.ListWhereAll(session.UserName);
             ViewBag.SinhVien = model;
             ViewBag.Hocky = hocky;
+
             if(phieuChamDiem is null)
             {
                 return RedirectToAction("ToastError", "Officers");
             }    
             return View(phieuChamDiem);
         }
-        public ActionResult ViewScores(string maSinhVien, string maHocKy)
-        {
-            var hocky = sinhVienServices.ListHocKy();
-            var session = (LoginModel)Session[Models.Constraints.Common.USER_SESSION];
-            if (session == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            hocKi hocKi = hocky.First();
-            phieuChamDiem phieuChamDiem = phieuChamDiemServices.findByMaSinhVienAndMaHocKy(maSinhVien, maHocKy);
-            var model = sinhVienServices.ListWhereAll(session.UserName);
-            ViewBag.SinhVien = model;
-            ViewBag.Hocky = hocky;
-            return View(phieuChamDiem);
-        }
+        
     }
 }
